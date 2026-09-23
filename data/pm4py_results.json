@@ -1,0 +1,37 @@
+{
+  "fitness": 1.0,
+  "precision": 0.9795918367346939,
+  "variants_mined": 3,
+  "alignments_sample": [
+    {
+      "case_id": "C001",
+      "fitness": 1.0,
+      "deviations": []
+    },
+    {
+      "case_id": "C021",
+      "fitness": 1.0,
+      "deviations": []
+    },
+    {
+      "case_id": "C041",
+      "fitness": 1.0,
+      "deviations": []
+    },
+    {
+      "case_id": "C061",
+      "fitness": 1.0,
+      "deviations": []
+    },
+    {
+      "case_id": "C081",
+      "fitness": 1.0,
+      "deviations": []
+    },
+    {
+      "case_id": "C101",
+      "fitness": 1.0,
+      "deviations": []
+    }
+  ]
+}

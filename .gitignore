@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Large raw source data
+data/BPI_Challenge_2019.xes
+
+# Local/generated ERP artifacts
+data/erp/
+data/odoo/
+data/*.sqlite
+data/*.db
+
+# Temporary/demo artifacts
+*.tmp
+*.bak

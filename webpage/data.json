@@ -1,0 +1,692 @@
+{
+  "meta": {
+    "title": "From Intended Process to Executed Process: Conformance Analysis of P2P in an ERP-Based Controlled Experiment",
+    "rq": "How do deviations between the normative purchase-to-pay process and its execution in an ERP system emerge, and what process-design or ERP-configuration changes can reduce these deviations?",
+    "n_r1": 120,
+    "n_r2": 60
+  },
+  "r1": {
+    "cases": 120,
+    "events": 740,
+    "conformance_rate": 0.5,
+    "variants": [
+      {
+        "label": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+        "count": 80
+      },
+      {
+        "label": "Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment",
+        "count": 20
+      },
+      {
+        "label": "Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+        "count": 20
+      }
+    ],
+    "violations": {
+      "R1": 0,
+      "R2": 20,
+      "R3": 20,
+      "R4": 20,
+      "R5": 0
+    },
+    "performance": [
+      {
+        "scenario": "S1",
+        "mean_cycle": 7.1838,
+        "median_cycle": 6.8438
+      },
+      {
+        "scenario": "S2",
+        "mean_cycle": 10.0257,
+        "median_cycle": 9.7675
+      },
+      {
+        "scenario": "S3",
+        "mean_cycle": 7.2433,
+        "median_cycle": 7.0
+      },
+      {
+        "scenario": "S4",
+        "mean_cycle": 7.7036,
+        "median_cycle": 7.4909
+      },
+      {
+        "scenario": "S5",
+        "mean_cycle": 9.7123,
+        "median_cycle": 9.6863
+      },
+      {
+        "scenario": "S6",
+        "mean_cycle": 8.0373,
+        "median_cycle": 7.7274
+      }
+    ]
+  },
+  "r2": {
+    "cases": 60,
+    "events": 400,
+    "conformance_rate": 1.0,
+    "variants": [
+      {
+        "label": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+        "count": 40
+      },
+      {
+        "label": "Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+        "count": 20
+      }
+    ],
+    "violations": {
+      "R1": 0,
+      "R2": 0,
+      "R3": 0,
+      "R4": 0,
+      "R5": 0
+    },
+    "performance": [
+      {
+        "scenario": "S3R",
+        "mean_cycle": 8.3935,
+        "median_cycle": 7.8462
+      },
+      {
+        "scenario": "S4R",
+        "mean_cycle": 7.7318,
+        "median_cycle": 7.1619
+      },
+      {
+        "scenario": "S6R",
+        "mean_cycle": 9.1887,
+        "median_cycle": 9.2775
+      }
+    ]
+  },
+  "stats": {
+    "p_value": 6.326068264e-28,
+    "chi2": 120.0,
+    "cohens_h": 3.141592654,
+    "welch_t": -6.940207133,
+    "welch_p": 3.336269605e-08,
+    "fisher_p": 2.070073888e-35
+  },
+  "pm4py": {
+    "fitness": 1.0,
+    "scope": "vs discovered inductive net, not normative BPMN",
+    "precision": 0.9795918367346939,
+    "variants_mined": 3,
+    "alignments_sample": [
+      {
+        "case_id": "C001",
+        "fitness": 1.0,
+        "deviations": []
+      },
+      {
+        "case_id": "C021",
+        "fitness": 1.0,
+        "deviations": []
+      },
+      {
+        "case_id": "C041",
+        "fitness": 1.0,
+        "deviations": []
+      },
+      {
+        "case_id": "C061",
+        "fitness": 1.0,
+        "deviations": []
+      },
+      {
+        "case_id": "C081",
+        "fitness": 1.0,
+        "deviations": []
+      },
+      {
+        "case_id": "C101",
+        "fitness": 1.0,
+        "deviations": []
+      }
+    ]
+  },
+  "robustness": [
+    {
+      "noise_level": 0.0,
+      "recall": 1.0,
+      "fpr": 0.0
+    },
+    {
+      "noise_level": 0.02,
+      "recall": 0.9889,
+      "fpr": 0.11666666666666665
+    },
+    {
+      "noise_level": 0.05,
+      "recall": 0.9833333333333333,
+      "fpr": 0.2333333333333333
+    },
+    {
+      "noise_level": 0.1,
+      "recall": 0.9722333333333334,
+      "fpr": 0.5
+    }
+  ],
+  "log_sample": [
+    {
+      "case_id": "C001",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 8.6
+    },
+    {
+      "case_id": "C002",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.8
+    },
+    {
+      "case_id": "C003",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.5
+    },
+    {
+      "case_id": "C004",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.4
+    },
+    {
+      "case_id": "C005",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 8.3
+    },
+    {
+      "case_id": "C006",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 5.9
+    },
+    {
+      "case_id": "C007",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 8.3
+    },
+    {
+      "case_id": "C008",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 5.5
+    },
+    {
+      "case_id": "C009",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 7.4
+    },
+    {
+      "case_id": "C010",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 7.0
+    },
+    {
+      "case_id": "C011",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.4
+    },
+    {
+      "case_id": "C012",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.9
+    },
+    {
+      "case_id": "C013",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 7.1
+    },
+    {
+      "case_id": "C014",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 7.6
+    },
+    {
+      "case_id": "C015",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.2
+    },
+    {
+      "case_id": "C016",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.8
+    },
+    {
+      "case_id": "C017",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.6
+    },
+    {
+      "case_id": "C018",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.1
+    },
+    {
+      "case_id": "C019",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 6.2
+    },
+    {
+      "case_id": "C020",
+      "scenario": "S1",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.0
+    },
+    {
+      "case_id": "C021",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 11.2
+    },
+    {
+      "case_id": "C022",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 12.0
+    },
+    {
+      "case_id": "C023",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 11.5
+    },
+    {
+      "case_id": "C024",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.2
+    },
+    {
+      "case_id": "C025",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.0
+    },
+    {
+      "case_id": "C026",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.3
+    },
+    {
+      "case_id": "C027",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.1
+    },
+    {
+      "case_id": "C028",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.6
+    },
+    {
+      "case_id": "C029",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 14.0
+    },
+    {
+      "case_id": "C030",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.5
+    },
+    {
+      "case_id": "C031",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.0
+    },
+    {
+      "case_id": "C032",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.9
+    },
+    {
+      "case_id": "C033",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.6
+    },
+    {
+      "case_id": "C034",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.6
+    },
+    {
+      "case_id": "C035",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.2
+    },
+    {
+      "case_id": "C036",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 8.7
+    },
+    {
+      "case_id": "C037",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.0
+    },
+    {
+      "case_id": "C038",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 9.0
+    },
+    {
+      "case_id": "C039",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 10.4
+    },
+    {
+      "case_id": "C040",
+      "scenario": "S2",
+      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
+      "violations": "OK",
+      "cycle": 7.7
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "backfill-01-r1",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r1",
+      "n_per_scenario": 20,
+      "seed": 42,
+      "cases": 120,
+      "events": 740,
+      "viol_rate": 0.5,
+      "mean_cycle": 8.3183
+    },
+    {
+      "run_id": "backfill-02-r1",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r1",
+      "n_per_scenario": 20,
+      "seed": 43,
+      "cases": 120,
+      "events": 740,
+      "viol_rate": 0.5,
+      "mean_cycle": 8.3292
+    },
+    {
+      "run_id": "backfill-03-r1",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r1",
+      "n_per_scenario": 20,
+      "seed": 44,
+      "cases": 120,
+      "events": 740,
+      "viol_rate": 0.5,
+      "mean_cycle": 8.1458
+    },
+    {
+      "run_id": "backfill-04-r1",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r1",
+      "n_per_scenario": 20,
+      "seed": 45,
+      "cases": 120,
+      "events": 740,
+      "viol_rate": 0.5,
+      "mean_cycle": 8.1833
+    },
+    {
+      "run_id": "backfill-05-r2",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r2",
+      "n_per_scenario": 20,
+      "seed": 7,
+      "cases": 60,
+      "events": 400,
+      "viol_rate": 0.0,
+      "mean_cycle": 8.4433
+    },
+    {
+      "run_id": "backfill-06-r2",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r2",
+      "n_per_scenario": 20,
+      "seed": 8,
+      "cases": 60,
+      "events": 400,
+      "viol_rate": 0.0,
+      "mean_cycle": 8.58
+    },
+    {
+      "run_id": "backfill-07-r2",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r2",
+      "n_per_scenario": 20,
+      "seed": 9,
+      "cases": 60,
+      "events": 400,
+      "viol_rate": 0.0,
+      "mean_cycle": 8.22
+    },
+    {
+      "run_id": "backfill-08-r2",
+      "utc_time": "2026-09-23T04:17:27+00:00",
+      "era": "r2",
+      "n_per_scenario": 20,
+      "seed": 10,
+      "cases": 60,
+      "events": 400,
+      "viol_rate": 0.0,
+      "mean_cycle": 8.5367
+    }
+  ],
+  "bpic": {
+    "mode": "REAL",
+    "doi": "10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1",
+    "source_xes": "data/BPI_Challenge_2019.xes",
+    "results": "data/bpic2019_results.json",
+    "cases": "data/bpic2019_case_results.csv",
+    "n_cases": 251734,
+    "n_events_filtered": 1595596,
+    "n_events_dropped_out_of_range": 327,
+    "strata": {
+      "2-way": 1044,
+      "after-GR": 15182,
+      "before-GR": 221010,
+      "consignment": 14498
+    },
+    "r1_maverick_2way": 0.5651340996168582,
+    "r1_maverick_2way_n_true": 590,
+    "r1_maverick_2way_n_applicable": 1044,
+    "r2_after_gr": 0.0,
+    "r2_applicable": 11128,
+    "r2_n_true": 0,
+    "r3_after_gr": 0.14234363767074049,
+    "r3_after_gr_n_true": 1584,
+    "r3_after_gr_n_applicable": 11128,
+    "r3_before_gr": 0.0,
+    "r3_before_gr_n_true": 0,
+    "r3_before_gr_n_applicable": 199564,
+    "r4_corrected": 0.10473754041964932,
+    "r4_corrected_n_true": 26366,
+    "r4_corrected_n_applicable": 251734,
+    "r4_2way": 0.009578544061302681,
+    "approval_change_after_po_2way": 0.9578544061302682,
+    "approval_only_2way": 0.94827586,
+    "approval_only_overall": 0.013113047899767215,
+    "falsifiers": {
+      "A": "INCONCLUSIVE",
+      "B": "REFUTED",
+      "C": "REFUTED"
+    },
+    "falsifiers_detail": {
+      "A_R2_rate_vs_lab_16_7pct": {
+        "observed_after_gr_r2_rate": 0.0,
+        "verdict": "INCONCLUSIVE"
+      },
+      "B_R3_zero_tolerance_both_3way": {
+        "observed_after": 0.14234363767074049,
+        "observed_before": 0.0,
+        "verdict": "REFUTED"
+      },
+      "C_R4_rework_vs_base_2_15pct": {
+        "observed": 0.10473754041964932,
+        "verdict": "REFUTED"
+      }
+    }
+  },
+  "hypotheses": [
+    {
+      "hypo_id": "H1",
+      "rule": "R1",
+      "track": "field",
+      "predicted_signature": "P(maverick|2-way-match) >> overall; 2-way rate >0.5",
+      "lab_rate": "NA",
+      "field_rate": 0.5651,
+      "status": "supported"
+    },
+    {
+      "hypo_id": "H2",
+      "rule": "R2",
+      "track": "field",
+      "predicted_signature": "P(R2 viol|invoice-after-GR) ~= lab S3 rate 1.0 (falsifier-A band 0.1-0.25, anchor 0.167)",
+      "lab_rate": 1.0,
+      "field_rate": 0.0,
+      "status": "nuanced"
+    },
+    {
+      "hypo_id": "H3",
+      "rule": "R3",
+      "track": "field",
+      "predicted_signature": "P(R3 value-delta|after-GR) >0 (lab S4=1.0 proxy); field after-GR rate >>0 with low correction",
+      "lab_rate": 1.0,
+      "field_rate": 0.1423,
+      "status": "supported"
+    },
+    {
+      "hypo_id": "H4",
+      "rule": "R3",
+      "track": "field",
+      "predicted_signature": "P(R3 viol|invoice-before-GR)=0 structural (no GR reference at invoice time)",
+      "lab_rate": "NA",
+      "field_rate": 0.0,
+      "status": "supported"
+    },
+    {
+      "hypo_id": "H5",
+      "rule": "R4",
+      "track": "field",
+      "predicted_signature": "P(R4 qty/price rework) elevated vs F2 base 0.0215 (band 0.0015-0.0415); lab S6=1.0 scales down in field",
+      "lab_rate": 1.0,
+      "field_rate": 0.1047,
+      "status": "nuanced"
+    },
+    {
+      "hypo_id": "H6",
+      "rule": "R4",
+      "track": "field",
+      "predicted_signature": "P(approval-change-after-PO|2-way) high (~1.0); routine workflow correctly excluded from corrected R4",
+      "lab_rate": "NA",
+      "field_rate": 0.9579,
+      "status": "supported"
+    },
+    {
+      "hypo_id": "H7",
+      "rule": "R5",
+      "track": "field",
+      "predicted_signature": "P(R5 viol) <0.01 rare",
+      "lab_rate": "NA",
+      "field_rate": 0.0016,
+      "status": "supported"
+    },
+    {
+      "hypo_id": "H8",
+      "rule": "redesign",
+      "track": "lab",
+      "predicted_signature": "Lab redesign S3/S4/S6 -> S3R/S4R/S6R drives violations 1.0->0.0; transfers to field (UNTESTED)",
+      "lab_rate": 0.0,
+      "field_rate": "NA",
+      "status": "open"
+    }
+  ],
+  "erp_next": {
+    "h8_status": "open",
+    "protocol": "docs/17-erp-experiment-protocol.md",
+    "mapping": "data/hypothesis_erp_mapping.csv",
+    "testable": [
+      "H1-adapted",
+      "H2-adapted",
+      "H3",
+      "H5"
+    ],
+    "negative_control": "H6",
+    "monitored": "H7",
+    "excluded": [
+      "H4",
+      "H8-frame"
+    ],
+    "note": "protocol only \u2014 no Odoo executed, no results"
+  }
+}

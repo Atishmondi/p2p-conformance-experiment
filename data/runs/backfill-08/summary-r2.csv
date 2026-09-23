@@ -1,0 +1,4 @@
+scenario,n_cases,conformance_rate,mean_cycle,median_cycle,mean_approval_wait,mean_receipt_wait,R1_viol,R2_viol,R3_viol,R4_viol,R5_viol
+S3R,20,1.0000,7.7186,7.4026,1.0897,2.4166,0,0,0,0,0
+S4R,20,1.0000,7.4684,7.1875,1.3519,2.0629,0,0,0,0,0
+S6R,20,1.0000,10.4209,10.8864,1.5485,2.8015,0,0,0,0,0

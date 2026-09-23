@@ -1,0 +1,121 @@
+case_id,scenario,variant_short,violations,cycle_days,qty_received,qty_invoiced
+C001,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.9,5,5
+C002,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.8,15,15
+C003,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.5,20,20
+C004,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.3,20,20
+C005,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.8,5,5
+C006,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.4,20,20
+C007,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,5.7,10,10
+C008,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.1,10,10
+C009,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,5.3,20,20
+C010,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.7,10,10
+C011,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.0,20,20
+C012,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.8,5,5
+C013,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.3,10,10
+C014,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.6,5,5
+C015,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.4,10,10
+C016,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.0,10,10
+C017,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,4.7,5,5
+C018,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.4,5,5
+C019,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.2,50,50
+C020,S1,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.6,50,50
+C021,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.8,10,10
+C022,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,13.8,5,5
+C023,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,13.2,5,5
+C024,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.5,5,5
+C025,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.4,20,20
+C026,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.6,15,15
+C027,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,15,15
+C028,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.8,5,5
+C029,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.5,10,10
+C030,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.2,15,15
+C031,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,5,5
+C032,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.7,15,15
+C033,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,20,20
+C034,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.0,10,10
+C035,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,13.9,5,5
+C036,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.2,15,15
+C037,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.6,5,5
+C038,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,5,5
+C039,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,13.0,15,15
+C040,S2,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.4,20,20
+C041,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,5.6,5,5
+C042,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,7.7,5,5
+C043,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.3,15,15
+C044,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,5.1,15,15
+C045,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.6,15,15
+C046,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,8.0,10,10
+C047,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.4,20,20
+C048,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.5,20,20
+C049,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.3,5,5
+C050,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,8.1,5,5
+C051,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,7.0,20,20
+C052,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,7.2,15,15
+C053,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.7,10,10
+C054,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,5.3,5,5
+C055,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,6.1,5,5
+C056,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,5.7,10,10
+C057,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,7.0,5,5
+C058,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,4.6,20,20
+C059,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,7.0,15,15
+C060,S3,Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment,R2,4.6,5,5
+C061,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.0,5,13
+C062,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,9.5,5,7
+C063,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,4.6,5,13
+C064,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,8.8,5,10
+C065,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.6,10,14
+C066,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,6.8,5,12
+C067,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.2,5,9
+C068,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.0,15,22
+C069,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,9.9,15,23
+C070,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,6.6,5,9
+C071,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,8.7,50,57
+C072,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,9.1,5,7
+C073,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.2,5,7
+C074,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,8.1,15,20
+C075,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,5.7,15,18
+C076,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.3,5,11
+C077,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,7.2,10,12
+C078,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,8.0,15,22
+C079,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,6.8,50,52
+C080,S4,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R3,6.5,10,17
+C081,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.3,5,5
+C082,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.6,20,20
+C083,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.9,15,15
+C084,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.7,5,5
+C085,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.5,10,10
+C086,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.8,20,20
+C087,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.0,10,10
+C088,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.8,20,20
+C089,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,12.0,10,10
+C090,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,15,15
+C091,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.1,5,5
+C092,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.4,5,5
+C093,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.8,5,5
+C094,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.6,5,5
+C095,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.1,5,5
+C096,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.0,5,5
+C097,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.4,5,5
+C098,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.9,50,50
+C099,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.7,5,5
+C100,S5,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.9,10,10
+C101,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,9.4,5,5
+C102,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.9,5,5
+C103,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.7,10,10
+C104,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.4,20,20
+C105,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.3,5,5
+C106,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,9.1,5,5
+C107,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.0,5,5
+C108,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.6,20,20
+C109,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.1,15,15
+C110,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.6,15,15
+C111,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,8.9,20,20
+C112,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,8.5,5,5
+C113,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.0,10,10
+C114,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,6.9,50,50
+C115,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,5.7,10,10
+C116,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,8.4,20,20
+C117,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.2,5,5
+C118,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,14.4,20,20
+C119,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,7.2,5,5
+C120,S6,Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment,R4,10.2,5,5

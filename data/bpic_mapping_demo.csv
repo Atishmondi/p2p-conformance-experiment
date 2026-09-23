@@ -1,0 +1,201 @@
+case_concept,concept_name,time_timestamp,org_resource,vendor_doc,note
+C001,Purchase Request,2026-01-05T09:00:00,req_01,Vendor_A|PO001,lab-proxy-for-BPIC
+C001,Purchase Request Approval,2026-01-07T21:00:00,approver_2,Vendor_A|PO001,lab-proxy-for-BPIC
+C001,Purchase Order,2026-01-08T04:20:57,buy_01,Vendor_A|PO001,lab-proxy-for-BPIC
+C001,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A|PO001,lab-proxy-for-BPIC
+C001,Vendor Invoice,2026-01-13T01:47:27,acc_01,Vendor_A|PO001,lab-proxy-for-BPIC
+C001,Payment,2026-01-13T23:53:27,acc_01,Vendor_A|PO001,lab-proxy-for-BPIC
+C002,Purchase Request,2026-01-05T14:00:00,req_01,Vendor_B|PO002,lab-proxy-for-BPIC
+C002,Purchase Request Approval,2026-01-06T00:57:28,approver_1,Vendor_B|PO002,lab-proxy-for-BPIC
+C002,Purchase Order,2026-01-06T08:38:11,buy_02,Vendor_B|PO002,lab-proxy-for-BPIC
+C002,Goods Receipt,2026-01-08T00:51:21,wh_02,Vendor_B|PO002,lab-proxy-for-BPIC
+C002,Vendor Invoice,2026-01-08T16:08:56,acc_02,Vendor_B|PO002,lab-proxy-for-BPIC
+C002,Payment,2026-01-12T08:00:00,acc_01,Vendor_B|PO002,lab-proxy-for-BPIC
+C003,Purchase Request,2026-01-05T19:00:00,req_02,Vendor_C|PO003,lab-proxy-for-BPIC
+C003,Purchase Request Approval,2026-01-07T03:11:40,approver_1,Vendor_C|PO003,lab-proxy-for-BPIC
+C003,Purchase Order,2026-01-07T12:43:48,buy_01,Vendor_C|PO003,lab-proxy-for-BPIC
+C003,Goods Receipt,2026-01-09T08:03:31,wh_01,Vendor_C|PO003,lab-proxy-for-BPIC
+C003,Vendor Invoice,2026-01-09T20:26:09,acc_01,Vendor_C|PO003,lab-proxy-for-BPIC
+C003,Payment,2026-01-12T07:25:55,acc_02,Vendor_C|PO003,lab-proxy-for-BPIC
+C004,Purchase Request,2026-01-06T00:00:00,req_03,Vendor_A|PO004,lab-proxy-for-BPIC
+C004,Purchase Request Approval,2026-01-07T01:09:33,approver_1,Vendor_A|PO004,lab-proxy-for-BPIC
+C004,Purchase Order,2026-01-07T10:51:40,buy_01,Vendor_A|PO004,lab-proxy-for-BPIC
+C004,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A|PO004,lab-proxy-for-BPIC
+C004,Vendor Invoice,2026-01-13T09:50:09,acc_02,Vendor_A|PO004,lab-proxy-for-BPIC
+C004,Payment,2026-01-15T09:24:43,acc_02,Vendor_A|PO004,lab-proxy-for-BPIC
+C005,Purchase Request,2026-01-06T05:00:00,req_01,Vendor_B|PO005,lab-proxy-for-BPIC
+C005,Purchase Request Approval,2026-01-07T03:13:01,approver_2,Vendor_B|PO005,lab-proxy-for-BPIC
+C005,Purchase Order,2026-01-07T17:47:46,buy_02,Vendor_B|PO005,lab-proxy-for-BPIC
+C005,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B|PO005,lab-proxy-for-BPIC
+C005,Vendor Invoice,2026-01-12T16:32:21,acc_02,Vendor_B|PO005,lab-proxy-for-BPIC
+C005,Payment,2026-01-14T12:56:43,acc_01,Vendor_B|PO005,lab-proxy-for-BPIC
+C006,Purchase Request,2026-01-06T10:00:00,req_03,Vendor_C|PO006,lab-proxy-for-BPIC
+C006,Purchase Request Approval,2026-01-07T05:28:57,approver_1,Vendor_C|PO006,lab-proxy-for-BPIC
+C006,Purchase Order,2026-01-07T21:01:06,buy_01,Vendor_C|PO006,lab-proxy-for-BPIC
+C006,Goods Receipt,2026-01-08T19:44:36,wh_02,Vendor_C|PO006,lab-proxy-for-BPIC
+C006,Vendor Invoice,2026-01-09T04:21:49,acc_02,Vendor_C|PO006,lab-proxy-for-BPIC
+C006,Payment,2026-01-12T08:00:00,acc_01,Vendor_C|PO006,lab-proxy-for-BPIC
+C007,Purchase Request,2026-01-06T15:00:00,req_03,Vendor_A|PO007,lab-proxy-for-BPIC
+C007,Purchase Request Approval,2026-01-07T21:05:44,approver_1,Vendor_A|PO007,lab-proxy-for-BPIC
+C007,Purchase Order,2026-01-08T08:16:52,buy_02,Vendor_A|PO007,lab-proxy-for-BPIC
+C007,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A|PO007,lab-proxy-for-BPIC
+C007,Vendor Invoice,2026-01-13T22:02:18,acc_01,Vendor_A|PO007,lab-proxy-for-BPIC
+C007,Payment,2026-01-14T22:34:03,acc_01,Vendor_A|PO007,lab-proxy-for-BPIC
+C008,Purchase Request,2026-01-06T20:00:00,req_02,Vendor_B|PO008,lab-proxy-for-BPIC
+C008,Purchase Request Approval,2026-01-07T16:54:00,approver_1,Vendor_B|PO008,lab-proxy-for-BPIC
+C008,Purchase Order,2026-01-08T01:18:58,buy_01,Vendor_B|PO008,lab-proxy-for-BPIC
+C008,Goods Receipt,2026-01-09T06:59:30,wh_02,Vendor_B|PO008,lab-proxy-for-BPIC
+C008,Vendor Invoice,2026-01-09T20:31:23,acc_02,Vendor_B|PO008,lab-proxy-for-BPIC
+C008,Payment,2026-01-12T08:00:00,acc_02,Vendor_B|PO008,lab-proxy-for-BPIC
+C009,Purchase Request,2026-01-07T01:00:00,req_01,Vendor_C|PO009,lab-proxy-for-BPIC
+C009,Purchase Request Approval,2026-01-07T19:31:25,approver_2,Vendor_C|PO009,lab-proxy-for-BPIC
+C009,Purchase Order,2026-01-08T16:17:19,buy_01,Vendor_C|PO009,lab-proxy-for-BPIC
+C009,Goods Receipt,2026-01-09T10:11:35,wh_01,Vendor_C|PO009,lab-proxy-for-BPIC
+C009,Vendor Invoice,2026-01-12T08:00:00,acc_02,Vendor_C|PO009,lab-proxy-for-BPIC
+C009,Payment,2026-01-14T11:45:10,acc_02,Vendor_C|PO009,lab-proxy-for-BPIC
+C010,Purchase Request,2026-01-07T06:00:00,req_02,Vendor_A|PO010,lab-proxy-for-BPIC
+C010,Purchase Request Approval,2026-01-08T09:38:40,approver_1,Vendor_A|PO010,lab-proxy-for-BPIC
+C010,Purchase Order,2026-01-08T17:12:55,buy_01,Vendor_A|PO010,lab-proxy-for-BPIC
+C010,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A|PO010,lab-proxy-for-BPIC
+C010,Vendor Invoice,2026-01-12T21:05:55,acc_02,Vendor_A|PO010,lab-proxy-for-BPIC
+C010,Payment,2026-01-14T05:36:28,acc_02,Vendor_A|PO010,lab-proxy-for-BPIC
+C011,Purchase Request,2026-01-07T11:00:00,req_01,Vendor_B|PO011,lab-proxy-for-BPIC
+C011,Purchase Request Approval,2026-01-08T03:56:34,approver_1,Vendor_B|PO011,lab-proxy-for-BPIC
+C011,Purchase Order,2026-01-08T11:18:33,buy_01,Vendor_B|PO011,lab-proxy-for-BPIC
+C011,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B|PO011,lab-proxy-for-BPIC
+C011,Vendor Invoice,2026-01-13T09:20:43,acc_02,Vendor_B|PO011,lab-proxy-for-BPIC
+C011,Payment,2026-01-13T21:20:43,acc_02,Vendor_B|PO011,lab-proxy-for-BPIC
+C012,Purchase Request,2026-01-07T16:00:00,req_01,Vendor_C|PO012,lab-proxy-for-BPIC
+C012,Purchase Request Approval,2026-01-08T14:50:16,approver_1,Vendor_C|PO012,lab-proxy-for-BPIC
+C012,Purchase Order,2026-01-08T23:07:09,buy_02,Vendor_C|PO012,lab-proxy-for-BPIC
+C012,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_C|PO012,lab-proxy-for-BPIC
+C012,Vendor Invoice,2026-01-13T05:39:54,acc_01,Vendor_C|PO012,lab-proxy-for-BPIC
+C012,Payment,2026-01-14T14:06:17,acc_02,Vendor_C|PO012,lab-proxy-for-BPIC
+C013,Purchase Request,2026-01-07T21:00:00,req_03,Vendor_A|PO013,lab-proxy-for-BPIC
+C013,Purchase Request Approval,2026-01-08T23:11:26,approver_1,Vendor_A|PO013,lab-proxy-for-BPIC
+C013,Purchase Order,2026-01-09T08:47:24,buy_02,Vendor_A|PO013,lab-proxy-for-BPIC
+C013,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A|PO013,lab-proxy-for-BPIC
+C013,Vendor Invoice,2026-01-13T05:18:12,acc_02,Vendor_A|PO013,lab-proxy-for-BPIC
+C013,Payment,2026-01-14T23:08:39,acc_01,Vendor_A|PO013,lab-proxy-for-BPIC
+C014,Purchase Request,2026-01-08T02:00:00,req_02,Vendor_B|PO014,lab-proxy-for-BPIC
+C014,Purchase Request Approval,2026-01-08T22:48:44,approver_1,Vendor_B|PO014,lab-proxy-for-BPIC
+C014,Purchase Order,2026-01-09T15:30:26,buy_01,Vendor_B|PO014,lab-proxy-for-BPIC
+C014,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B|PO014,lab-proxy-for-BPIC
+C014,Vendor Invoice,2026-01-13T06:57:18,acc_02,Vendor_B|PO014,lab-proxy-for-BPIC
+C014,Payment,2026-01-15T15:42:09,acc_01,Vendor_B|PO014,lab-proxy-for-BPIC
+C015,Purchase Request,2026-01-08T07:00:00,req_02,Vendor_C|PO015,lab-proxy-for-BPIC
+C015,Purchase Request Approval,2026-01-08T21:45:46,approver_1,Vendor_C|PO015,lab-proxy-for-BPIC
+C015,Purchase Order,2026-01-09T15:26:23,buy_02,Vendor_C|PO015,lab-proxy-for-BPIC
+C015,Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_C|PO015,lab-proxy-for-BPIC
+C015,Vendor Invoice,2026-01-12T17:25:40,acc_02,Vendor_C|PO015,lab-proxy-for-BPIC
+C015,Payment,2026-01-14T11:51:20,acc_01,Vendor_C|PO015,lab-proxy-for-BPIC
+C016,Purchase Request,2026-01-08T12:00:00,req_01,Vendor_A|PO016,lab-proxy-for-BPIC
+C016,Purchase Request Approval,2026-01-09T05:54:02,approver_2,Vendor_A|PO016,lab-proxy-for-BPIC
+C016,Purchase Order,2026-01-09T22:32:50,buy_01,Vendor_A|PO016,lab-proxy-for-BPIC
+C016,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A|PO016,lab-proxy-for-BPIC
+C016,Vendor Invoice,2026-01-13T03:32:51,acc_02,Vendor_A|PO016,lab-proxy-for-BPIC
+C016,Payment,2026-01-15T06:23:58,acc_02,Vendor_A|PO016,lab-proxy-for-BPIC
+C017,Purchase Request,2026-01-08T17:00:00,req_01,Vendor_B|PO017,lab-proxy-for-BPIC
+C017,Purchase Request Approval,2026-01-09T05:44:47,approver_2,Vendor_B|PO017,lab-proxy-for-BPIC
+C017,Purchase Order,2026-01-09T14:19:33,buy_01,Vendor_B|PO017,lab-proxy-for-BPIC
+C017,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_B|PO017,lab-proxy-for-BPIC
+C017,Vendor Invoice,2026-01-12T19:36:48,acc_02,Vendor_B|PO017,lab-proxy-for-BPIC
+C017,Payment,2026-01-15T07:38:34,acc_02,Vendor_B|PO017,lab-proxy-for-BPIC
+C018,Purchase Request,2026-01-08T22:00:00,req_03,Vendor_C|PO018,lab-proxy-for-BPIC
+C018,Purchase Request Approval,2026-01-09T11:36:49,approver_2,Vendor_C|PO018,lab-proxy-for-BPIC
+C018,Purchase Order,2026-01-09T23:52:08,buy_02,Vendor_C|PO018,lab-proxy-for-BPIC
+C018,Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_C|PO018,lab-proxy-for-BPIC
+C018,Vendor Invoice,2026-01-13T13:20:27,acc_02,Vendor_C|PO018,lab-proxy-for-BPIC
+C018,Payment,2026-01-15T01:25:05,acc_01,Vendor_C|PO018,lab-proxy-for-BPIC
+C019,Purchase Request,2026-01-09T03:00:00,req_01,Vendor_A|PO019,lab-proxy-for-BPIC
+C019,Purchase Request Approval,2026-01-12T08:00:00,approver_2,Vendor_A|PO019,lab-proxy-for-BPIC
+C019,Purchase Order,2026-01-12T14:29:51,buy_02,Vendor_A|PO019,lab-proxy-for-BPIC
+C019,Goods Receipt,2026-01-13T18:32:40,wh_02,Vendor_A|PO019,lab-proxy-for-BPIC
+C019,Vendor Invoice,2026-01-14T07:17:45,acc_02,Vendor_A|PO019,lab-proxy-for-BPIC
+C019,Payment,2026-01-15T07:01:31,acc_02,Vendor_A|PO019,lab-proxy-for-BPIC
+C020,Purchase Request,2026-01-09T08:00:00,req_01,Vendor_B|PO020,lab-proxy-for-BPIC
+C020,Purchase Request Approval,2026-01-12T08:00:00,approver_2,Vendor_B|PO020,lab-proxy-for-BPIC
+C020,Purchase Order,2026-01-13T01:05:53,buy_02,Vendor_B|PO020,lab-proxy-for-BPIC
+C020,Goods Receipt,2026-01-16T09:32:28,wh_02,Vendor_B|PO020,lab-proxy-for-BPIC
+C020,Vendor Invoice,2026-01-16T20:56:24,acc_02,Vendor_B|PO020,lab-proxy-for-BPIC
+C020,Payment,2026-01-19T08:00:00,acc_02,Vendor_B|PO020,lab-proxy-for-BPIC
+C021,Purchase Request,2026-01-09T13:00:00,req_01,Vendor_C|PO021,lab-proxy-for-BPIC
+C021,Purchase Request Approval,2026-01-12T08:00:00,approver_1,Vendor_C|PO021,lab-proxy-for-BPIC
+C021,Purchase Order,2026-01-12T16:55:20,buy_01,Vendor_C|PO021,lab-proxy-for-BPIC
+C021,Goods Receipt,2026-01-16T03:52:41,wh_01,Vendor_C|PO021,lab-proxy-for-BPIC
+C021,Vendor Invoice,2026-01-19T08:00:00,acc_01,Vendor_C|PO021,lab-proxy-for-BPIC
+C021,Payment,2026-01-20T18:55:33,acc_02,Vendor_C|PO021,lab-proxy-for-BPIC
+C022,Purchase Request,2026-01-09T18:00:00,req_01,Vendor_A|PO022,lab-proxy-for-BPIC
+C022,Purchase Request Approval,2026-01-12T08:00:00,approver_2,Vendor_A|PO022,lab-proxy-for-BPIC
+C022,Purchase Order,2026-01-12T16:40:57,buy_01,Vendor_A|PO022,lab-proxy-for-BPIC
+C022,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A|PO022,lab-proxy-for-BPIC
+C022,Vendor Invoice,2026-01-20T00:49:48,acc_02,Vendor_A|PO022,lab-proxy-for-BPIC
+C022,Payment,2026-01-21T19:08:31,acc_01,Vendor_A|PO022,lab-proxy-for-BPIC
+C023,Purchase Request,2026-01-09T23:00:00,req_03,Vendor_B|PO023,lab-proxy-for-BPIC
+C023,Purchase Request Approval,2026-01-12T08:00:00,approver_2,Vendor_B|PO023,lab-proxy-for-BPIC
+C023,Purchase Order,2026-01-13T00:03:52,buy_02,Vendor_B|PO023,lab-proxy-for-BPIC
+C023,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B|PO023,lab-proxy-for-BPIC
+C023,Vendor Invoice,2026-01-20T02:25:54,acc_02,Vendor_B|PO023,lab-proxy-for-BPIC
+C023,Payment,2026-01-21T12:09:16,acc_02,Vendor_B|PO023,lab-proxy-for-BPIC
+C024,Purchase Request,2026-01-12T08:00:00,req_03,Vendor_C|PO024,lab-proxy-for-BPIC
+C024,Purchase Request Approval,2026-01-13T17:33:52,approver_1,Vendor_C|PO024,lab-proxy-for-BPIC
+C024,Purchase Order,2026-01-14T00:49:18,buy_01,Vendor_C|PO024,lab-proxy-for-BPIC
+C024,Goods Receipt,2026-01-20T13:34:59,wh_01,Vendor_C|PO024,lab-proxy-for-BPIC
+C024,Vendor Invoice,2026-01-21T08:12:59,acc_01,Vendor_C|PO024,lab-proxy-for-BPIC
+C024,Payment,2026-01-22T12:24:17,acc_02,Vendor_C|PO024,lab-proxy-for-BPIC
+C025,Purchase Request,2026-01-12T08:00:00,req_03,Vendor_A|PO025,lab-proxy-for-BPIC
+C025,Purchase Request Approval,2026-01-13T20:04:06,approver_2,Vendor_A|PO025,lab-proxy-for-BPIC
+C025,Purchase Order,2026-01-14T11:43:42,buy_02,Vendor_A|PO025,lab-proxy-for-BPIC
+C025,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A|PO025,lab-proxy-for-BPIC
+C025,Vendor Invoice,2026-01-20T03:24:37,acc_02,Vendor_A|PO025,lab-proxy-for-BPIC
+C025,Payment,2026-01-21T07:45:31,acc_02,Vendor_A|PO025,lab-proxy-for-BPIC
+C026,Purchase Request,2026-01-12T08:00:00,req_02,Vendor_B|PO026,lab-proxy-for-BPIC
+C026,Purchase Request Approval,2026-01-13T10:35:23,approver_1,Vendor_B|PO026,lab-proxy-for-BPIC
+C026,Purchase Order,2026-01-13T17:52:46,buy_02,Vendor_B|PO026,lab-proxy-for-BPIC
+C026,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B|PO026,lab-proxy-for-BPIC
+C026,Vendor Invoice,2026-01-20T08:06:30,acc_01,Vendor_B|PO026,lab-proxy-for-BPIC
+C026,Payment,2026-01-21T15:19:53,acc_02,Vendor_B|PO026,lab-proxy-for-BPIC
+C027,Purchase Request,2026-01-12T08:00:00,req_02,Vendor_C|PO027,lab-proxy-for-BPIC
+C027,Purchase Request Approval,2026-01-13T10:25:52,approver_2,Vendor_C|PO027,lab-proxy-for-BPIC
+C027,Purchase Order,2026-01-14T02:26:40,buy_02,Vendor_C|PO027,lab-proxy-for-BPIC
+C027,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C|PO027,lab-proxy-for-BPIC
+C027,Vendor Invoice,2026-01-19T14:01:37,acc_02,Vendor_C|PO027,lab-proxy-for-BPIC
+C027,Payment,2026-01-21T10:30:49,acc_01,Vendor_C|PO027,lab-proxy-for-BPIC
+C028,Purchase Request,2026-01-12T08:00:00,req_02,Vendor_A|PO028,lab-proxy-for-BPIC
+C028,Purchase Request Approval,2026-01-12T22:55:21,approver_2,Vendor_A|PO028,lab-proxy-for-BPIC
+C028,Purchase Order,2026-01-13T08:00:04,buy_02,Vendor_A|PO028,lab-proxy-for-BPIC
+C028,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A|PO028,lab-proxy-for-BPIC
+C028,Vendor Invoice,2026-01-20T03:32:01,acc_01,Vendor_A|PO028,lab-proxy-for-BPIC
+C028,Payment,2026-01-21T22:39:51,acc_01,Vendor_A|PO028,lab-proxy-for-BPIC
+C029,Purchase Request,2026-01-12T08:00:00,req_03,Vendor_B|PO029,lab-proxy-for-BPIC
+C029,Purchase Request Approval,2026-01-13T05:12:16,approver_2,Vendor_B|PO029,lab-proxy-for-BPIC
+C029,Purchase Order,2026-01-13T22:38:45,buy_01,Vendor_B|PO029,lab-proxy-for-BPIC
+C029,Goods Receipt,2026-01-21T22:38:45,wh_02,Vendor_B|PO029,lab-proxy-for-BPIC
+C029,Vendor Invoice,2026-01-22T11:55:15,acc_02,Vendor_B|PO029,lab-proxy-for-BPIC
+C029,Payment,2026-01-26T08:00:00,acc_01,Vendor_B|PO029,lab-proxy-for-BPIC
+C030,Purchase Request,2026-01-12T08:00:00,req_02,Vendor_C|PO030,lab-proxy-for-BPIC
+C030,Purchase Request Approval,2026-01-13T01:43:38,approver_2,Vendor_C|PO030,lab-proxy-for-BPIC
+C030,Purchase Order,2026-01-13T17:44:18,buy_02,Vendor_C|PO030,lab-proxy-for-BPIC
+C030,Goods Receipt,2026-01-19T08:00:00,wh_02,Vendor_C|PO030,lab-proxy-for-BPIC
+C030,Vendor Invoice,2026-01-20T05:05:26,acc_01,Vendor_C|PO030,lab-proxy-for-BPIC
+C030,Payment,2026-01-21T20:44:20,acc_01,Vendor_C|PO030,lab-proxy-for-BPIC
+C031,Purchase Request,2026-01-12T08:00:00,req_02,Vendor_A|PO031,lab-proxy-for-BPIC
+C031,Purchase Request Approval,2026-01-13T13:13:46,approver_2,Vendor_A|PO031,lab-proxy-for-BPIC
+C031,Purchase Order,2026-01-14T07:51:28,buy_01,Vendor_A|PO031,lab-proxy-for-BPIC
+C031,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A|PO031,lab-proxy-for-BPIC
+C031,Vendor Invoice,2026-01-20T05:34:30,acc_01,Vendor_A|PO031,lab-proxy-for-BPIC
+C031,Payment,2026-01-22T07:20:54,acc_01,Vendor_A|PO031,lab-proxy-for-BPIC
+C032,Purchase Request,2026-01-12T08:00:00,req_03,Vendor_B|PO032,lab-proxy-for-BPIC
+C032,Purchase Request Approval,2026-01-13T03:10:51,approver_2,Vendor_B|PO032,lab-proxy-for-BPIC
+C032,Purchase Order,2026-01-13T12:53:13,buy_02,Vendor_B|PO032,lab-proxy-for-BPIC
+C032,Goods Receipt,2026-01-19T08:50:31,wh_02,Vendor_B|PO032,lab-proxy-for-BPIC
+C032,Vendor Invoice,2026-01-20T06:58:05,acc_02,Vendor_B|PO032,lab-proxy-for-BPIC
+C032,Payment,2026-01-22T05:49:55,acc_02,Vendor_B|PO032,lab-proxy-for-BPIC
+C033,Purchase Request,2026-01-12T01:00:00,req_03,Vendor_C|PO033,lab-proxy-for-BPIC
+C033,Purchase Request Approval,2026-01-12T21:01:37,approver_2,Vendor_C|PO033,lab-proxy-for-BPIC
+C033,Purchase Order,2026-01-13T10:02:57,buy_01,Vendor_C|PO033,lab-proxy-for-BPIC
+C033,Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C|PO033,lab-proxy-for-BPIC
+C033,Vendor Invoice,2026-01-20T09:59:15,acc_02,Vendor_C|PO033,lab-proxy-for-BPIC
+C033,Payment,2026-01-21T16:00:36,acc_01,Vendor_C|PO033,lab-proxy-for-BPIC
+C034,Purchase Request,2026-01-12T06:00:00,req_01,Vendor_A|PO034,lab-proxy-for-BPIC
+C034,Purchase Request Approval,2026-01-13T05:57:48,approver_1,Vendor_A|PO034,lab-proxy-for-BPIC

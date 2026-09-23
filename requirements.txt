@@ -1,0 +1,5 @@
+pandas
+numpy
+scipy
+matplotlib
+pm4py>=2.7  # optional but recommended

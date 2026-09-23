@@ -1,0 +1,301 @@
+case_concept,activity,event_time,user,vendor,document,item_category,net_value
+PO001_1,Create Purchase Requisition Item,2026-01-05T09:00:00,req_01,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO001_1,Change Approval for Purchase Order,2026-01-07T21:00:00,approver_2,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO001_1,Create Purchase Order Item,2026-01-08T04:20:57,buy_01,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO001_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO001_1,Record Invoice Receipt,2026-01-13T01:47:27,acc_01,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO001_1,Clear Invoice,2026-01-13T23:53:27,acc_01,Vendor_A,PO001,"3-way match, invoice after GR",1000
+PO002_1,Create Purchase Requisition Item,2026-01-05T14:00:00,req_01,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO002_1,Change Approval for Purchase Order,2026-01-06T00:57:28,approver_1,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO002_1,Create Purchase Order Item,2026-01-06T08:38:11,buy_02,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO002_1,Record Goods Receipt,2026-01-08T00:51:21,wh_02,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO002_1,Record Invoice Receipt,2026-01-08T16:08:56,acc_02,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO002_1,Clear Invoice,2026-01-12T08:00:00,acc_01,Vendor_B,PO002,"3-way match, invoice after GR",1000
+PO003_1,Create Purchase Requisition Item,2026-01-05T19:00:00,req_02,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO003_1,Change Approval for Purchase Order,2026-01-07T03:11:40,approver_1,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO003_1,Create Purchase Order Item,2026-01-07T12:43:48,buy_01,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO003_1,Record Goods Receipt,2026-01-09T08:03:31,wh_01,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO003_1,Record Invoice Receipt,2026-01-09T20:26:09,acc_01,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO003_1,Clear Invoice,2026-01-12T07:25:55,acc_02,Vendor_C,PO003,"3-way match, invoice after GR",2000
+PO004_1,Create Purchase Requisition Item,2026-01-06T00:00:00,req_03,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO004_1,Change Approval for Purchase Order,2026-01-07T01:09:33,approver_1,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO004_1,Create Purchase Order Item,2026-01-07T10:51:40,buy_01,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO004_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO004_1,Record Invoice Receipt,2026-01-13T09:50:09,acc_02,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO004_1,Clear Invoice,2026-01-15T09:24:43,acc_02,Vendor_A,PO004,"3-way match, invoice after GR",1000
+PO005_1,Create Purchase Requisition Item,2026-01-06T05:00:00,req_01,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO005_1,Change Approval for Purchase Order,2026-01-07T03:13:01,approver_2,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO005_1,Create Purchase Order Item,2026-01-07T17:47:46,buy_02,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO005_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO005_1,Record Invoice Receipt,2026-01-12T16:32:21,acc_02,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO005_1,Clear Invoice,2026-01-14T12:56:43,acc_01,Vendor_B,PO005,"3-way match, invoice after GR",500
+PO006_1,Create Purchase Requisition Item,2026-01-06T10:00:00,req_03,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO006_1,Change Approval for Purchase Order,2026-01-07T05:28:57,approver_1,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO006_1,Create Purchase Order Item,2026-01-07T21:01:06,buy_01,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO006_1,Record Goods Receipt,2026-01-08T19:44:36,wh_02,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO006_1,Record Invoice Receipt,2026-01-09T04:21:49,acc_02,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO006_1,Clear Invoice,2026-01-12T08:00:00,acc_01,Vendor_C,PO006,"3-way match, invoice after GR",500
+PO007_1,Create Purchase Requisition Item,2026-01-06T15:00:00,req_03,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO007_1,Change Approval for Purchase Order,2026-01-07T21:05:44,approver_1,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO007_1,Create Purchase Order Item,2026-01-08T08:16:52,buy_02,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO007_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO007_1,Record Invoice Receipt,2026-01-13T22:02:18,acc_01,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO007_1,Clear Invoice,2026-01-14T22:34:03,acc_01,Vendor_A,PO007,"3-way match, invoice after GR",500
+PO008_1,Create Purchase Requisition Item,2026-01-06T20:00:00,req_02,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO008_1,Change Approval for Purchase Order,2026-01-07T16:54:00,approver_1,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO008_1,Create Purchase Order Item,2026-01-08T01:18:58,buy_01,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO008_1,Record Goods Receipt,2026-01-09T06:59:30,wh_02,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO008_1,Record Invoice Receipt,2026-01-09T20:31:23,acc_02,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO008_1,Clear Invoice,2026-01-12T08:00:00,acc_02,Vendor_B,PO008,"3-way match, invoice after GR",2000
+PO009_1,Create Purchase Requisition Item,2026-01-07T01:00:00,req_01,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO009_1,Change Approval for Purchase Order,2026-01-07T19:31:25,approver_2,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO009_1,Create Purchase Order Item,2026-01-08T16:17:19,buy_01,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO009_1,Record Goods Receipt,2026-01-09T10:11:35,wh_01,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO009_1,Record Invoice Receipt,2026-01-12T08:00:00,acc_02,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO009_1,Clear Invoice,2026-01-14T11:45:10,acc_02,Vendor_C,PO009,"3-way match, invoice after GR",500
+PO010_1,Create Purchase Requisition Item,2026-01-07T06:00:00,req_02,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO010_1,Change Approval for Purchase Order,2026-01-08T09:38:40,approver_1,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO010_1,Create Purchase Order Item,2026-01-08T17:12:55,buy_01,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO010_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO010_1,Record Invoice Receipt,2026-01-12T21:05:55,acc_02,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO010_1,Clear Invoice,2026-01-14T05:36:28,acc_02,Vendor_A,PO010,"3-way match, invoice after GR",1000
+PO011_1,Create Purchase Requisition Item,2026-01-07T11:00:00,req_01,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO011_1,Change Approval for Purchase Order,2026-01-08T03:56:34,approver_1,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO011_1,Create Purchase Order Item,2026-01-08T11:18:33,buy_01,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO011_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO011_1,Record Invoice Receipt,2026-01-13T09:20:43,acc_02,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO011_1,Clear Invoice,2026-01-13T21:20:43,acc_02,Vendor_B,PO011,"3-way match, invoice after GR",500
+PO012_1,Create Purchase Requisition Item,2026-01-07T16:00:00,req_01,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO012_1,Change Approval for Purchase Order,2026-01-08T14:50:16,approver_1,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO012_1,Create Purchase Order Item,2026-01-08T23:07:09,buy_02,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO012_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO012_1,Record Invoice Receipt,2026-01-13T05:39:54,acc_01,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO012_1,Clear Invoice,2026-01-14T14:06:17,acc_02,Vendor_C,PO012,"3-way match, invoice after GR",500
+PO013_1,Create Purchase Requisition Item,2026-01-07T21:00:00,req_03,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO013_1,Change Approval for Purchase Order,2026-01-08T23:11:26,approver_1,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO013_1,Create Purchase Order Item,2026-01-09T08:47:24,buy_02,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO013_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO013_1,Record Invoice Receipt,2026-01-13T05:18:12,acc_02,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO013_1,Clear Invoice,2026-01-14T23:08:39,acc_01,Vendor_A,PO013,"3-way match, invoice after GR",1000
+PO014_1,Create Purchase Requisition Item,2026-01-08T02:00:00,req_02,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO014_1,Change Approval for Purchase Order,2026-01-08T22:48:44,approver_1,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO014_1,Create Purchase Order Item,2026-01-09T15:30:26,buy_01,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO014_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO014_1,Record Invoice Receipt,2026-01-13T06:57:18,acc_02,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO014_1,Clear Invoice,2026-01-15T15:42:09,acc_01,Vendor_B,PO014,"3-way match, invoice after GR",500
+PO015_1,Create Purchase Requisition Item,2026-01-08T07:00:00,req_02,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO015_1,Change Approval for Purchase Order,2026-01-08T21:45:46,approver_1,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO015_1,Create Purchase Order Item,2026-01-09T15:26:23,buy_02,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO015_1,Record Goods Receipt,2026-01-12T08:00:00,wh_02,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO015_1,Record Invoice Receipt,2026-01-12T17:25:40,acc_02,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO015_1,Clear Invoice,2026-01-14T11:51:20,acc_01,Vendor_C,PO015,"3-way match, invoice after GR",500
+PO016_1,Create Purchase Requisition Item,2026-01-08T12:00:00,req_01,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO016_1,Change Approval for Purchase Order,2026-01-09T05:54:02,approver_2,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO016_1,Create Purchase Order Item,2026-01-09T22:32:50,buy_01,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO016_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO016_1,Record Invoice Receipt,2026-01-13T03:32:51,acc_02,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO016_1,Clear Invoice,2026-01-15T06:23:58,acc_02,Vendor_A,PO016,"3-way match, invoice after GR",1000
+PO017_1,Create Purchase Requisition Item,2026-01-08T17:00:00,req_01,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO017_1,Change Approval for Purchase Order,2026-01-09T05:44:47,approver_2,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO017_1,Create Purchase Order Item,2026-01-09T14:19:33,buy_01,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO017_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO017_1,Record Invoice Receipt,2026-01-12T19:36:48,acc_02,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO017_1,Clear Invoice,2026-01-15T07:38:34,acc_02,Vendor_B,PO017,"3-way match, invoice after GR",500
+PO018_1,Create Purchase Requisition Item,2026-01-08T22:00:00,req_03,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO018_1,Change Approval for Purchase Order,2026-01-09T11:36:49,approver_2,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO018_1,Create Purchase Order Item,2026-01-09T23:52:08,buy_02,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO018_1,Record Goods Receipt,2026-01-12T08:00:00,wh_01,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO018_1,Record Invoice Receipt,2026-01-13T13:20:27,acc_02,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO018_1,Clear Invoice,2026-01-15T01:25:05,acc_01,Vendor_C,PO018,"3-way match, invoice after GR",1000
+PO019_1,Create Purchase Requisition Item,2026-01-09T03:00:00,req_01,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO019_1,Change Approval for Purchase Order,2026-01-12T08:00:00,approver_2,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO019_1,Create Purchase Order Item,2026-01-12T14:29:51,buy_02,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO019_1,Record Goods Receipt,2026-01-13T18:32:40,wh_02,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO019_1,Record Invoice Receipt,2026-01-14T07:17:45,acc_02,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO019_1,Clear Invoice,2026-01-15T07:01:31,acc_02,Vendor_A,PO019,"3-way match, invoice after GR",500
+PO020_1,Create Purchase Requisition Item,2026-01-09T08:00:00,req_01,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO020_1,Change Approval for Purchase Order,2026-01-12T08:00:00,approver_2,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO020_1,Create Purchase Order Item,2026-01-13T01:05:53,buy_02,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO020_1,Record Goods Receipt,2026-01-16T09:32:28,wh_02,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO020_1,Record Invoice Receipt,2026-01-16T20:56:24,acc_02,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO020_1,Clear Invoice,2026-01-19T08:00:00,acc_02,Vendor_B,PO020,"3-way match, invoice after GR",500
+PO021_1,Create Purchase Requisition Item,2026-01-09T13:00:00,req_01,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO021_1,Change Approval for Purchase Order,2026-01-12T08:00:00,approver_1,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO021_1,Create Purchase Order Item,2026-01-12T16:55:20,buy_01,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO021_1,Record Goods Receipt,2026-01-16T03:52:41,wh_01,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO021_1,Record Invoice Receipt,2026-01-19T08:00:00,acc_01,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO021_1,Clear Invoice,2026-01-20T18:55:33,acc_02,Vendor_C,PO021,"3-way match, invoice after GR",500
+PO022_1,Create Purchase Requisition Item,2026-01-09T18:00:00,req_01,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO022_1,Change Approval for Purchase Order,2026-01-12T08:00:00,approver_2,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO022_1,Create Purchase Order Item,2026-01-12T16:40:57,buy_01,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO022_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO022_1,Record Invoice Receipt,2026-01-20T00:49:48,acc_02,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO022_1,Clear Invoice,2026-01-21T19:08:31,acc_01,Vendor_A,PO022,"3-way match, invoice after GR",2000
+PO023_1,Create Purchase Requisition Item,2026-01-09T23:00:00,req_03,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO023_1,Change Approval for Purchase Order,2026-01-12T08:00:00,approver_2,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO023_1,Create Purchase Order Item,2026-01-13T00:03:52,buy_02,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO023_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO023_1,Record Invoice Receipt,2026-01-20T02:25:54,acc_02,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO023_1,Clear Invoice,2026-01-21T12:09:16,acc_02,Vendor_B,PO023,"3-way match, invoice after GR",2000
+PO024_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_03,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO024_1,Change Approval for Purchase Order,2026-01-13T17:33:52,approver_1,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO024_1,Create Purchase Order Item,2026-01-14T00:49:18,buy_01,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO024_1,Record Goods Receipt,2026-01-20T13:34:59,wh_01,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO024_1,Record Invoice Receipt,2026-01-21T08:12:59,acc_01,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO024_1,Clear Invoice,2026-01-22T12:24:17,acc_02,Vendor_C,PO024,"3-way match, invoice after GR",500
+PO025_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_03,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO025_1,Change Approval for Purchase Order,2026-01-13T20:04:06,approver_2,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO025_1,Create Purchase Order Item,2026-01-14T11:43:42,buy_02,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO025_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO025_1,Record Invoice Receipt,2026-01-20T03:24:37,acc_02,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO025_1,Clear Invoice,2026-01-21T07:45:31,acc_02,Vendor_A,PO025,"3-way match, invoice after GR",1500
+PO026_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_02,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO026_1,Change Approval for Purchase Order,2026-01-13T10:35:23,approver_1,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO026_1,Create Purchase Order Item,2026-01-13T17:52:46,buy_02,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO026_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO026_1,Record Invoice Receipt,2026-01-20T08:06:30,acc_01,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO026_1,Clear Invoice,2026-01-21T15:19:53,acc_02,Vendor_B,PO026,"3-way match, invoice after GR",1500
+PO027_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_02,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO027_1,Change Approval for Purchase Order,2026-01-13T10:25:52,approver_2,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO027_1,Create Purchase Order Item,2026-01-14T02:26:40,buy_02,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO027_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO027_1,Record Invoice Receipt,2026-01-19T14:01:37,acc_02,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO027_1,Clear Invoice,2026-01-21T10:30:49,acc_01,Vendor_C,PO027,"3-way match, invoice after GR",2000
+PO028_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_02,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO028_1,Change Approval for Purchase Order,2026-01-12T22:55:21,approver_2,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO028_1,Create Purchase Order Item,2026-01-13T08:00:04,buy_02,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO028_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO028_1,Record Invoice Receipt,2026-01-20T03:32:01,acc_01,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO028_1,Clear Invoice,2026-01-21T22:39:51,acc_01,Vendor_A,PO028,"3-way match, invoice after GR",2000
+PO029_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_03,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO029_1,Change Approval for Purchase Order,2026-01-13T05:12:16,approver_2,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO029_1,Create Purchase Order Item,2026-01-13T22:38:45,buy_01,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO029_1,Record Goods Receipt,2026-01-21T22:38:45,wh_02,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO029_1,Record Invoice Receipt,2026-01-22T11:55:15,acc_02,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO029_1,Clear Invoice,2026-01-26T08:00:00,acc_01,Vendor_B,PO029,"3-way match, invoice after GR",1000
+PO030_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_02,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO030_1,Change Approval for Purchase Order,2026-01-13T01:43:38,approver_2,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO030_1,Create Purchase Order Item,2026-01-13T17:44:18,buy_02,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO030_1,Record Goods Receipt,2026-01-19T08:00:00,wh_02,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO030_1,Record Invoice Receipt,2026-01-20T05:05:26,acc_01,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO030_1,Clear Invoice,2026-01-21T20:44:20,acc_01,Vendor_C,PO030,"3-way match, invoice after GR",1500
+PO031_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_02,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO031_1,Change Approval for Purchase Order,2026-01-13T13:13:46,approver_2,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO031_1,Create Purchase Order Item,2026-01-14T07:51:28,buy_01,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO031_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO031_1,Record Invoice Receipt,2026-01-20T05:34:30,acc_01,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO031_1,Clear Invoice,2026-01-22T07:20:54,acc_01,Vendor_A,PO031,"3-way match, invoice after GR",500
+PO032_1,Create Purchase Requisition Item,2026-01-12T08:00:00,req_03,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO032_1,Change Approval for Purchase Order,2026-01-13T03:10:51,approver_2,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO032_1,Create Purchase Order Item,2026-01-13T12:53:13,buy_02,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO032_1,Record Goods Receipt,2026-01-19T08:50:31,wh_02,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO032_1,Record Invoice Receipt,2026-01-20T06:58:05,acc_02,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO032_1,Clear Invoice,2026-01-22T05:49:55,acc_02,Vendor_B,PO032,"3-way match, invoice after GR",500
+PO033_1,Create Purchase Requisition Item,2026-01-12T01:00:00,req_03,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO033_1,Change Approval for Purchase Order,2026-01-12T21:01:37,approver_2,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO033_1,Create Purchase Order Item,2026-01-13T10:02:57,buy_01,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO033_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO033_1,Record Invoice Receipt,2026-01-20T09:59:15,acc_02,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO033_1,Clear Invoice,2026-01-21T16:00:36,acc_01,Vendor_C,PO033,"3-way match, invoice after GR",1000
+PO034_1,Create Purchase Requisition Item,2026-01-12T06:00:00,req_01,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO034_1,Change Approval for Purchase Order,2026-01-13T05:57:48,approver_1,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO034_1,Create Purchase Order Item,2026-01-13T19:05:37,buy_02,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO034_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO034_1,Record Invoice Receipt,2026-01-20T08:03:08,acc_01,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO034_1,Clear Invoice,2026-01-22T19:28:54,acc_01,Vendor_A,PO034,"3-way match, invoice after GR",1500
+PO035_1,Create Purchase Requisition Item,2026-01-12T11:00:00,req_01,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO035_1,Change Approval for Purchase Order,2026-01-13T04:35:39,approver_1,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO035_1,Create Purchase Order Item,2026-01-13T15:05:05,buy_01,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO035_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO035_1,Record Invoice Receipt,2026-01-19T22:42:36,acc_02,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO035_1,Clear Invoice,2026-01-22T15:02:15,acc_01,Vendor_B,PO035,"3-way match, invoice after GR",1000
+PO036_1,Create Purchase Requisition Item,2026-01-12T16:00:00,req_03,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO036_1,Change Approval for Purchase Order,2026-01-13T06:14:54,approver_1,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO036_1,Create Purchase Order Item,2026-01-13T18:12:52,buy_02,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO036_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO036_1,Record Invoice Receipt,2026-01-19T15:44:39,acc_01,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO036_1,Clear Invoice,2026-01-21T07:38:54,acc_01,Vendor_C,PO036,"3-way match, invoice after GR",2000
+PO037_1,Create Purchase Requisition Item,2026-01-12T21:00:00,req_01,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO037_1,Change Approval for Purchase Order,2026-01-13T18:27:19,approver_1,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO037_1,Create Purchase Order Item,2026-01-14T09:46:15,buy_01,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO037_1,Record Goods Receipt,2026-01-19T08:00:00,wh_02,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO037_1,Record Invoice Receipt,2026-01-20T04:48:21,acc_01,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO037_1,Clear Invoice,2026-01-21T20:26:10,acc_01,Vendor_A,PO037,"3-way match, invoice after GR",500
+PO038_1,Create Purchase Requisition Item,2026-01-13T02:00:00,req_01,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO038_1,Change Approval for Purchase Order,2026-01-14T12:18:17,approver_2,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO038_1,Create Purchase Order Item,2026-01-14T23:09:14,buy_02,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO038_1,Record Goods Receipt,2026-01-19T16:52:51,wh_02,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO038_1,Record Invoice Receipt,2026-01-20T08:21:33,acc_02,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO038_1,Clear Invoice,2026-01-22T02:16:28,acc_02,Vendor_B,PO038,"3-way match, invoice after GR",1500
+PO039_1,Create Purchase Requisition Item,2026-01-13T07:00:00,req_03,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO039_1,Change Approval for Purchase Order,2026-01-14T18:39:08,approver_2,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO039_1,Create Purchase Order Item,2026-01-15T07:34:38,buy_01,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO039_1,Record Goods Receipt,2026-01-21T06:46:49,wh_01,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO039_1,Record Invoice Receipt,2026-01-21T21:06:37,acc_02,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO039_1,Clear Invoice,2026-01-23T16:13:13,acc_01,Vendor_C,PO039,"3-way match, invoice after GR",1500
+PO040_1,Create Purchase Requisition Item,2026-01-13T12:00:00,req_01,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO040_1,Change Approval for Purchase Order,2026-01-14T11:43:47,approver_2,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO040_1,Create Purchase Order Item,2026-01-15T06:37:20,buy_02,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO040_1,Record Goods Receipt,2026-01-20T03:28:06,wh_02,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO040_1,Record Invoice Receipt,2026-01-20T11:59:59,acc_02,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO040_1,Clear Invoice,2026-01-21T04:24:50,acc_02,Vendor_A,PO040,"3-way match, invoice after GR",500
+PO041_1,Create Purchase Requisition Item,2026-01-13T17:00:00,req_02,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO041_1,Change Approval for Purchase Order,2026-01-14T07:46:07,approver_2,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO041_1,Create Purchase Order Item,2026-01-14T11:32:00,buy_01,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO041_1,Record Invoice Receipt,2026-01-14T22:01:27,acc_02,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO041_1,Record Goods Receipt,2026-01-19T08:00:00,wh_02,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO041_1,Clear Invoice,2026-01-21T20:22:03,acc_02,Vendor_B,PO041,"3-way match, invoice after GR",500
+PO042_1,Create Purchase Requisition Item,2026-01-13T22:00:00,req_03,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO042_1,Change Approval for Purchase Order,2026-01-14T18:55:48,approver_1,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO042_1,Create Purchase Order Item,2026-01-15T05:12:47,buy_02,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO042_1,Record Invoice Receipt,2026-01-16T02:50:29,acc_01,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO042_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO042_1,Clear Invoice,2026-01-20T09:30:08,acc_02,Vendor_C,PO042,"3-way match, invoice after GR",5000
+PO043_1,Create Purchase Requisition Item,2026-01-14T03:00:00,req_03,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO043_1,Change Approval for Purchase Order,2026-01-14T16:37:44,approver_2,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO043_1,Create Purchase Order Item,2026-01-15T02:11:48,buy_02,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO043_1,Record Invoice Receipt,2026-01-15T13:53:46,acc_01,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO043_1,Record Goods Receipt,2026-01-16T16:44:54,wh_02,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO043_1,Clear Invoice,2026-01-19T08:00:00,acc_01,Vendor_A,PO043,"3-way match, invoice after GR",2000
+PO044_1,Create Purchase Requisition Item,2026-01-14T08:00:00,req_02,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO044_1,Change Approval for Purchase Order,2026-01-15T08:48:57,approver_1,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO044_1,Create Purchase Order Item,2026-01-15T19:45:19,buy_01,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO044_1,Record Invoice Receipt,2026-01-16T11:27:19,acc_01,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO044_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO044_1,Clear Invoice,2026-01-20T21:30:54,acc_02,Vendor_B,PO044,"3-way match, invoice after GR",500
+PO045_1,Create Purchase Requisition Item,2026-01-14T13:00:00,req_01,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO045_1,Change Approval for Purchase Order,2026-01-15T13:59:14,approver_2,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO045_1,Create Purchase Order Item,2026-01-15T22:14:58,buy_02,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO045_1,Record Invoice Receipt,2026-01-16T04:39:33,acc_01,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO045_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO045_1,Clear Invoice,2026-01-20T22:57:19,acc_02,Vendor_C,PO045,"3-way match, invoice after GR",2000
+PO046_1,Create Purchase Requisition Item,2026-01-14T18:00:00,req_03,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO046_1,Change Approval for Purchase Order,2026-01-15T14:33:38,approver_2,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO046_1,Create Purchase Order Item,2026-01-16T06:49:29,buy_01,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO046_1,Record Invoice Receipt,2026-01-16T17:51:08,acc_01,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO046_1,Record Goods Receipt,2026-01-19T00:07:58,wh_01,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO046_1,Clear Invoice,2026-01-20T09:17:02,acc_02,Vendor_A,PO046,"3-way match, invoice after GR",1000
+PO047_1,Create Purchase Requisition Item,2026-01-14T23:00:00,req_01,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO047_1,Change Approval for Purchase Order,2026-01-15T14:21:36,approver_2,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO047_1,Create Purchase Order Item,2026-01-16T00:44:54,buy_01,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO047_1,Record Invoice Receipt,2026-01-16T22:36:15,acc_01,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO047_1,Record Goods Receipt,2026-01-19T08:00:00,wh_01,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO047_1,Clear Invoice,2026-01-20T12:04:49,acc_02,Vendor_B,PO047,"3-way match, invoice after GR",2000
+PO048_1,Create Purchase Requisition Item,2026-01-15T04:00:00,req_03,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO048_1,Change Approval for Purchase Order,2026-01-16T13:10:53,approver_2,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO048_1,Create Purchase Order Item,2026-01-19T08:00:00,buy_02,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO048_1,Record Invoice Receipt,2026-01-19T16:51:53,acc_01,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO048_1,Record Goods Receipt,2026-01-20T10:36:34,wh_01,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO048_1,Clear Invoice,2026-01-21T18:45:45,acc_01,Vendor_C,PO048,"3-way match, invoice after GR",2000
+PO049_1,Create Purchase Requisition Item,2026-01-15T09:00:00,req_02,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO049_1,Change Approval for Purchase Order,2026-01-19T08:00:00,approver_1,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO049_1,Create Purchase Order Item,2026-01-19T17:48:09,buy_02,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO049_1,Record Invoice Receipt,2026-01-20T11:57:29,acc_02,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO049_1,Record Goods Receipt,2026-01-21T23:04:57,wh_01,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO049_1,Clear Invoice,2026-01-26T08:00:00,acc_02,Vendor_A,PO049,"3-way match, invoice after GR",1000
+PO050_1,Create Purchase Requisition Item,2026-01-15T14:00:00,req_01,Vendor_B,PO050,"3-way match, invoice after GR",1500
+PO050_1,Change Approval for Purchase Order,2026-01-16T18:50:35,approver_1,Vendor_B,PO050,"3-way match, invoice after GR",1500
+PO050_1,Create Purchase Order Item,2026-01-19T08:00:00,buy_01,Vendor_B,PO050,"3-way match, invoice after GR",1500
+PO050_1,Record Invoice Receipt,2026-01-19T16:58:01,acc_01,Vendor_B,PO050,"3-way match, invoice after GR",1500
+PO050_1,Record Goods Receipt,2026-01-22T00:52:56,wh_01,Vendor_B,PO050,"3-way match, invoice after GR",1500
+PO050_1,Clear Invoice,2026-01-23T22:36:52,acc_01,Vendor_B,PO050,"3-way match, invoice after GR",1500
