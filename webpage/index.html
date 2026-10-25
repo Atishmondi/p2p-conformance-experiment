@@ -207,8 +207,19 @@ prec = pm4py.precision_token_based_replay(log, net, im, fm)</code></pre>
       <h2 id="bpmn-heading">7 · Normative BPMN model</h2>
       <p>Normative P2P v2: requisition, approval gateway, order, receipt, 3-way-matched bill, payment. Source of truth for rules R1–R5 and for alignment.</p>
       <figure>
-        <img src="bpmn-placeholder.png" alt="Preview of normative BPMN v2 purchase-to-pay model" width="800" height="400">
-        <figcaption>Fig. 8 — Normative BPMN v2 preview. Machine-readable source: docs/bpmn/v2.bpmn.</figcaption>
+        <svg viewBox="0 0 820 160" width="100%" height="auto" role="img" aria-label="Normative BPMN v2 purchase-to-pay model: request, approval, order, receipt, invoice, payment with re-approval and receipt gates">
+          <style>.b{fill:#f8fafc;stroke:#334155;stroke-width:1.5}.g{fill:#fef9c3;stroke:#a16207;stroke-width:1.5}.t{font:12px sans-serif;fill:#0f172a}.s{font:10px sans-serif;fill:#475569}.a{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#ah)}</style>
+          <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#334155"/></marker></defs>
+          <rect class="b" x="10" y="55" width="100" height="50" rx="6"/><text class="t" x="60" y="75" text-anchor="middle">Request</text><text class="s" x="60" y="90" text-anchor="middle">PR create</text>
+          <rect class="b" x="125" y="55" width="100" height="50" rx="6"/><text class="t" x="175" y="75" text-anchor="middle">Approval</text><text class="s" x="175" y="90" text-anchor="middle">2-step</text>
+          <rect class="g" x="240" y="55" width="100" height="50" rx="6"/><text class="t" x="290" y="75" text-anchor="middle">Re-approval?</text><text class="s" x="290" y="90" text-anchor="middle">if PO changed</text>
+          <rect class="b" x="355" y="55" width="100" height="50" rx="6"/><text class="t" x="405" y="75" text-anchor="middle">Order</text><text class="s" x="405" y="90" text-anchor="middle">PO confirm</text>
+          <rect class="b" x="470" y="55" width="100" height="50" rx="6"/><text class="t" x="520" y="75" text-anchor="middle">Receipt</text><text class="s" x="520" y="90" text-anchor="middle">Validate GR</text>
+          <rect class="g" x="585" y="55" width="100" height="50" rx="6"/><text class="t" x="635" y="75" text-anchor="middle">Bill gate</text><text class="s" x="635" y="90" text-anchor="middle">qty ≤ received</text>
+          <rect class="b" x="700" y="55" width="110" height="50" rx="6"/><text class="t" x="755" y="75" text-anchor="middle">Pay</text><text class="s" x="755" y="90" text-anchor="middle">after invoice</text>
+          <line class="a" x1="110" y1="80" x2="123" y2="80"/><line class="a" x1="225" y1="80" x2="238" y2="80"/><line class="a" x1="340" y1="80" x2="353" y2="80"/><line class="a" x1="455" y1="80" x2="468" y2="80"/><line class="a" x1="570" y1="80" x2="583" y2="80"/><line class="a" x1="685" y1="80" x2="698" y2="80"/>
+        </svg>
+        <figcaption>Fig. 8 — Normative BPMN v2 preview (inline; generated from 6-step flow since <code>bpmn-placeholder.png</code> was never generated — see dead <code>src/make_figures.py</code> reference). Machine-readable source: docs/bpmn/v2.bpmn.</figcaption>
       </figure>
       <p><a href="../docs/bpmn/v2.bpmn">docs/bpmn/v2.bpmn</a> · <a href="#reproduce">Reproduction steps</a></p>
     </section>

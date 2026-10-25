@@ -21,3 +21,8 @@ data/*.db
 # Temporary/demo artifacts
 *.tmp
 *.bak
+
+# Local execution and verification artifacts
+.venv/
+.superpowers/
+__pycache__/
