@@ -1,7 +1,9 @@
 # ERP Experiment Protocol — Odoo Community Transferability (H8 Preregistration)
 
+> **Superseded for ERP extraction and execution (2026-10-26):** This is a historical, unexecuted H8 preregistration. Its §5.1 snapshot schema, §5.2 date-field suggestions, §8 SQL extraction step, and any stated hard-control expectations are **not an executable or evidential path**. Use [the strict recorded-action pilot](erp-pilot.md), [the v2 event contract](event-contract.md), and `src/validate_erp_export.py` instead. `sql/odoo_extract.sql` now deliberately fails; no live Odoo control outcome has been observed. The original arm predictions below remain hypotheses, not findings.
+
 **Status: PROTOCOL ONLY — no Odoo executed, no results recorded, no claim made.**
-**Owns-only: this file (`docs/17-erp-experiment-protocol.md`). Does not implement Odoo, does not modify controls, does not write `data/hypothesis_erp_mapping.csv`.**
+**Historical note:** The originally scoped schema and extraction workflow are preserved below to show what was preregistered; the strict pilot document supersedes them.
 **Gate: `docs/04-odoo-execution-protocol.md` §6 (hypotheses-first gate) + `src/signatures.py` + `SCOPE_NOTES` + `docs/16-research-audit.md` open items (D1–D5, F1–F6). Order is mandatory: preregister → execute → extract → detect → verify → compare to field base rates → only then modify + rerun.**
 **H8 status: OPEN and stays open until field/ERP intervention is measured. Lab 60/60→0/60 (seeds 42/7) licences only pilot hypotheses.**
 
@@ -148,7 +150,7 @@ H8 remains **open** after Odoo control arms until ALL of: (a) S3R/S4R/S6R reruns
 
 ## 5. Event-log contract
 
-### 5.1 Schema (column-for-column; reject exports that do not match)
+### 5.1 Historical schema (superseded; do not use for verdict CSV)
 
 | Column | Type | Odoo source | Required | Semantics |
 |---|---|---|---|---|
@@ -171,7 +173,7 @@ H8 remains **open** after Odoo control arms until ALL of: (a) S3R/S4R/S6R reruns
 | `condition` | enum | `control` / `intervention` | yes | S1–S6 = control; S3R/S4R/S6R = intervention. |
 | `doc_order_seq` | integer | Export order per case | yes | Document-order fallback audit trail; disagreements with ts flagged, ts prevails for verdict. |
 
-### 5.2 Timestamp semantics (S3 latent-vs-recorded lesson — read before extracting)
+### 5.2 Historical timestamp discussion (superseded for extraction)
 
 Field lesson (audit E13 + E-contradiction 1): after-GR **vendor-early** (`Vendor Creates Invoice` < GR) occurred in 5754/15182 cases, yet **recorded-early** (`Record Invoice Receipt` < GR) occurred in 0/11128 applicable; D1 16356 all before-GR / 0 after-GR; D2/D4 89 each all before-GR; D3 1009 with 0 after-GR; probes 0/40 invoice<GR, 0/39 clear<GR. The recording gate absorbs latent earliness. Quoting vendor-action timestamps as system violations conflates mechanism with verdict (audit F4: 1704-definition ambiguity).
 
@@ -222,7 +224,7 @@ Odoo analogue: vendor sends bill (occurred, `vendor_bill_date` / paper date) vs 
 
 ## 8. Reproducibility procedure + preregistration record (fill BEFORE results)
 
-Backbone order (04 §6, 9 steps): 1 define (§2 + R1–R5) → 2 signatures (frozen) → 3 execute → 4 extract (`sql/odoo_extract.sql` → §5.1) → 5 detect (frozen `check_case`) → 6 verify (observed vs latent per signature) → 7 modify (only after field-base comparison) → 8 rerun → 9 measure (lab delta + field-base comparison, FLAG untransferred fixes).
+Historical backbone (04 §6, 9 steps; extraction step superseded by [ERP pilot](erp-pilot.md)): 1 define (§2 + R1–R5) → 2 signatures (frozen) → 3 execute → 4 extract (`sql/odoo_extract.sql` → §5.1) → 5 detect (frozen `check_case`) → 6 verify (observed vs latent per signature) → 7 modify (only after field-base comparison) → 8 rerun → 9 measure (lab delta + field-base comparison, FLAG untransferred fixes).
 
 Preregistration table (copy H1–H8 from `data/hypotheses.csv`, add Odoo prediction; `status` stays preregistered until rerun + comparison recorded):
 
