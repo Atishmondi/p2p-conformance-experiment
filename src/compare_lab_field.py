@@ -18,7 +18,7 @@ METRICS = ('r1_maverick', 'r2_viol', 'r3_viol', 'r4_rework', 'r5_viol', 'approva
 DEFINITIONS = {
     'r1_maverick': 'Vendor-created invoice before PO item (field proxy, not lab approval R1).',
     'r2_viol': 'Invoice receipt before goods receipt in after-GR stratum; field applicability differs from lab R2.',
-    'r3_viol': 'Historical invoice/order quantity proxy with epsilon tolerance; not lab cumulative invoice/receipt R3.',
+    'r3_viol': 'Historical monetary-value proxy from Cumulative net worth: maximum invoice worth exceeds first PO worth by more than epsilon; differs from lab cumulative invoice/receipt item quantities R3.',
     'r4_rework': 'Quantity or price change after PO item; not lab modification/reapproval interval R4.',
     'r5_viol': 'Invoice clearing before invoice receipt; payment signal differs from lab R5.',
     'approval_change_after_po': 'Approval-change activity after PO; separate from corrected field rework.'}
@@ -42,13 +42,22 @@ def _metric(source):
                 wilson_95=wilson_ci(x, n))
 
 
-def _stratum(source):
+def _stratum(source, n_cases=None):
     if source is None:
-        return dict(available=False, n_cases=None, metrics={})
+        return dict(available=False, n_cases=n_cases, metrics={})
     if not isinstance(source, dict):
         raise ValueError('field stratum must be an object')
-    return dict(available=True, n_cases=_count(source.get('n_cases'), 'n_cases'),
-                metrics={key: _metric(source[key]) for key in METRICS if key in source})
+    embedded_cases = _count(source.get('n_cases'), 'n_cases')
+    if n_cases is not None and embedded_cases is not None and n_cases != embedded_cases:
+        raise ValueError('field overall n_cases conflicts with top-level n_cases')
+    total = n_cases if n_cases is not None else embedded_cases
+    metrics = {key: _metric(source[key]) for key in METRICS if key in source}
+    if total is not None:
+        for key, metric in metrics.items():
+            applicable = metric['n_applicable']
+            if applicable is not None and applicable > total:
+                raise ValueError('field %s n_applicable exceeds n_cases' % key)
+    return dict(available=True, n_cases=total, metrics=metrics)
 
 
 def compare(data_dir: Path, lab=None):
@@ -75,7 +84,7 @@ def compare(data_dir: Path, lab=None):
     result['available'] = True
     # Never copy source_xes or arbitrary metadata: legacy summaries can contain
     # machine-local absolute paths and old cached anchors/verdicts.
-    strata = dict(overall=_stratum(source.get('overall')),
+    strata = dict(overall=_stratum(source.get('overall'), _count(source.get('n_cases'), 'n_cases')),
                   two_way=_stratum(source.get('r1_two_way_stratum')),
                   three_way_after=_stratum(source.get('three_way_strata', {}).get('after')),
                   three_way_before=_stratum(source.get('three_way_strata', {}).get('before')))

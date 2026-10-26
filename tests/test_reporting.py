@@ -151,6 +151,41 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(compare(self.root)['strata']['three_way_after']['metrics']['r2_viol']['rate'], 0.6)
         self.assertNotIn('/private', json.dumps(result))
 
+    def test_field_r3_definition_describes_monetary_worth_basis(self):
+        definition = importlib.import_module('compare_lab_field').DEFINITIONS['r3_viol']
+        self.assertIn('Cumulative net worth', definition)
+        self.assertIn('maximum invoice', definition)
+        self.assertIn('first PO', definition)
+        self.assertIn('cumulative invoice/receipt item quantities', definition)
+
+    def test_field_applicable_count_cannot_exceed_known_stratum_cases(self):
+        stratum = importlib.import_module('compare_lab_field')._stratum
+        with self.assertRaisesRegex(ValueError, 'n_applicable.*n_cases'):
+            stratum({'n_cases': 1, 'r3_viol': {'n_true': 2, 'n_applicable': 2}})
+        self.assertIsNone(stratum({'r3_viol': {'n_true': 2, 'n_applicable': 2}})['n_cases'])
+        empty = stratum({'n_cases': 0, 'r3_viol': {'n_true': 0, 'n_applicable': 0}})
+        self.assertEqual(empty['n_cases'], 0)
+        self.assertIsNone(empty['metrics']['r3_viol']['rate'])
+
+    def test_field_overall_uses_top_level_case_count_and_rejects_conflict(self):
+        compare = importlib.import_module('compare_lab_field').compare
+        path = self.root / 'bpic2019_results.json'
+        source = {'n_cases': 3, 'overall': {'r3_viol': {'n_true': 1, 'n_applicable': 2}}}
+        path.write_text(json.dumps(source))
+        overall = compare(self.root)['strata']['overall']
+        self.assertEqual(overall['n_cases'], 3)
+        self.assertEqual(overall['metrics']['r3_viol']['n_applicable'], 2)
+        source['overall']['n_cases'] = 2
+        path.write_text(json.dumps(source))
+        with self.assertRaisesRegex(ValueError, 'n_cases'):
+            compare(self.root)
+        del source['n_cases']
+        path.write_text(json.dumps(source))
+        self.assertEqual(compare(self.root)['strata']['overall']['n_cases'], 2)
+        del source['overall']['n_cases']
+        path.write_text(json.dumps(source))
+        self.assertIsNone(compare(self.root)['strata']['overall']['n_cases'])
+
     def test_raw_field_offsets_are_normalized_and_fresh_results_are_versioned(self):
         analyzer = importlib.import_module('analyze_bpic2019')
         # These two event strings represent the same instant; dropping offsets
