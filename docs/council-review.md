@@ -26,4 +26,3 @@ Pin independent failing examples for quantities, incomplete evidence, and orderi
 - Bounded: preserve existing public data provenance, do not redistribute the raw XES in delivery or include private source paths; avoid asserting a license not verified.
 - Deferred: impact calculator, universal ERP adapter, multi-currency amount matching, returns and full payment allocation, new promotional video; unsupported cases rejected/documented.
 - Runtime: actual Docker/Odoo execution requires a functioning authorized local runtime; attempt results recorded separately. An ERP-shaped CSV example is labeled synthetic.
-

@@ -108,3 +108,70 @@ runs.csv headers are rejected for v2 writes; use a fresh output root. The v1
 snapshot remains unchanged, including its historical script-relative defaults;
 reproducibility tests call its load/check_case API with explicit input paths.
 No ERP execution, deployment, or publication is claimed.
+
+## Review fixes: default root and registry serialization (2026-10-26)
+
+Resolved both findings in `task-1-review.md` against base `5795f6b`, limited to
+`src/run_manager.py`, `tests/test_runs.py`, `docs/event-contract.md`, and
+`.gitignore`. Historical event/result/registry files, frozen v1 checker, and
+both generators remain unchanged.
+
+### Regression-first evidence
+
+Read the test-driven-development skill and writing-good-tests reference before
+writing tests. Added three real-IO regression methods before production changes:
+
+1. A temporary checkout containing the actual checked-in historical `runs.csv`
+   invokes the default workflow without `--output-dir`, requests both eras, and
+   requires success in `output/experiments/`, both registry rows and summaries,
+   and byte-for-byte preservation of historical data with no new data/ entries.
+2. An explicit root containing that same historical registry must reject twice
+   with a concise incompatible-header CLI error, no traceback, no tag reservation
+   or artifacts, and unchanged registry bytes. Retrying also checks that the
+   failure releases the lock.
+3. A deterministic scheduling fixture pauses `Path.open('x')` after the first
+   worker publishes an empty registry but before it writes the header. A second
+   tag must fail explicitly as busy without a run directory. The first worker
+   then finishes; a real subprocess can reuse the second tag and append a
+   complete second v2 row. Filesystem IO, checker, and generators remain real;
+   only the scheduling boundary is intercepted.
+
+Initial concurrency fixture path comparison needed `.resolve()` because macOS
+normalizes the temporary root through `/private`; corrected this test fixture
+before any production changes. Final observed RED command:
+`python3 -S -m unittest discover -s tests -p test_runs.py -v`.
+Result: **9 methods run, 3 expected assertion failures**. Default invocation
+failed against historical runs.csv; incompatible-root rejection emitted a
+traceback after generation; the paused-header competitor raised the erroneous
+incompatible-header `ValueError` instead of a busy `SystemExit`. No import or
+fixture errors remained in this RED run.
+
+### Fix and verification
+
+- Default generated root is now `output/experiments/`, ignored by Git. Existing
+  default commands run both eras without touching the historical registry.
+- An atomic standard-library `mkdir` on `.runs.lock` serializes preflight,
+  registry initialization, tag reservation, generation, and every era append
+  for one invocation. Direct `run_era` calls use the same serialization protocol.
+  No platform-specific locking library or third-party dependency was added.
+- Header compatibility is checked under the lock before reserving a tag or
+  generating output. Incompatible roots produce a concise CLI error. A busy
+  root fails before tag reservation or generation; it cannot mistake an
+  in-progress header for an incompatible registry. `finally` releases the lock
+  on ordinary exits and exceptions.
+- Focused GREEN, same command as RED: **9 methods passed** (1.502 seconds).
+- Full suite, run once after the fix:
+  `python3 -S -m unittest discover -s tests -v` -> **30 tests passed**, no skips
+  or failures (1.408 seconds), using **Python 3.9.6** with site packages disabled.
+- `git diff --check` passed. `git check-ignore output/experiments/probe.txt`
+  confirmed the default generated root is ignored. Diff checks against
+  `5795f6b` showed no changes to data/, legacy checker, or either generator.
+- Self-review confirmed that header initialization and row appends share the
+  same lock, the lock is acquired before reservation, both eras share one
+  session, duplicate tags remain protected, and no historical migration or
+  unrelated checker changes were introduced.
+
+Bounded tradeoff: invocations sharing one root serialize the entire generation,
+so a competitor must retry after the active run finishes. A killed process can
+leave a stale lock; the contract documents removing the empty lock directory
+only after verifying no run is active. Locks are never stolen automatically.
