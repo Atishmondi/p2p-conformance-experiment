@@ -143,12 +143,26 @@ class PortabilityTests(unittest.TestCase):
                                    '--out', str(canonical / 'dashboard.json'), '--site-dir', str(canonical / 'webpage')],
                                   capture_output=True, text=True)
             self.assertEqual(proc.returncode, 0, proc.stderr)
+            standalone_path = canonical / 'standalone.json'
+            proc = subprocess.run([sys.executable, '-S', str(ROOT / 'src/build_dashboard.py'),
+                                   '--data-dir', str(ROOT / 'data'), '--out', str(standalone_path)],
+                                  capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            standalone = json.loads(standalone_path.read_text())
+            standalone_field = next(s for s in standalone['provenance']['sources'] if s['path'] == 'bpic2019_results.json')
+            input_hash = hashlib.sha256((ROOT / 'data/bpic2019_results.json').read_bytes()).hexdigest()
+            self.assertEqual(standalone_field['sha256'], input_hash)
+            self.assertNotIn('download', standalone_field)
             field = canonical / 'webpage/artifacts/bpic2019_results.json'
             self.assertNotIn(str(ROOT), field.read_text())
             self.assertFalse(Path(json.loads(field.read_text())['source_xes']).is_absolute())
             payload = json.loads((canonical / 'webpage/data.json').read_text())
             record = next(s for s in payload['provenance']['sources'] if s['path'] == field.name)
             self.assertEqual(record['sha256'], hashlib.sha256(field.read_bytes()).hexdigest())
+            self.assertEqual(record['source_sha256'], input_hash)
+            self.assertNotEqual(record['sha256'], record['source_sha256'])
+            self.assertIn('source_xes', record['transformation'])
+            self.assertIn('download', payload['provenance']['path_base'])
 
 
 if __name__ == '__main__':

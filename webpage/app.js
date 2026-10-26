@@ -92,6 +92,11 @@ function renderSources() {
   data.provenance.sources.forEach(source => {
     const tr = $('provenance').insertRow(); const td = tr.insertCell();
     const a = document.createElement('a'); a.textContent = source.path; a.href = source.download || '#'; td.append(a);
+    if (source.transformation) {
+      const note = document.createElement('small');
+      note.textContent = ` Public copy: ${source.transformation} Input SHA-256: ${source.source_sha256}`;
+      td.append(note);
+    }
     [source.evidence_class, source.rule_version, source.sha256].forEach(v => cell(tr, v));
   });
   clear('limits'); data.limitations.forEach(value => {

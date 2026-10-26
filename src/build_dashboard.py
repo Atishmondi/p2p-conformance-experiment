@@ -102,7 +102,7 @@ def build(data_dir: Path, output_path: Path) -> dict:
     lab = evaluate(data_dir)
     field = compare(data_dir, lab=lab)
     if field['available']:
-        contents['bpic2019_results.json'] = public_field_bytes((data_dir / 'bpic2019_results.json').read_bytes())
+        contents['bpic2019_results.json'] = (data_dir / 'bpic2019_results.json').read_bytes()
     sources = []
     for name, content in sorted(contents.items()):
         era = 'r1' if '-r1.' in name else 'r2'
@@ -138,14 +138,23 @@ def build_site(data_dir: Path, site_dir: Path, payload: dict) -> None:
     artifacts.mkdir(exist_ok=True)
     for source in payload['provenance']['sources']:
         name = source['path']
+        original = (data_dir / name).read_bytes()
+        if hashlib.sha256(original).hexdigest() != source['sha256']:
+            raise ValueError('source changed during build: %s' % name)
+        source['source_sha256'] = source['sha256']
         if name == 'bpic2019_results.json':
-            content = public_field_bytes((data_dir / name).read_bytes())
-            if hashlib.sha256(content).hexdigest() != source['sha256']:
-                raise ValueError('field summary changed during build')
+            content = public_field_bytes(original)
             (artifacts / name).write_bytes(content)
         else:
-            shutil.copyfile(data_dir / name, artifacts / name)
+            content = original
+            (artifacts / name).write_bytes(content)
+        source['sha256'] = hashlib.sha256(content).hexdigest()
+        if content != original:
+            source['transformation'] = 'Public copy reduces source_xes to its basename; source_sha256 identifies the original input.'
         source['download'] = 'artifacts/' + name
+    payload['provenance']['path_base'] = ('path is relative to the selected input data directory; '
+                                          'download is relative to this viewer. source_sha256 hashes the input; '
+                                          'sha256 hashes the downloadable public copy.')
     write_json(payload, site_dir / 'data.json')
 
 

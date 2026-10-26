@@ -2511,42 +2511,47 @@
   "provenance": {
     "builder": "build_dashboard.py",
     "historical_note": "Unversioned conformance CSV is historical v1; v2 is explicit. Field proxy version is separate.",
-    "path_base": "Paths are relative to the selected data directory.",
+    "path_base": "path is relative to the selected input data directory; download is relative to this viewer. source_sha256 hashes the input; sha256 hashes the downloadable public copy.",
     "sources": [
       {
         "download": "artifacts/bpic2019_results.json",
         "evidence_class": "observational_field_summary",
         "path": "bpic2019_results.json",
         "rule_version": "historical-field-proxies-v1",
-        "sha256": "f9e8577b029b3fa400c5c0586177b5212566d3877afd9a8da52b6804cdf8e16d"
+        "sha256": "f9e8577b029b3fa400c5c0586177b5212566d3877afd9a8da52b6804cdf8e16d",
+        "source_sha256": "f9e8577b029b3fa400c5c0586177b5212566d3877afd9a8da52b6804cdf8e16d"
       },
       {
         "download": "artifacts/conformance-r1.csv",
         "evidence_class": "synthetic_demonstration",
         "path": "conformance-r1.csv",
         "rule_version": "v2",
-        "sha256": "0284e19c7a0dc6a1ddd7887a2e67df365cb586fd240362468f9441160d662d43"
+        "sha256": "0284e19c7a0dc6a1ddd7887a2e67df365cb586fd240362468f9441160d662d43",
+        "source_sha256": "0284e19c7a0dc6a1ddd7887a2e67df365cb586fd240362468f9441160d662d43"
       },
       {
         "download": "artifacts/conformance-r2.csv",
         "evidence_class": "synthetic_demonstration",
         "path": "conformance-r2.csv",
         "rule_version": "v2",
-        "sha256": "4a5253cf5d0a51069f0d8eeb61b5e9ceb9c83f744d421c24f4efe4056317e530"
+        "sha256": "4a5253cf5d0a51069f0d8eeb61b5e9ceb9c83f744d421c24f4efe4056317e530",
+        "source_sha256": "4a5253cf5d0a51069f0d8eeb61b5e9ceb9c83f744d421c24f4efe4056317e530"
       },
       {
         "download": "artifacts/event-log-r1.csv",
         "evidence_class": "synthetic_demonstration",
         "path": "event-log-r1.csv",
         "rule_version": "v2",
-        "sha256": "19ddf326e2e7ea8192a44c3000b50e347bef04a08da3f78390d3e5ff1d989ae7"
+        "sha256": "19ddf326e2e7ea8192a44c3000b50e347bef04a08da3f78390d3e5ff1d989ae7",
+        "source_sha256": "19ddf326e2e7ea8192a44c3000b50e347bef04a08da3f78390d3e5ff1d989ae7"
       },
       {
         "download": "artifacts/event-log-r2.csv",
         "evidence_class": "synthetic_demonstration",
         "path": "event-log-r2.csv",
         "rule_version": "v2",
-        "sha256": "b5d4f9929a9150f9fa9f4847358f5d1c6e9f6a3c689247e4420b985164e19bcf"
+        "sha256": "b5d4f9929a9150f9fa9f4847358f5d1c6e9f6a3c689247e4420b985164e19bcf",
+        "source_sha256": "b5d4f9929a9150f9fa9f4847358f5d1c6e9f6a3c689247e4420b985164e19bcf"
       }
     ]
   },
