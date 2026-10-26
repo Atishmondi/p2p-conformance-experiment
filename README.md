@@ -13,13 +13,15 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory output/my-first-demo/we
 
 Open [http://localhost:8000](http://localhost:8000). Choose a new `--output-dir` for another demo; existing directories are protected. `--n 20` is the default cases per scenario; `--without-field` shows the explicit unavailable state. No raw XES, database, Odoo instance, or installed scientific package is required. The static viewer in `output/my-first-demo/webpage` includes its matching `data.json`, source downloads, and pilot documents. Host it as a directory over HTTP; opening `index.html` as `file:` can block `fetch`.
 
-To rebuild after editing the supplied run artifacts:
+After editing a generated v2 event log, regenerate its matching conformance CSV before rebuilding. For example, after editing either or both logs:
 
 ```sh
+python3 -S src/check_conformance.py output/my-first-demo/event-log-r1.csv --output-dir output/my-first-demo --tag r1
+python3 -S src/check_conformance.py output/my-first-demo/event-log-r2.csv --output-dir output/my-first-demo --tag r2
 python3 -S src/build_dashboard.py --data-dir output/my-first-demo --out output/my-first-demo/dashboard.json --site-dir output/my-first-demo/webpage
 ```
 
-The builder reads conformance and event CSVs, derives rates and durations, hashes each input, and refreshes the viewer. It fails on missing or inconsistent required input. The optional field summary is absent rather than silently replaced. `make demo OUTPUT_DIR=output/another-demo` is an equivalent generator path. `./run_demo.sh --output-dir output/another-demo` works from another working directory.
+Run only the checker command for each edited log. The builder checks every supplied case verdict against its declared version before publishing, then derives rates and durations, hashes each input, and refreshes the viewer. It fails on missing or inconsistent required input; manually edited conformance verdicts must also match the trace. Historical v1 rows are checked with the frozen v1 checker and are not silently relabeled v2. The optional field summary is absent rather than silently replaced. `make demo OUTPUT_DIR=output/another-demo` is an equivalent generator path. `./run_demo.sh --output-dir output/another-demo` works from another working directory.
 
 ## Read the evidence
 

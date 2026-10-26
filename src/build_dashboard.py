@@ -8,11 +8,61 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
-from pathlib import Path
+import importlib.util
+import json
+from pathlib import Path, PureWindowsPath
 import shutil
 
 from compare_lab_field import compare
-from evaluate import ROOT, evaluate, write_json
+from check_conformance import RULES, check_case, load
+from evaluate import ROOT, evaluate, load_conformance, write_json
+
+
+def validate_conformance(data_dir: Path) -> None:
+    """Reject a stale verdict artifact before publishing any output."""
+    legacy_path = ROOT / 'src' / 'legacy' / 'check_conformance_v1.py'
+    legacy = None
+    for era in ('r1', 'r2'):
+        rows, version = load_conformance(data_dir / ('conformance-%s.csv' % era))
+        event_path = data_dir / ('event-log-%s.csv' % era)
+        if version == 'v1':
+            if legacy is None:
+                spec = importlib.util.spec_from_file_location('frozen_checker_v1', legacy_path)
+                legacy = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(legacy)
+            cases = legacy.load(event_path)
+        else:
+            cases = load(event_path)
+        if set(cases) != {row['case_id'] for row in rows}:
+            raise ValueError('event/conformance case IDs differ for %s' % era)
+        for row in rows:
+            cid = row['case_id']
+            trace = cases[cid]
+            if version == 'v1':
+                rules = legacy.check_case(trace)[0]
+                failed = {rule for rule in RULES if rules[rule]}
+                unknown = set()
+            else:
+                rules = check_case(trace)[0]
+                failed = {rule for rule in RULES if rules[rule] is True}
+                unknown = {rule for rule in RULES if rules[rule] is None}
+            if failed != row['violations'] or unknown != row['unknown']:
+                raise ValueError('event/conformance verdicts differ for %s case %s (%s); rerun its %s checker'
+                                 % (era, cid, version, version))
+
+
+def public_field_bytes(source: bytes) -> bytes:
+    """Preserve the source summary while removing a local XES location from public copies."""
+    field = json.loads(source)
+    if not isinstance(field, dict):
+        raise ValueError('field summary must be an object')
+    location = field.get('source_xes')
+    if isinstance(location, str):
+        basename = PureWindowsPath(location).name if '\\' in location else Path(location).name
+        if basename != location:
+            field['source_xes'] = basename
+            return (json.dumps(field, sort_keys=True, indent=2, allow_nan=False) + '\n').encode('utf-8')
+    return source
 
 
 def case_examples(data_dir: Path) -> dict:
@@ -48,10 +98,11 @@ def build(data_dir: Path, output_path: Path) -> dict:
     required = ['conformance-r1.csv', 'conformance-r2.csv', 'event-log-r1.csv', 'event-log-r2.csv']
     # Read source bytes before writing so missing inputs cannot create partial output.
     contents = {name: (data_dir / name).read_bytes() for name in required}
+    validate_conformance(data_dir)
     lab = evaluate(data_dir)
     field = compare(data_dir, lab=lab)
     if field['available']:
-        contents['bpic2019_results.json'] = (data_dir / 'bpic2019_results.json').read_bytes()
+        contents['bpic2019_results.json'] = public_field_bytes((data_dir / 'bpic2019_results.json').read_bytes())
     sources = []
     for name, content in sorted(contents.items()):
         era = 'r1' if '-r1.' in name else 'r2'
@@ -80,11 +131,20 @@ def build_site(data_dir: Path, site_dir: Path, payload: dict) -> None:
     docs.mkdir(exist_ok=True)
     for name in ('erp-pilot.md', 'event-contract.md'):
         shutil.copyfile(ROOT / 'docs' / name, docs / name)
+    examples = site_dir / 'examples'
+    examples.mkdir(exist_ok=True)
+    shutil.copyfile(ROOT / 'examples' / 'erp-recorded-events.csv', examples / 'erp-recorded-events.csv')
     artifacts = site_dir / 'artifacts'
     artifacts.mkdir(exist_ok=True)
     for source in payload['provenance']['sources']:
         name = source['path']
-        shutil.copyfile(data_dir / name, artifacts / name)
+        if name == 'bpic2019_results.json':
+            content = public_field_bytes((data_dir / name).read_bytes())
+            if hashlib.sha256(content).hexdigest() != source['sha256']:
+                raise ValueError('field summary changed during build')
+            (artifacts / name).write_bytes(content)
+        else:
+            shutil.copyfile(data_dir / name, artifacts / name)
         source['download'] = 'artifacts/' + name
     write_json(payload, site_dir / 'data.json')
 

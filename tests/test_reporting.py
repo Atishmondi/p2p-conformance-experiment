@@ -30,10 +30,20 @@ def fixture(root):
             writer.writerows(values)
         with (root / ('event-log-%s.csv' % era)).open('w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(['case_id', 'activity', 'timestamp', 'scenario', 'vendor'])
+            writer.writerow(['case_id', 'activity', 'timestamp', 'scenario', 'vendor', 'qty_received', 'qty_invoiced'])
             for cid, scen, *_ in values:
-                writer.writerow([cid, 'Purchase Request', '2026-01-01T00:00:00', scen, 'NewVendor'])
-                writer.writerow([cid, 'Payment', '2026-01-03T00:00:00', scen, 'NewVendor'])
+                activities = ['Purchase Request', 'Purchase Request Approval', 'Purchase Order',
+                              'Goods Receipt', 'Vendor Invoice', 'Payment']
+                if cid == 'b':
+                    activities[3], activities[4] = activities[4], activities[3]
+                    activities.insert(5, 'Vendor Invoice')
+                for index, activity in enumerate(activities):
+                    hour = ((0, 8, 16, 24, 36, 42, 48) if cid == 'b' else (0, 8, 16, 24, 36, 48))[index]
+                    writer.writerow([cid, activity, '2026-01-%02dT%02d:00:00' % (1 + hour // 24, hour % 24),
+                                     scen, 'NewVendor',
+                                     '' if cid in ('b', 'c') else ('10' if activity == 'Goods Receipt' else ''),
+                                     ('10' if cid != 'b' or index == 5 else '')
+                                     if activity == 'Vendor Invoice' else ''])
 
 
 class ReportingTests(unittest.TestCase):
@@ -223,8 +233,11 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(source['sha256'], hashlib.sha256((self.root / source['path']).read_bytes()).hexdigest())
         self.assertEqual(source['rule_version'], 'v2')
         self.assertNotIn(str(self.root), content.decode())
-        conf = self.root / 'conformance-r1.csv'
-        conf.write_text(conf.read_text().replace('a,S1,OK,,compliant', 'a,S1,R1,,violating'))
+        events = self.root / 'event-log-r1.csv'
+        events.write_text(events.read_text().replace('a,Purchase Order,2026-01-01T16:00:00',
+                                                    'a,Purchase Order,2026-01-01T04:00:00'))
+        checker = importlib.import_module('check_conformance')
+        checker.write_results(checker.load(events), self.root, 'r1')
         changed = build(self.root, out)
         self.assertEqual(changed['lab']['cohorts']['r1']['overall']['violation_rate'], 1.0)
         self.assertNotEqual(changed['provenance'], payload['provenance'])
