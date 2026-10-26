@@ -1,6 +1,6 @@
 """Generate and check isolated experiments without touching canonical artifacts.
 
---output-dir selects the data root (default: data). A new runs/<tag>/ is
+--output-dir selects the data root (default: output/experiments). A new runs/<tag>/ is
 reserved exclusively; its logs and v2 results are written directly there.
 The root's runs.csv records cohort counts, seeds, and evaluated denominators.
 """
@@ -10,6 +10,7 @@ import random
 import statistics
 import subprocess
 import sys
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -18,7 +19,7 @@ from check_conformance import RULE_VERSION, load, validate_tag, write_results
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'src'
-DATA = ROOT / 'data'
+DATA = ROOT / 'output' / 'experiments'
 HEADER = ['run_id', 'utc_time', 'era', 'n_per_scenario', 'seed',
           'cases', 'events', 'viol_rate', 'mean_cycle',
           'compliant', 'violating', 'not_evaluable', 'evaluated_cases', 'rule_version']
@@ -70,7 +71,43 @@ def compute_metrics(conformance_csv, event_log_csv):
                 mean_cycle=statistics.fmean(cycles) if cycles else None)
 
 
+
+@contextmanager
+def registry_session(output_dir):
+    """Serialize preflight and all writes, failing busy before run reservation.
+
+    mkdir is atomic and available in the standard library on every supported
+    platform. A killed process can leave the lock directory; never steal it.
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    lock = output_dir / '.runs.lock'
+    try:
+        lock.mkdir()
+    except FileExistsError:
+        raise SystemExit('run registry busy: %s; retry after the active run finishes' % output_dir)
+    try:
+        registry = output_dir / 'runs.csv'
+        try:
+            with registry.open(newline='') as handle:
+                if next(csv.reader(handle), None) != HEADER:
+                    raise SystemExit('runs.csv has an incompatible header; choose a fresh --output-dir')
+        except FileNotFoundError:
+            with registry.open('x', newline='') as handle:
+                csv.writer(handle).writerow(HEADER)
+        yield
+    finally:
+        lock.rmdir()
+
+
 def run_era(era, n, seed, tag, utc_time, output_dir):
+    """Run one era with registry serialization; the caller reserves its tag."""
+    with registry_session(output_dir):
+        return _run_era(era, n, seed, tag, utc_time, output_dir)
+
+
+def _run_era(era, n, seed, tag, utc_time, output_dir):
+    """Generate and append while the caller holds registry_session."""
     output_dir = Path(output_dir)
     run_dir = output_dir / 'runs' / tag
     out_log = run_dir / ('event-log-%s.csv' % era)
@@ -78,14 +115,6 @@ def run_era(era, n, seed, tag, utc_time, output_dir):
     paths = write_results(load(out_log), run_dir, era)
     metrics = compute_metrics(paths['conformance'], out_log)
     registry = output_dir / 'runs.csv'
-    # Exclusive header creation prevents two new runs from truncating a registry.
-    try:
-        with registry.open('x', newline='') as handle:
-            csv.writer(handle).writerow(HEADER)
-    except FileExistsError:
-        with registry.open(newline='') as handle:
-            if next(csv.reader(handle), None) != HEADER:
-                raise ValueError('runs.csv has an incompatible header; choose a fresh --output-dir')
     run_id = '%s-%s' % (tag, era)
     row = [run_id, utc_time, era, n, seed, metrics['cases'], metrics['events'],
            '%.4f' % metrics['viol_rate'] if metrics['viol_rate'] is not None else '',
@@ -109,14 +138,15 @@ def main(argv=None):
         override = args.seed_r1 if era == 'r1' else args.seed_r2
         seeds[era] = override if override is not None else (args.seed if args.seed is not None
                                                            else random.SystemRandom().randint(0, 2 ** 31 - 1))
-    try:
-        run_dir.parent.mkdir(parents=True, exist_ok=True)
-        run_dir.mkdir()  # atomic reservation, rejecting duplicate tags and symlinks
-    except FileExistsError:
-        raise SystemExit('run directory already exists: %s' % run_dir)
-    utc_time = datetime.now(timezone.utc).isoformat(timespec='seconds')
-    for era in eras:
-        run_era(era, args.n, seeds[era], tag, utc_time, output_dir)
+    with registry_session(output_dir):
+        try:
+            run_dir.parent.mkdir(parents=True, exist_ok=True)
+            run_dir.mkdir()  # atomic reservation, rejecting duplicate tags and symlinks
+        except FileExistsError:
+            raise SystemExit('run directory already exists: %s' % run_dir)
+        utc_time = datetime.now(timezone.utc).isoformat(timespec='seconds')
+        for era in eras:
+            _run_era(era, args.n, seeds[era], tag, utc_time, output_dir)
     print('done tag=%s eras=%s' % (tag, eras))
     return run_dir
 

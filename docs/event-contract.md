@@ -86,15 +86,27 @@ in the per-rule unknown counts. Never infer compliance from an empty failure lis
 
 ## Isolated experiments
 
-`python3 src/run_manager.py --n 2 --era both --seed 17 --tag example --output-dir DIR`
-reserves a fresh `DIR/runs/example/`, writes event logs and checker outputs
-directly there, and appends era records to `DIR/runs.csv`. It never writes or
+`python3 src/run_manager.py --n 2 --era both --seed 17 --tag example` uses
+`output/experiments/` by default, leaving historical `data/runs.csv` untouched.
+The generated root is ignored by Git. Add `--output-dir DIR` to select another
+root. Under that root, the command reserves a fresh `runs/example/`, writes event logs and checker outputs
+directly there, and appends era records to `runs.csv` at the root. It never writes or
 backs up canonical outputs. A duplicate tag fails without modifying that run.
 Tags are safe single path components; n must be positive. Default tags combine
 UTC microseconds and a random suffix. Explicit seeds yield identical event,
 conformance, and summary bytes across roots; timestamps/run IDs in registries
 are execution metadata. Failures retain the reserved partial run for inspection.
-An existing incompatible registry is rejected; use a fresh output root.
+An existing incompatible registry is rejected with a concise CLI error before
+reserving a tag or generating artifacts; use a fresh output root.
+
+A portable standard-library directory lock (`DIR/.runs.lock`) serializes registry
+validation, initialization, run generation, and appends for all eras in one
+invocation. A competing invocation fails explicitly as busy before reserving a
+tag or generating artifacts; retry after the active run finishes. Normal exits
+and exceptions release the lock. Process termination may leave a stale lock:
+after verifying that no run is active, remove the empty `.runs.lock` directory
+before retrying. Locks are never automatically stolen. The same serialization
+protects direct `run_era` calls; their caller must first reserve the run directory.
 
 Registry columns:
 `run_id,utc_time,era,n_per_scenario,seed,cases,events,viol_rate,mean_cycle,compliant,violating,not_evaluable,evaluated_cases,rule_version`.

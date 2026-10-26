@@ -26,3 +26,6 @@ data/*.db
 .venv/
 .superpowers/
 __pycache__/
+
+# Isolated generated experiments (historical data/ stays versioned)
+/output/experiments/
