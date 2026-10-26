@@ -1,238 +1,217 @@
-"""Masters-level evaluation: violation-rate reduction + throughput + vendor stratification.
+"""Descriptive synthetic-cohort reporting, derived from conformance/event artifacts.
 
-Targeted cohorts (fixed experimental design):
-  R1 targeted (S3/S4/S6): 60 violations / 60 cases (20+20+20)
-  R2 targeted (S3R/S4R/S6R): 0 violations / 60 cases
-  Overall context: R1 60/120 conformant, R2 60/60 conformant.
-
-Methods:
-  (a) Violation rates: chi-square (no Yates correction, 2x2), Fisher exact
-      (two-sided, appropriate because cells contain 0), absolute + relative
-      reduction, Cohen's h, 95% Wilson score CI per rate.
-  (b) Throughput: per-case cycle time (days) derived DYNAMICALLY from
-      data/event-log-r1.csv (max(timestamp)-min(timestamp) per case),
-      S1 vs S2 Welch two-sample t-test (unequal variances), Welch-Satterthwaite
-      df, Cohen's d (unequal-n, average-variance form). Cross-checked against
-      data/summary-r1.csv mean_cycle values (read dynamically, never hardcoded).
-  (c) Vendor stratification: case->vendor from data/event-log-r1.csv joined to
-      case->violated from data/conformance-r1.csv (violations != "OK"),
-      per-vendor n / violations / rate + 95% Wilson CI.
-
-Writes data/evaluation.csv with columns metric,value.
-Legacy metric names are preserved byte-identical.
+No optional dependency or write is triggered on import. --scientific explicitly
+requests SciPy diagnostics; generated cohorts support no causal interpretation.
+JSON null means unknown/unavailable, including rates with zero denominators.
 """
-
 from __future__ import annotations
 
+import argparse
 import csv
-from collections import defaultdict
-from datetime import datetime
+import json
+import math
 from pathlib import Path
+import statistics
 
-import numpy as np
-from scipy.stats import chi2_contingency, fisher_exact, ttest_ind
+from check_conformance import load
 
-BASE = Path(__file__).resolve().parent.parent / "data"
-EVENT_R1 = BASE / "event-log-r1.csv"
-SUMMARY_R1 = BASE / "summary-r1.csv"
-CONF_R1 = BASE / "conformance-r1.csv"
-
-
-def wilson_ci(k: int, n: int, z: float = 1.96):
-    p = k / n if n else 0.0
-    denom = 1.0 + z**2 / n if n else 1.0
-    center = p + z**2 / (2 * n) if n else 0.0
-    margin = z * np.sqrt(p * (1 - p) / n + z**2 / (4 * n**2)) if n else 0.0
-    low = max(0.0, (center - margin) / denom)
-    high = min(1.0, (center + margin) / denom)
-    return float(low), float(high)
+ROOT = Path(__file__).resolve().parents[1]
+RULES = ('R1', 'R2', 'R3', 'R4', 'R5')
+TARGETED = {'r1': ('S3', 'S4', 'S6'), 'r2': ('S3R', 'S4R', 'S6R')}
+SCENARIOS = {'r1': ('S1', 'S2', 'S3', 'S4', 'S5', 'S6'), 'r2': TARGETED['r2']}
 
 
-def load_case_cycles(event_path: Path):
-    """Return {case_id: cycle_days}, {case_id: scenario} from event log."""
-    case_ts: dict[str, list[datetime]] = defaultdict(list)
-    case_scen: dict[str, str] = {}
-    with event_path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            cid = row["case_id"]
-            case_ts[cid].append(datetime.fromisoformat(row["timestamp"]))
-            case_scen[cid] = row["scenario"]
-    cycles = {c: (max(v) - min(v)).total_seconds() / 86400.0 for c, v in case_ts.items()}
-    return cycles, case_scen
+def wilson_ci(k, n, z=1.959963984540054):
+    """95% Wilson interval for evaluated Bernoulli observations, else unknown."""
+    if not n or k is None:
+        return [None, None]
+    p = k / n
+    denom = 1 + z * z / n
+    center = p + z * z / (2 * n)
+    margin = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))
+    return [max(0.0, (center - margin) / denom), min(1.0, (center + margin) / denom)]
 
 
-def load_summary_means(summary_path: Path):
-    """Return {scenario: mean_cycle} read dynamically from summary-r1.csv."""
-    means: dict[str, float] = {}
-    with summary_path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            means[row["scenario"]] = float(row["mean_cycle"])
-    return means
+def _rules(value, label):
+    items = value.strip().split(';') if value.strip() else []
+    if len(items) != len(set(items)) or set(items) - set(RULES):
+        raise ValueError('unsupported or duplicate %s rules: %s' % (label, value))
+    return set(items)
 
 
-def load_vendor_map(event_path: Path):
-    """Return {case_id: vendor} from event log."""
-    mapping: dict[str, str] = {}
-    with event_path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            mapping[row["case_id"]] = row["vendor"]
-    return mapping
+def load_conformance(path):
+    """Read v1 historical or v2 tri-state rows without relabeling history."""
+    with Path(path).open(newline='') as handle:
+        reader = csv.DictReader(handle)
+        if not {'case_id', 'scenario', 'violations'} <= set(reader.fieldnames or []):
+            raise ValueError('conformance requires case_id, scenario, violations: %s' % path)
+        records = list(reader)
+        columns = set(reader.fieldnames or [])
+    rows, versions, seen = [], set(), set()
+    for row in records:
+        cid = row['case_id'].strip()
+        if not cid or cid in seen:
+            raise ValueError('blank or duplicate conformance case_id: %s' % cid)
+        seen.add(cid)
+        version = row.get('rule_version', '').strip() or 'v1'
+        if version not in ('v1', 'v2'):
+            raise ValueError('unsupported rule version: %s' % version)
+        versions.add(version)
+        violations = _rules('' if row['violations'].strip() == 'OK' else row['violations'], 'violation')
+        unknown = _rules(row.get('not_evaluable', ''), 'unknown')
+        if violations & unknown:
+            raise ValueError('rule cannot be both violated and not_evaluable')
+        expected = 'violating' if violations else ('not_evaluable' if unknown else 'compliant')
+        if version == 'v2':
+            if not {'not_evaluable', 'status', 'rule_version'} <= columns:
+                raise ValueError('v2 requires not_evaluable, status, and rule_version columns')
+            if row.get('status') != expected:
+                raise ValueError('inconsistent v2 status for case %s' % cid)
+            if expected == 'compliant' and row['violations'].strip() != 'OK':
+                raise ValueError('v2 compliant status requires OK for case %s' % cid)
+        elif unknown or row['violations'].strip() == '':
+            raise ValueError('v1 rows require OK or violations and cannot express unknown rules')
+        rows.append(dict(case_id=cid, scenario=row['scenario'].strip(),
+                         violations=violations, unknown=unknown, status=expected))
+    if len(versions) > 1:
+        raise ValueError('mixed rule versions in one conformance cohort')
+    return rows, next(iter(versions), None)
 
 
-def load_violated_map(conf_path: Path):
-    """Return {case_id: violated_bool} (violations != 'OK')."""
-    mapping: dict[str, bool] = {}
-    with conf_path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            mapping[row["case_id"]] = row["violations"].strip() != "OK"
-    return mapping
+def summarize(rows):
+    """Case status denominator and separate rule-specific evidence denominators."""
+    counts = {key: sum(row['status'] == key for row in rows)
+              for key in ('compliant', 'violating', 'not_evaluable')}
+    n = counts['compliant'] + counts['violating']
+    rules = {}
+    for rule in RULES:
+        bad = sum(rule in row['violations'] for row in rows)
+        unknown = sum(rule in row['unknown'] for row in rows)
+        evaluated = len(rows) - unknown
+        rules[rule] = dict(violating=bad, compliant=evaluated - bad,
+                           not_evaluable=unknown, evaluated_cases=evaluated,
+                           violation_rate=bad / evaluated if evaluated else None,
+                           wilson_95=wilson_ci(bad, evaluated))
+    return dict(counts, cases=len(rows), evaluated_cases=n,
+                violation_rate=counts['violating'] / n if n else None,
+                conformance_rate=counts['compliant'] / n if n else None,
+                wilson_95=wilson_ci(counts['violating'], n), rules=rules)
 
 
-def welch_df(a: np.ndarray, b: np.ndarray) -> float:
-    v1, v2 = np.var(a, ddof=1), np.var(b, ddof=1)
-    n1, n2 = len(a), len(b)
-    num = (v1 / n1 + v2 / n2) ** 2
-    den = (v1 / n1) ** 2 / (n1 - 1) + (v2 / n2) ** 2 / (n2 - 1)
-    return float(num / den) if den else float("nan")
+def _sample(values):
+    return dict(n=len(values), mean_days=statistics.fmean(values) if values else None,
+                median_days=statistics.median(values) if values else None,
+                stdev_days=statistics.stdev(values) if len(values) > 1 else None)
 
 
-def main() -> None:
-    # ---- (a) Targeted violation-rate comparison (R1 S3+S4+S6 vs R2) ----
-    r1_viol, r1_n = 60, 60
-    r2_viol, r2_n = 0, 60
+def _finite(value):
+    value = float(value)
+    return value if math.isfinite(value) else None
 
-    r1_rate = r1_viol / r1_n
-    r2_rate = r2_viol / r2_n
 
-    abs_reduction = r1_rate - r2_rate
-    rel_reduction = abs_reduction / r1_rate if r1_rate != 0 else 0.0
-
-    # 2x2 contingency: rows=R1/R2, cols=[violations, non-violations]
-    table = np.array([[r1_viol, r1_n - r1_viol], [r2_viol, r2_n - r2_viol]])
-    chi2, p_value, _, _ = chi2_contingency(table, correction=False)
-
-    # Fisher exact (two-sided): exact p for sparse/zero cells
-    fisher_odds, fisher_p = fisher_exact(table, alternative="two-sided")
-
-    # Cohen's h (magnitude)
-    cohens_h = abs(2 * np.arcsin(np.sqrt(r2_rate)) - 2 * np.arcsin(np.sqrt(r1_rate)))
-
-    r1_low, r1_high = wilson_ci(r1_viol, r1_n)
-    r2_low, r2_high = wilson_ci(r2_viol, r2_n)
-
-    # ---- (b) Throughput: Welch t-test S1 vs S2 cycle times ----
-    cycles, case_scen = load_case_cycles(EVENT_R1)
-    summary_means = load_summary_means(SUMMARY_R1)
-
-    s1 = np.array(sorted(cycles[c] for c in cycles if case_scen[c] == "S1"), dtype=float)
-    s2 = np.array(sorted(cycles[c] for c in cycles if case_scen[c] == "S2"), dtype=float)
-    if len(s1) == 0 or len(s2) == 0:
-        raise ValueError("S1/S2 cycle samples empty; check event-log-r1.csv")
-
-    s1_n, s2_n = int(len(s1)), int(len(s2))
-    s1_mean, s2_mean = float(np.mean(s1)), float(np.mean(s2))
-    s1_std = float(np.std(s1, ddof=1)) if s1_n > 1 else 0.0
-    s2_std = float(np.std(s2, ddof=1)) if s2_n > 1 else 0.0
-    s1_med, s2_med = float(np.median(s1)), float(np.median(s2))
-
-    # Summary cross-check (dynamically read, never hardcoded)
-    s1_summary = float(summary_means.get("S1", float("nan")))
-    s2_summary = float(summary_means.get("S2", float("nan")))
-
-    t_res = ttest_ind(s1, s2, equal_var=False)  # Welch, two-sided
-    welch_t = float(t_res.statistic)
-    welch_p = float(t_res.pvalue)
-    # Prefer scipy df when available, else manual Welch-Satterthwaite
+def scientific_diagnostics(cohorts, samples):
+    """Optional dynamic diagnostics; no pooling of lab and field definitions."""
     try:
-        df_val = float(t_res.df)  # type: ignore[attr-defined]
-    except Exception:
-        df_val = welch_df(s1, s2)
-    if not np.isfinite(df_val):
-        df_val = welch_df(s1, s2)
-
-    mean_diff = s2_mean - s1_mean  # S2 minus S1 (positive = S2 slower)
-    pooled_sd = np.sqrt((s1_std**2 + s2_std**2) / 2.0) if (s1_std or s2_std) else float("nan")
-    cohens_d = float(mean_diff / pooled_sd) if pooled_sd and np.isfinite(pooled_sd) else float("nan")
-
-    # ---- (c) Vendor-stratified violation rates ----
-    case_vendor = load_vendor_map(EVENT_R1)
-    violated = load_violated_map(CONF_R1)
-    vendor_stats: dict[str, tuple[int, int, float, float, float]] = {}
-    for vendor in ("Vendor_A", "Vendor_B", "Vendor_C"):
-        cases = [c for c, v in case_vendor.items() if v == vendor and c in violated]
-        n = len(cases)
-        nv = sum(1 for c in cases if violated[c])
-        rate = nv / n if n else 0.0
-        lo, hi = wilson_ci(nv, n) if n else (0.0, 0.0)
-        vendor_stats[vendor] = (n, nv, rate, lo, hi)
-
-    rows: list[tuple[str, object]] = [
-        # Legacy (names identical)
-        ("r1_viol_rate", r1_rate),
-        ("r2_viol_rate", r2_rate),
-        ("abs_reduction", abs_reduction),
-        ("rel_reduction", rel_reduction),
-        ("chi2", float(chi2)),
-        ("p_value", float(p_value)),
-        ("cohens_h", float(cohens_h)),
-        ("r1_ci_low", float(r1_low)),
-        ("r1_ci_high", float(r1_high)),
-        ("r2_ci_low", float(r2_low)),
-        ("r2_ci_high", float(r2_high)),
-        # Fisher exact
-        ("fisher_p", float(fisher_p)),
-        ("fisher_oddsratio", float(fisher_odds)),
-        # Throughput (Welch S1 vs S2)
-        ("s1_n", s1_n),
-        ("s2_n", s2_n),
-        ("s1_mean_cycle", s1_mean),
-        ("s2_mean_cycle", s2_mean),
-        ("s1_std_cycle", s1_std),
-        ("s2_std_cycle", s2_std),
-        ("s1_median_cycle", s1_med),
-        ("s2_median_cycle", s2_med),
-        ("s1_summary_mean_cycle", s1_summary),
-        ("s2_summary_mean_cycle", s2_summary),
-        ("s1_s2_mean_diff", float(s1_mean - s2_mean)),
-        ("s2_minus_s1_diff", float(mean_diff)),
-        ("welch_t", welch_t),
-        ("welch_df", float(df_val)),
-        ("welch_p", welch_p),
-        ("cohens_d_cycle", float(cohens_d)),
-    ]
-    for vendor in ("Vendor_A", "Vendor_B", "Vendor_C"):
-        n, nv, rate, lo, hi = vendor_stats[vendor]
-        pfx = vendor  # e.g. Vendor_A
-        rows += [
-            (f"{pfx}_n", n),
-            (f"{pfx}_viol", nv),
-            (f"{pfx}_viol_rate", rate),
-            (f"{pfx}_ci_low", lo),
-            (f"{pfx}_ci_high", hi),
-        ]
-
-    out_path = BASE / "evaluation.csv"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with out_path.open("w", newline="") as f:
-        f.write("metric,value\n")
-        for metric, value in rows:
-            if isinstance(value, float):
-                if np.isinf(value):
-                    f.write(f"{metric},inf\n")
-                elif np.isnan(value):
-                    f.write(f"{metric},nan\n")
-                else:
-                    f.write(f"{metric},{value:.10g}\n")
-            else:
-                f.write(f"{metric},{value}\n")
-
-    print(f"Wrote {out_path}")
-    for metric, value in rows:
-        if isinstance(value, float):
-            print(f"{metric}={value:.10g}")
-        else:
-            print(f"{metric}={value}")
+        from scipy.stats import chi2_contingency, fisher_exact, ttest_ind
+    except ImportError as exc:
+        raise RuntimeError('--scientific requires optional SciPy; omit it for the stdlib report') from exc
+    result = dict(requested=True, available=True,
+                  interpretation='Exploratory diagnostics on generated cohorts; no causal inference.',
+                  chi2=None, chi2_p=None, fisher_p=None, fisher_oddsratio=None,
+                  cohens_h=None, welch_t=None, welch_p=None, welch_df=None,
+                  cohens_d_cycle=None)
+    a, b = (cohorts[era]['targeted'] for era in ('r1', 'r2'))
+    if (a['evaluated_cases'] and b['evaluated_cases'] and
+            cohorts['r1']['rule_version'] == cohorts['r2']['rule_version']):
+        table = [[r['violating'], r['compliant']] for r in (a, b)]
+        odds, p = fisher_exact(table, alternative='two-sided')
+        result.update(fisher_p=_finite(p), fisher_oddsratio=_finite(odds))
+        if all(sum(row[col] for row in table) for col in (0, 1)):
+            chi2, p, _, _ = chi2_contingency(table, correction=False)
+            result.update(chi2=_finite(chi2), chi2_p=_finite(p))
+        result['cohens_h'] = abs(2 * math.asin(math.sqrt(a['violation_rate'])) -
+                                 2 * math.asin(math.sqrt(b['violation_rate'])))
+    s1, s2 = (samples['r1'].get(scenario, []) for scenario in ('S1', 'S2'))
+    if len(s1) > 1 and len(s2) > 1:
+        v1, v2 = statistics.variance(s1), statistics.variance(s2)
+        if v1 + v2:
+            test = ttest_ind(s1, s2, equal_var=False)
+            denom = (v1 / len(s1)) ** 2 / (len(s1) - 1) + (v2 / len(s2)) ** 2 / (len(s2) - 1)
+            df = (v1 / len(s1) + v2 / len(s2)) ** 2 / denom
+            result.update(welch_t=_finite(test.statistic), welch_p=_finite(test.pvalue),
+                          welch_df=df,
+                          cohens_d_cycle=(statistics.fmean(s2) - statistics.fmean(s1)) / math.sqrt((v1 + v2) / 2))
+    return result
 
 
-if __name__ == "__main__":
+def evaluate(data_dir: Path, scientific=False):
+    """Return data-derived description of required r1/r2 input pairs; never write."""
+    data_dir = Path(data_dir)
+    cohorts, throughput, vendors, samples = {}, {}, {}, {}
+    for era in ('r1', 'r2'):
+        rows, version = load_conformance(data_dir / ('conformance-%s.csv' % era))
+        events = load(data_dir / ('event-log-%s.csv' % era))
+        if set(events) != {row['case_id'] for row in rows}:
+            raise ValueError('event/conformance case IDs differ for %s' % era)
+        by_scenario = sorted(set(SCENARIOS[era]) | {row['scenario'] for row in rows})
+        cohorts[era] = dict(rule_version=version, evidence_class='synthetic_demonstration',
+                            overall=summarize(rows), targeted_scenarios=list(TARGETED[era]),
+                            targeted=summarize([row for row in rows if row['scenario'] in TARGETED[era]]),
+                            scenarios={s: summarize([row for row in rows if row['scenario'] == s]) for s in by_scenario})
+        samples[era] = {s: [] for s in by_scenario}
+        vendor_cases = {}
+        for row in rows:
+            trace = events[row['case_id']]
+            scenarios = {event.get('scenario', '').strip() for event in trace} - {''}
+            if scenarios and scenarios != {row['scenario']}:
+                raise ValueError('event/conformance scenarios differ for case %s' % row['case_id'])
+            dates = [event['_ts'] for event in trace]
+            samples[era][row['scenario']].append((max(dates) - min(dates)).total_seconds() / 86400)
+            names = {event.get('vendor', '').strip() for event in trace} - {''}
+            if len(names) > 1:
+                raise ValueError('conflicting vendors for case %s' % row['case_id'])
+            vendor = next(iter(names), '(unknown)')
+            vendor_cases.setdefault(vendor, []).append(row)
+        throughput[era] = {s: _sample(values) for s, values in samples[era].items()}
+        vendors[era] = {vendor: summarize(values) for vendor, values in sorted(vendor_cases.items())}
+    a, b = (cohorts[era]['targeted']['violation_rate'] for era in ('r1', 'r2'))
+    comparable = (cohorts['r1']['rule_version'] is not None and
+                  cohorts['r1']['rule_version'] == cohorts['r2']['rule_version'])
+    difference = a - b if comparable and a is not None and b is not None else None
+    return dict(evidence_class='synthetic_demonstration', cohorts=cohorts, throughput=throughput,
+                vendors=vendors,
+                targeted_comparison=dict(comparable=comparable, absolute_rate_difference=difference,
+                    relative_rate_difference=difference / a if a and difference is not None else None,
+                    interpretation='Descriptive difference between generated targeted cohorts; no measured operational or causal effect.'),
+                scientific=scientific_diagnostics(cohorts, samples) if scientific else dict(requested=False, available=False),
+                limitations=[
+                    'Generated cases demonstrate fictional controls; they do not measure operational savings.',
+                    'Case rates exclude not_evaluable status; rule rates exclude unknown outcomes for that rule.',
+                    'A proven violation establishes violating status even when other rules are unknown.',
+                    'Wilson intervals describe these samples; generator design limits statistical generalization.',
+                    'Cycle times derive from observed first/last timestamps, not business-calendar durations.'])
+
+
+def write_json(payload, output_path):
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(payload, sort_keys=True, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--data-dir', type=Path, default=ROOT / 'data')
+    parser.add_argument('--out', type=Path, default=ROOT / 'output' / 'reports' / 'evaluation.json')
+    parser.add_argument('--scientific', action='store_true')
+    args = parser.parse_args(argv)
+    try:
+        result = evaluate(args.data_dir, scientific=args.scientific)
+        write_json(result, args.out)
+    except (OSError, ValueError, RuntimeError) as exc:
+        parser.exit(1, 'evaluation error: %s\n' % exc)
+    print('Wrote %s' % args.out)
+    return result
+
+
+if __name__ == '__main__':
     main()

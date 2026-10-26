@@ -40,7 +40,7 @@ Per-case rules (filtered events only):
     'Record Invoice Receipt' -> True. Both exist -> True iff
     min(Clear) < min(Record) (fallback to document order when ts missing).
 
-Outputs (repo data/ dir by default):
+Outputs (repo output/field/ dir by default):
   data/bpic2019_case_results.csv:
     case_id,item_category,has_gr,has_invoice,r1_maverick,r2_viol,r3_viol,
     r4_rework,approval_change_after_po,r5_viol,n_events
@@ -55,7 +55,7 @@ Outputs (repo data/ dir by default):
 
 CLI: python3 src/analyze_bpic2019.py [xes_path]
      (default data/BPI_Challenge_2019.xes relative to repo root).
-     Optional: --cases-out PATH --json-out PATH (default to data/ files).
+     Optional: --cases-out PATH --json-out PATH (default to output/field/ files).
 Progress: print every 25k cases.
 Missing attrs: flags are None (empty CSV cell), never crash.
 """
@@ -65,14 +65,14 @@ import json
 import sys
 import xml.etree.ElementTree as ET
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_XES = REPO_ROOT / "data" / "BPI_Challenge_2019.xes"
-DEFAULT_CASES_OUT = REPO_ROOT / "data" / "bpic2019_case_results.csv"
-DEFAULT_JSON_OUT = REPO_ROOT / "data" / "bpic2019_results.json"
+DEFAULT_CASES_OUT = REPO_ROOT / "output" / "field" / "bpic2019_case_results.csv"
+DEFAULT_JSON_OUT = REPO_ROOT / "output" / "field" / "bpic2019_results.json"
 
 XES_NS = "{http://www.xes-standard.org/}"
 KEEP_FROM = datetime(2018, 1, 1, 0, 0, 0)          # inclusive
@@ -100,7 +100,7 @@ def local_tag(tag: str) -> str:
 
 
 def parse_timestamp(s):
-    """Parse XES date value -> naive datetime (tz stripped) or None."""
+    """Parse XES date value; aware instants become naive UTC for UTC window filtering."""
     if s is None or s == "":
         return None
     t = str(s).strip()
@@ -109,7 +109,7 @@ def parse_timestamp(s):
             t = t[:-1] + "+00:00"
         dt = datetime.fromisoformat(t)
         if dt.tzinfo is not None:
-            dt = dt.replace(tzinfo=None)  # date-level window; drop tz
+            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
         return dt
     except Exception:
         pass
@@ -620,7 +620,10 @@ def analyze(xes_path: Path, cases_out: Path, json_out: Path):
                  "below base band; no persistence signal.")
 
     results = {
-        "source_xes": str(xes_path),
+        "source_xes": Path(xes_path).name,
+        "rule_version": "field-proxies-utc-v2",
+        "evidence_class": "observational_field_summary",
+        "timestamp_basis": "Aware timestamps normalized to UTC; naive values assumed UTC. Missing/unparseable timestamps retain historical proxy handling.",
         "n_cases": n_cases,
         "n_events_filtered": n_events,
         "n_events_dropped_out_of_range": n_dropped,
@@ -714,6 +717,7 @@ def analyze(xes_path: Path, cases_out: Path, json_out: Path):
                         flag_str(r["r3_viol"]), flag_str(r["r4_rework"]),
                         flag_str(r["approval_change_after_po"]),
                         flag_str(r["r5_viol"]), r["n_events"]])
+    json_out.parent.mkdir(parents=True, exist_ok=True)
     with open(json_out, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, default=str)
     print(f"Wrote {len(rows)} cases -> {cases_out}", flush=True)
