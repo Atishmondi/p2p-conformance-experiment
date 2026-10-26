@@ -20,7 +20,14 @@ def row(activity, n, **changes):
     result = dict.fromkeys(FIELDS, '')
     result.update(case_id='A', activity=activity, timestamp=f'2026-01-{n:02d}T10:00:00+00:00',
                   event_id=f'E{n}', source_model='audit.action', source_id=str(n),
-                  source_action='recorded transition', timestamp_kind='recorded',
+                  source_action={
+                      'Purchase Request': 'request_submitted',
+                      'Purchase Request Approval': 'request_approved',
+                      'Purchase Order': 'po_confirmed',
+                      'Goods Receipt': 'receipt_validated',
+                      'Vendor Invoice': 'vendor_bill_posted',
+                      'Payment': 'payment_registered',
+                  }[activity], timestamp_kind='recorded',
                   product_id='P1', uom='Units', scenario='S1')
     result.update(changes)
     return result
@@ -82,6 +89,14 @@ class ExportTests(unittest.TestCase):
                 rows = good_rows()
                 rows[0].update(change)
                 with self.assertRaises(ValueError):
+                    adapter.validate_export(self.write(directory, rows))
+
+    def test_reversal_or_mismatched_source_action_cannot_be_positive_invoice(self):
+        for action in ('reverse posted vendor bill / credit note', 'receipt_validated'):
+            with self.subTest(action=action), tempfile.TemporaryDirectory() as directory:
+                rows = good_rows()
+                rows[5]['source_action'] = action
+                with self.assertRaisesRegex(ValueError, 'source_action'):
                     adapter.validate_export(self.write(directory, rows))
 
     def test_event_deltas_and_exact_invoice_link_required(self):

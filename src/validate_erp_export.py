@@ -17,9 +17,16 @@ REQUIRED = ('case_id', 'activity', 'timestamp', 'event_id', 'source_model',
 OPTIONAL = ('invoice_event_id', 'qty_ordered', 'qty_received', 'qty_invoiced',
             'scenario', 'resource', 'vendor', 'po_id')
 COLUMNS = REQUIRED + OPTIONAL
-ACTIVITIES = frozenset(('Purchase Request', 'Purchase Request Approval',
-                        'Purchase Request Approval (re-approval)', 'PO Modification',
-                        'Purchase Order', 'Goods Receipt', 'Vendor Invoice', 'Payment'))
+SOURCE_ACTIONS = {
+    'Purchase Request': 'request_submitted',
+    'Purchase Request Approval': 'request_approved',
+    'Purchase Request Approval (re-approval)': 'request_reapproved',
+    'PO Modification': 'po_modified',
+    'Purchase Order': 'po_confirmed',
+    'Goods Receipt': 'receipt_validated',
+    'Vendor Invoice': 'vendor_bill_posted',
+    'Payment': 'payment_registered',
+}
 
 
 def validate_export(path: Path) -> list:
@@ -44,8 +51,11 @@ def validate_export(path: Path) -> list:
                     raise ValueError('missing %s at line %d' % (key, line))
             if row['timestamp_kind'] != 'recorded':
                 raise ValueError('timestamp_kind must be recorded at line %d' % line)
-            if row['activity'] not in ACTIVITIES:
+            if row['activity'] not in SOURCE_ACTIONS:
                 raise ValueError('unsupported activity at line %d: %s' % (line, row['activity']))
+            if row['source_action'] != SOURCE_ACTIONS[row['activity']]:
+                raise ValueError('unsupported or mismatched source_action at line %d: %s'
+                                 % (line, row['source_action']))
             stamp = checker.parse_ts(row['timestamp'])
             if stamp.tzinfo is None:
                 raise ValueError('recorded timestamp must have timezone at line %d' % line)

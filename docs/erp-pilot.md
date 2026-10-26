@@ -8,6 +8,21 @@ Use a disposable Odoo 17 database and distinct requester, approver, buyer, wareh
 
 Map exactly one comparable product and UoM to each `case_id`. Split a multi-line PO into separate case IDs using an explicit stable mapping; retain the parent PO ID as metadata. `source_model` and `source_id` identify the captured **action record**, unique per emitted event; `event_id` is unique throughout export. `source_action` names that action. Receive and invoice rows carry **event deltas** at this same item/UoM grain; do not repeat current line totals across events. For partial receipts or bills, use each validated movement or posted bill line once. Reversals, returns, credits, cancelled actions and quantity adjustments require a new contract and must not be silently represented as positive deltas. Only allow the eight activity names accepted by the adapter. The exact invoice event linked to each payment is `invoice_event_id`, looked up within the same case; for allocations across several invoices, produce separately attributable links only when actual source evidence supports them, or stop. No memo/name inference. R5 checks recorded temporal precedence, **not full financial settlement or amount reconciliation**.
 
+`source_action` is a closed **adapter code**, not an assertion about Odoo's native event names. Before export, map each real instrumented action and its source record to exactly one code below; inspect its state transition/direction and reject any credit, return, reversal, refund or cancellation source action rather than re-labeling it. A mapped code is still subject to independent source proof.
+
+| `activity` | Required `source_action` | Action to verify against audit trail |
+| --- | --- | --- |
+| `Purchase Request` | `request_submitted` | Request submission |
+| `Purchase Request Approval` | `request_approved` | Approval action |
+| `Purchase Request Approval (re-approval)` | `request_reapproved` | Subsequent approval action |
+| `PO Modification` | `po_modified` | Post-approval commercial edit, with before/after values |
+| `Purchase Order` | `po_confirmed` | Order confirmation |
+| `Goods Receipt` | `receipt_validated` | Completed positive receipt movement |
+| `Vendor Invoice` | `vendor_bill_posted` | Posted positive vendor bill line, not credit note/reversal |
+| `Payment` | `payment_registered` | Registered vendor payment linked to bill event |
+
+The adapter rejects every unknown or mismatched code, including a reversal described in `source_action` on a `Vendor Invoice` row. The exporter/operator must verify source direction because substituting a permitted code for a reversal is misrepresentation the CSV cannot detect.
+
 The CSV requires `case_id,activity,timestamp,event_id,source_model,source_id,source_action,timestamp_kind,product_id,uom`. Only `timestamp_kind=recorded` and timezone-aware ISO datetimes qualify. Optional fields are `invoice_event_id,qty_ordered,qty_received,qty_invoiced,scenario,resource,vendor,po_id`. Payment requires `invoice_event_id`; Goods Receipt requires `qty_received`; Vendor Invoice requires `qty_invoiced`. `qty_ordered` belongs only to Purchase Order. Do not put vendor dates or manual `timestamp_occurred` into the verdict input; record those in a separate mechanism/attempt log with distinct provenance. Quantities are finite nonnegative decimals. The adapter rejects duplicates, mixed product/UoM grain, unknown actions, missing source links, unsupported quantities and unmapped payments, then normalizes UTC and writes deterministic checker-compatible CSV. It validates shape and relationships, **not authenticity**.
 
 ```sh
