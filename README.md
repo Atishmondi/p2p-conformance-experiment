@@ -1,51 +1,40 @@
-# From Intended Process to Executed Process: Conformance Analysis of P2P in an ERP-Based Controlled Experiment
+# Purchase-to-pay evidence desk
 
-## The story in 2–3 minutes
-**RQ:** how do deviations between the normative P2P process and its ERP execution emerge, and what design/configuration changes reduce them? **Field grounding:** BPI Challenge 2019, n=251,734 cases (FULL corrected run), gives real-world base rates with applicable denominators — R1 maverick 590/1,044=56.5% (2-way); R2 0/11,128=0.0% (3-way after-GR); R3 value-proxy 1,584/11,128=14.2% after vs 0/199,564 structural zero before; R4 qty/price-only 26,366/251,734=10.5% (approval-change 4,290/251,734 excluded); R5 408/251,734=0.16%. **Lab causal control:** Odoo-protocol synthetic stand-in (seeds 42/7, 120+60 cases) with frozen R1–R5 checker isolates delay (S2/S5, performance-only) from failure (S3/S4/S6) and drives targeted-cohort violations 60/60=1.0 → 0/60=0.0 under lab conditions (overall anchor 60/120=0.50; S1 0/20 FP). **Contradictions:** S3-absent in field (lab S3 20/20=1.0 vs field after-GR 0/11,128 — recording gate absorbs vendor-early mass) and R3 value-match proxy artifact (tolerance-0 refuted as enforced norm; H3 holds only as directional proxy, H2/H5 nuanced). Registry: 5 supported / 2 nuanced / 1 open. **H8-open:** lab elimination licences only a pilot hypothesis — field transfer is UNTESTED. Next step is preregistered, not claimed: ERP transfer protocol `docs/17-erp-experiment-protocol.md` + `data/hypothesis_erp_mapping.csv` (Odoo Community 17, 3-way-after-GR recording stage; no Odoo executed, no results).
+This portfolio demonstration asks a practical question: **which procurement control exceptions can the recorded events support, and what would an analyst inspect next?** It combines generated purchase-to-pay cases, a separate historical BPI Challenge 2019 field summary, and an ERP pilot contract. The five lab rules are a **fictional policy for the exercise**, not an endorsed purchasing policy or a production accuracy benchmark.
 
-Controlled experimental study using open-source ERP (Odoo Community protocol). Odoo-protocol synthetic stand-in — no live Odoo export used; swap in real export row-for-row. External check: BPI Challenge 2019 P2P log, see `docs/07-real-dataset.md`.
+## Run in five minutes
 
-Pipeline: Normative BPMN → Odoo configuration → controlled execution → event log → process mining → deviations → redesign → re-execution.
+Requires Python 3.9+; the core demo uses only the standard library. From a fresh clone or download:
 
-## Research question
-How do deviations between the normative purchase-to-pay process and its execution in an ERP system emerge, and what process-design or ERP-configuration changes can reduce these deviations?
-
-Subquestions: variants? temporal vs behavioral? design vs config cause? does redesign reduce deviations? See `docs/01-normative-model.md`.
-
-## Combined backbone: lab causal-control + field grounding
-Combined-backbone: lab provides causal-control (stochastic S1-S6 masters, R1-R5 rules, redesign S3R/S4R/S6R driving violations 60/60=1.0 applicable (overall 60/120=0.50) → 0/60=0.0) and field provides grounding (BPI Challenge 2019, n=251,734). Pre-registered H1-H8 registry (`data/hypotheses.csv`, signatures in `src/signatures.py`) yields 5 supported / 2 nuanced / 1 open (H1,H3,H4,H6,H7 supported; H2,H5 nuanced; H8 open). Key contradictions: S3-absent in field (lab S3 20/20=1.0 vs field after-GR R2 0/11128=0.0, S3 absent at recording gate) and R3 value-match proxy artifact (tolerance-0 refuted: after-GR 1584/11128=0.1423 routine vs before-GR 0/199564 structural zero, R3 value-match proxy artifact as enforced norm).
-
-## Status: closed loop DONE — stochastic masters build (seeds 42/7; business hours + lognormal waits + vendor effects + resource pools)
-- [x] Normative model R1-R5 + S1-S6 (`docs/01,02`, `docs/bpmn/normative.bpmn`)
-- [x] Odoo execution protocol + multiline SQL extract (`docs/04`, `sql/odoo_extract.sql` line-grain + currency + single-company)
-- [x] Round 1: 120 cases / 740 events stochastic (`data/event-log-r1.csv`, `src/generate_log.py`)
-- [x] Mining: rules + PM4Py + performance (`src/check_conformance.py`, `src/mining_pm4py.py` fitness 1.0 / precision 0.98 / 3 variants vs discovered inductive model (not normative BPMN), `docs/05-findings-r1.md`)
-  - 3 variants 80/20/20; R2:20 (S3), R3:20 (S4), R4:20 (S6); S1 7.2±1.2d, S2 10.0±1.4d, S5 approval 3.3d
-- [x] Stats: targeted 60/60->0/60, chi2=120 p=6.3e-28, Fisher p=2.1e-35, Welch S1-vs-S2 t=-6.94 p=3.3e-08 (`src/evaluate.py`, `data/evaluation.csv`)
-- [x] Robustness: recall 98.9%@2% noise but FPR 11.7% — breakdown at 2% (`src/noise_test.py`, `data/robustness.csv`)
-- [x] Redesign + Round 2: 60 cases / 400 events, 0 violations (`docs/06`, `docs/bpmn/v2.bpmn`, S3R 8.4d / S4R 7.7d / S6R 9.19d (median 9.28) vs S1 7.18 (+2.0) / vs S6 8.04 (+1.15))
-- [x] External check: BPIC 2019 mapping + falsifiers (`docs/07`, `data/bpic_mapping_demo.csv`); validity + appendix (`docs/00,09,10`)
-
-## Reproduce
+```sh
+python3 -S src/demo.py --output-dir output/my-first-demo
+python3 -m http.server 8000 --bind 127.0.0.1 --directory output/my-first-demo/webpage
 ```
-pip install -r requirements.txt   # pandas/numpy/scipy/matplotlib + pm4py 2.7 (installed)
-python3 src/generate_log.py
-python3 src/check_conformance.py data/event-log-r1.csv
-python3 src/generate_log_r2.py
-python3 src/check_conformance.py data/event-log-r2.csv
-python3 src/evaluate.py           # chi2/Fisher/Welch/vendor strata -> data/evaluation.csv
-python3 src/noise_test.py         # 0/2/5/10% sweep -> data/robustness.csv (breakdown at 2%)
-python3 src/mining_pm4py.py       # inductive miner + fitness/precision/alignments -> data/pm4py_results.json
-```
-Stable targets (kept): `make bpic` (= `src/analyze_bpic2019.py` + `src/compare_lab_field.py` -> `data/comparison.csv`, `data/hypotheses.csv` check) and `make hypo` (= H1–H8 registry check: 5 supported / 2 nuanced / 1 open).
-Web showcase: `python3 -m http.server 8000 --directory webpage` -> open http://localhost:8000 (KPIs, R1/R2 toggle, variant/violation/cycle/robustness + run-trend charts, run registry table, BPIC sample).
-Living runs: `python3 src/run_manager.py --n 20 --era both` -> timestamped `data/runs/<UTC-tag>/` + appends `data/runs.csv` (8 backfilled runs: R1 viol 0.50, R2 0.0). Rebuild dashboard data: webpage/data.json includes runs + BPIC.
-Real data: FULL corrected run `data/bpic2019_results.json` (n=251,734; DOI 10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1) — R1 maverick 590/1044=56.5% (2-way); R2 0/11128=0.0% (after-GR applicable); R3 value-match proxy 1584/11128=14.2% after vs 0/199564 before; R4 qty/price-only 26366/251734=10.5% (approval-change 4290/251734=1.7% excluded); R5 408/251734=0.16%. See `docs/11-bpic2019-results.md`.
-XES canonical: `data/BPI_Challenge_2019.xes` MD5 4eb909242351193a61e1c15b9c3cc814 (728558522 bytes; DOI 10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1; see `docs/14-data-stewardship.md`).
-Live Odoo path: `docker compose up -d`, then `psql -h localhost -U odoo p2p-exp -f sql/odoo_extract.sql -o data/event-log-odoo.csv --csv`.
 
-## Layout
-- `docs/` 00 abstract, 01 norm, 02 scenarios, 03 odoo-setup, 04 execution protocol, 05 findings-R1, 06 redesign+R2, 07 BPIC-2019 + falsifiers, 09 validity, 10 appendix (predicates + formulas + generator spec), 11-bpic2019-results, docs/13/14/15 (`docs/13-cross-validation.md`, `docs/14-data-stewardship.md`, `docs/15` reserved); `docs/bpmn/` normative + v2
-- `data/` event-log-r1/r2.csv + conformance + summary + evaluation.csv + robustness.csv + pm4py_results.json + bpic_mapping_demo.csv + `data/hypotheses.csv` + `data/comparison.csv` (from `src/compare_lab_field.py`) + bpic2019_results.json + bpic2019_case_results.csv
-- `src/` generate_log (stochastic), generate_log_r2, check_conformance, evaluate (Fisher/Welch/vendors), noise_test (sweep), mining_pm4py (installed), `src/signatures.py`, analyze_bpic2019.py, compare_lab_field.py
-- `sql/` odoo_extract.sql (line-grain) | `webpage/` index.html + app.js + styles.css + data.json + `webpage/hypotheses.js` + figures/ (boxplot, variants, heatmap)
+Open [http://localhost:8000](http://localhost:8000). Choose a new `--output-dir` for another demo; existing directories are protected. `--n 20` is the default cases per scenario; `--without-field` shows the explicit unavailable state. No raw XES, database, Odoo instance, or installed scientific package is required. The static viewer in `output/my-first-demo/webpage` includes its matching `data.json`, source downloads, and pilot documents. Host it as a directory over HTTP; opening `index.html` as `file:` can block `fetch`.
+
+To rebuild after editing the supplied run artifacts:
+
+```sh
+python3 -S src/build_dashboard.py --data-dir output/my-first-demo --out output/my-first-demo/dashboard.json --site-dir output/my-first-demo/webpage
+```
+
+The builder reads conformance and event CSVs, derives rates and durations, hashes each input, and refreshes the viewer. It fails on missing or inconsistent required input. The optional field summary is absent rather than silently replaced. `make demo OUTPUT_DIR=output/another-demo` is an equivalent generator path. `./run_demo.sh --output-dir output/another-demo` works from another working directory.
+
+## Read the evidence
+
+The default generated run (seeds 42 and 7, `n=20`) has 120 first-round and 60 second-round cases. Its case-level first-round violations are 60/120, and second-round violations are 0/60; generated cohorts show a checker response to designed scenarios, **not** an estimated control effect in a business operation. The dashboard always reads counts from its current source artifacts. An unknown outcome reduces its rule denominator; a case may violate one rule while another remains unknown. Scenario durations are first-to-last observed event spans, not business-calendar service times.
+
+The included BPI field JSON is a **historical observational proxy summary** (251,734 cases); the demo does not rerun its raw XES. For example, the summary contains 590/1,044 maverick proxy hits in its two-way stratum, whereas the lab R1 tests approval ordering. The field R3 uses monetary worth, while the lab R3 uses cumulative item quantities. The activities, units, eligibility and censoring differ. Never pool those denominators or treat a field structural false as a fully conformant case. The exact redistribution license of the raw XES is unverified; raw XES is excluded from this delivery. The small summary and source records have SHA-256 hashes in the viewer.
+
+Start an investigation by selecting a scenario and inspecting its trace, rule outcomes and unknowns; check quantity event deltas and ordering in the source CSV; then inspect the field stratum and its applicable count as separate context. Decide what source action record or missing event would resolve an unknown before proposing a control. [Business case](docs/business-case.md), [claim/evidence map](docs/claim-evidence.md), and [completion report](docs/completion-report.md) provide the decision boundaries.
+
+## Verify and extend
+
+```sh
+./scripts/verify.sh
+```
+
+This runs the standard-library test suite under `python3 -S`, including isolated generation, source mutation and web-bundle assertions. The HTTP assertion runs where loopback listeners are permitted. CI invokes the same command. Optional numerical and process mining packages live in `requirements-optional.txt`; they are unnecessary for the demo. The scientific option is diagnostic on generated samples, and PM4Py discovery fitness is not a normative purchasing verdict.
+
+For ERP work, read [the event contract](docs/event-contract.md) and [the isolated pilot protocol](docs/erp-pilot.md). `examples/erp-recorded-events.csv` is a **synthetic contract fixture**, not an Odoo export. The validator rejects dates substituted for recorded timestamps, unsupported reversals, ambiguous mapping, and quantities without one comparable item/unit. No live Odoo execution has been verified. Historical [numbered research notes](docs/04-odoo-execution-protocol.md), [handoff](PROJECT_HANDOFF.md), and the existing promotional video are retained as historical context; their older SQL and transfer/causal language is superseded by the current contract and evidence map. Do not execute the old extraction SQL.

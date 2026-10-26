@@ -1,0 +1,350 @@
+{
+  "activity_scope": {
+    "r1": [
+      "Vendor creates invoice",
+      "Create Purchase Order Item"
+    ],
+    "r2": [
+      "Record Invoice Receipt",
+      "Record Goods Receipt"
+    ],
+    "r3": [
+      "Create Purchase Order Item",
+      "Record Invoice Receipt"
+    ],
+    "r4": [
+      "Change Price",
+      "Change Quantity",
+      "Create Purchase Order Item"
+    ],
+    "r4_approval_change_after_po": [
+      "Change Approval for Purchase Order",
+      "Create Purchase Order Item"
+    ],
+    "r5": [
+      "Clear Invoice",
+      "Record Invoice Receipt"
+    ]
+  },
+  "approval_change": {
+    "approval_only_no_quantity_price_rework": {
+      "n_applicable": 251734,
+      "n_true": 3301,
+      "rate": 0.013113047899767215
+    },
+    "definition": "'Change Approval for Purchase Order' after 'Create Purchase Order Item'; routine workflow, excluded from corrected R4; approval-only = approval True AND r4_rework False.",
+    "overall": {
+      "n_applicable": 251734,
+      "n_true": 4290,
+      "rate": 0.017041798088458453
+    }
+  },
+  "by_item_category": {
+    "2-way match": {
+      "approval_change_after_po": {
+        "n_applicable": 1044,
+        "n_true": 1000,
+        "rate": 0.9578544061302682
+      },
+      "n_cases": 1044,
+      "r1_maverick": {
+        "n_applicable": 1044,
+        "n_true": 590,
+        "rate": 0.5651340996168582
+      },
+      "r2_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r3_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r4_rework": {
+        "n_applicable": 1044,
+        "n_true": 10,
+        "rate": 0.009578544061302681
+      },
+      "r5_viol": {
+        "n_applicable": 1044,
+        "n_true": 0,
+        "rate": 0.0
+      }
+    },
+    "3-way match, invoice after GR": {
+      "approval_change_after_po": {
+        "n_applicable": 15182,
+        "n_true": 38,
+        "rate": 0.002502964036358846
+      },
+      "n_cases": 15182,
+      "r1_maverick": {
+        "n_applicable": 15182,
+        "n_true": 319,
+        "rate": 0.021011724410486102
+      },
+      "r2_viol": {
+        "n_applicable": 11128,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "r3_viol": {
+        "n_applicable": 11128,
+        "n_true": 1584,
+        "rate": 0.14234363767074049
+      },
+      "r4_rework": {
+        "n_applicable": 15182,
+        "n_true": 1882,
+        "rate": 0.1239625872744039
+      },
+      "r5_viol": {
+        "n_applicable": 15182,
+        "n_true": 9,
+        "rate": 0.0005928072717692003
+      }
+    },
+    "3-way match, invoice before GR": {
+      "approval_change_after_po": {
+        "n_applicable": 221010,
+        "n_true": 3252,
+        "rate": 0.014714266322790824
+      },
+      "n_cases": 221010,
+      "r1_maverick": {
+        "n_applicable": 221010,
+        "n_true": 2541,
+        "rate": 0.011497217320483236
+      },
+      "r2_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r3_viol": {
+        "n_applicable": 199564,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "r4_rework": {
+        "n_applicable": 221010,
+        "n_true": 23315,
+        "rate": 0.10549296411927062
+      },
+      "r5_viol": {
+        "n_applicable": 221010,
+        "n_true": 399,
+        "rate": 0.0018053481742907561
+      }
+    },
+    "Consignment": {
+      "approval_change_after_po": {
+        "n_applicable": 14498,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "n_cases": 14498,
+      "r1_maverick": {
+        "n_applicable": 14498,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "r2_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r3_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r4_rework": {
+        "n_applicable": 14498,
+        "n_true": 1159,
+        "rate": 0.07994206097392743
+      },
+      "r5_viol": {
+        "n_applicable": 14498,
+        "n_true": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "falsifiers": {
+    "A_R2_rate_vs_lab_16_7pct": {
+      "band_supported": [
+        0.1,
+        0.25
+      ],
+      "expected_lab": 0.167,
+      "observed_after_gr_r2_rate": 0.0,
+      "rationale": "after-GR R2 rate 0.000 off-anchor but cost signature ambiguous (block viol=None vs compl=0.205607476635514).",
+      "refuted_if": ">0.50 with no excess block/delay/rework",
+      "verdict": "INCONCLUSIVE"
+    },
+    "B_R3_zero_tolerance_both_3way": {
+      "correction_rate_given_viol": {
+        "after": 0.1571969696969697,
+        "before": null
+      },
+      "expected": 0.0,
+      "observed_after": 0.14234363767074049,
+      "observed_before": 0.0,
+      "rationale": "R3 deltas routine (max rate 0.142; after=0.14234363767074049, before=0.0) with low correction {'after': 0.1571969696969697, 'before': None}; tolerance-0 is artifact.",
+      "refuted_if": "max rate > 0.05 with correction < 0.50",
+      "supported_if": "max rate <= 0.01",
+      "verdict": "REFUTED"
+    },
+    "C_R4_rework_vs_base_2_15pct": {
+      "band_supported": [
+        0.0015,
+        0.0415
+      ],
+      "expected_base": 0.0215,
+      "expected_base_detail": "F2 Change Quantity 1.34% + Change Price 0.78% only; Change Approval excluded",
+      "observed": 0.10473754041964932,
+      "observed_approval_change_after_po": 0.017041798088458453,
+      "observed_approval_only": 0.013113047899767215,
+      "r4_definition": "Change Quantity/Price after Create PO Item",
+      "rationale": "corrected rework (Quantity/Price only) rate 0.1047 at/above 2.15% F2 base (1.34%+0.78%); Round-2 '-100%' fix does not transfer (rate persists). Delay-penalty check needs durations.",
+      "verdict": "REFUTED"
+    }
+  },
+  "filters": {
+    "epsilon_r3": 0.01,
+    "keep_from": "2018-01-01",
+    "keep_to": "2019-01-27",
+    "rule": "drop event if ts < 2018-01-01 or ts > 2019-01-27 23:59:59"
+  },
+  "n_cases": 251734,
+  "n_events_dropped_out_of_range": 327,
+  "n_events_filtered": 1595596,
+  "notes": [
+    "Streaming iterparse, constant memory (trace-level clear).",
+    "R1 False includes vendor-invoice-absent (F1 denominator = all 2-way). None only if PO ts missing.",
+    "R2 applicable only in after-GR stratum; R3 only in 3-way strata; else None.",
+    "R4 corrected: Change Quantity/Price after PO only (Change Approval excluded as routine workflow; tracked as approval_change_after_po).",
+    "Item Category matching is case-insensitive substring (after/before+gr, 2-way, 3-way, consignment) with GR-Based Inv. Verif. fallback."
+  ],
+  "overall": {
+    "approval_change_after_po": {
+      "n_applicable": 251734,
+      "n_true": 4290,
+      "rate": 0.017041798088458453
+    },
+    "r1_maverick": {
+      "n_applicable": 251734,
+      "n_true": 3450,
+      "rate": 0.013704942518690364
+    },
+    "r2_viol": {
+      "n_applicable": 11128,
+      "n_true": 0,
+      "rate": 0.0
+    },
+    "r3_viol": {
+      "n_applicable": 210692,
+      "n_true": 1584,
+      "rate": 0.007518083268467716
+    },
+    "r4_rework": {
+      "n_applicable": 251734,
+      "n_true": 26366,
+      "rate": 0.10473754041964932
+    },
+    "r5_viol": {
+      "n_applicable": 251734,
+      "n_true": 408,
+      "rate": 0.001620758419601643
+    }
+  },
+  "r1_two_way_stratum": {
+    "approval_change_after_po": {
+      "n_applicable": 1044,
+      "n_true": 1000,
+      "rate": 0.9578544061302682
+    },
+    "n_cases": 1044,
+    "r1_maverick": {
+      "n_applicable": 1044,
+      "n_true": 590,
+      "rate": 0.5651340996168582
+    },
+    "r4_rework": {
+      "n_applicable": 1044,
+      "n_true": 10,
+      "rate": 0.009578544061302681
+    }
+  },
+  "r2": {
+    "block_rate_given_compliant": 0.205607476635514,
+    "block_rate_given_viol": null,
+    "delay_invoice_to_clear_median_days_compliant": 26.321527777777778,
+    "delay_invoice_to_clear_median_days_viol": null,
+    "n_after_gr": 15182,
+    "n_compliant": 11128,
+    "n_unblocked_blocked_then_cleared": 0,
+    "n_viol": 0,
+    "note": "block = event name contains 'block' (e.g. Remove Payment Block); delay = Clear Invoice ts minus Record Invoice Receipt ts; unblocked = R2 violation with a later GR after first invoice.",
+    "payment_signal_rate_given_compliant": 0.8918943206326384,
+    "payment_signal_rate_given_viol": null,
+    "unblocked_rate_given_viol": null
+  },
+  "r2_unblocked_nuance": {
+    "definition": "R2 violation where a later GR exists after first invoice (blocked-then-cleared).",
+    "n_unblocked": 0,
+    "n_viol": 0
+  },
+  "source_xes": "BPI_Challenge_2019.xes",
+  "three_way_strata": {
+    "after": {
+      "approval_change_after_po": {
+        "n_applicable": 15182,
+        "n_true": 38,
+        "rate": 0.002502964036358846
+      },
+      "n_cases": 15182,
+      "r2_viol": {
+        "n_applicable": 11128,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "r3_viol": {
+        "n_applicable": 11128,
+        "n_true": 1584,
+        "rate": 0.14234363767074049
+      },
+      "r4_rework": {
+        "n_applicable": 15182,
+        "n_true": 1882,
+        "rate": 0.1239625872744039
+      }
+    },
+    "before": {
+      "approval_change_after_po": {
+        "n_applicable": 221010,
+        "n_true": 3252,
+        "rate": 0.014714266322790824
+      },
+      "n_cases": 221010,
+      "r2_viol": {
+        "n_applicable": 0,
+        "n_true": 0,
+        "rate": null
+      },
+      "r3_viol": {
+        "n_applicable": 199564,
+        "n_true": 0,
+        "rate": 0.0
+      },
+      "r4_rework": {
+        "n_applicable": 221010,
+        "n_true": 23315,
+        "rate": 0.10549296411927062
+      }
+    }
+  }
+}

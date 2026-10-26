@@ -1,0 +1,61 @@
+case_id,scenario,variant_short,violations,cycle_days,qty_received,qty_invoiced,not_evaluable,status,rule_version
+C101,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.864247685185186,5,5,,compliant,v2
+C102,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.75,10,10,,compliant,v2
+C103,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.8082060185185185,5,5,,compliant,v2
+C104,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.530069444444445,5,5,,compliant,v2
+C105,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.62056712962963,10,10,,compliant,v2
+C106,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.434282407407407,20,20,,compliant,v2
+C107,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.849247685185185,20,20,,compliant,v2
+C108,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.645127314814815,10,10,,compliant,v2
+C109,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.875983796296296,10,10,,compliant,v2
+C110,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.451423611111111,10,10,,compliant,v2
+C111,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.591099537037037,50,50,,compliant,v2
+C112,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.666666666666666,5,5,,compliant,v2
+C113,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.504791666666666,50,50,,compliant,v2
+C114,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.884131944444444,5,5,,compliant,v2
+C115,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.417326388888889,10,10,,compliant,v2
+C116,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.623958333333333,20,20,,compliant,v2
+C117,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.625,10,10,,compliant,v2
+C118,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.789131944444445,20,20,,compliant,v2
+C119,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,12.938460648148148,20,20,,compliant,v2
+C120,S3R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.0,5,5,,compliant,v2
+C121,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.791666666666666,5,5,,compliant,v2
+C122,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.912905092592593,10,10,,compliant,v2
+C123,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.375,5,5,,compliant,v2
+C124,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.464131944444444,5,5,,compliant,v2
+C125,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.034201388888889,10,10,,compliant,v2
+C126,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,15,15,,compliant,v2
+C127,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.032210648148149,10,10,,compliant,v2
+C128,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,5,5,,compliant,v2
+C129,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,5,5,,compliant,v2
+C130,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.513599537037036,15,15,,compliant,v2
+C131,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,5,5,,compliant,v2
+C132,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,5,5,,compliant,v2
+C133,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.291666666666667,5,5,,compliant,v2
+C134,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.588449074074074,10,10,,compliant,v2
+C135,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,3.9649074074074075,10,10,,compliant,v2
+C136,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.877268518518518,20,20,,compliant,v2
+C137,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.458333333333333,5,5,,compliant,v2
+C138,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.25,5,5,,compliant,v2
+C139,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.556296296296296,5,5,,compliant,v2
+C140,S4R,Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.524490740740741,15,15,,compliant,v2
+C141,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.492905092592593,10,10,,compliant,v2
+C142,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.270798611111111,20,20,,compliant,v2
+C143,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.054918981481482,20,20,,compliant,v2
+C144,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,12.0,20,20,,compliant,v2
+C145,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.225798611111111,5,5,,compliant,v2
+C146,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.583333333333334,10,10,,compliant,v2
+C147,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.362638888888889,50,50,,compliant,v2
+C148,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.166666666666666,50,50,,compliant,v2
+C149,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.958333333333334,5,5,,compliant,v2
+C150,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,6.419201388888889,15,15,,compliant,v2
+C151,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.276284722222222,15,15,,compliant,v2
+C152,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,12.306539351851852,15,15,,compliant,v2
+C153,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,10.125,50,50,,compliant,v2
+C154,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,11.267430555555556,15,15,,compliant,v2
+C155,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.859467592592592,10,10,,compliant,v2
+C156,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.5,15,15,,compliant,v2
+C157,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.884270833333333,10,10,,compliant,v2
+C158,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,8.254780092592593,20,20,,compliant,v2
+C159,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,7.0,20,20,,compliant,v2
+C160,S6R,Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment,OK,9.765185185185185,15,15,,compliant,v2

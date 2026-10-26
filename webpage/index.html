@@ -1,309 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="P2P conformance experiment: normative BPMN versus Odoo ERP execution. Round 1 diagnosis, redesign, and Round 2 verification with process mining.">
-  <title>P2P Conformance Experiment — From Intended Process to Executed Process</title>
+  <title>Purchase-to-pay | Evidence desk</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js" defer></script>
-  <script src="hypotheses.js" defer></script>
 </head>
 <body>
-  <header class="hero hero--dark-navy">
-    <div class="hero-inner">
-      <p class="eyebrow">Research showcase · Purchase-to-Pay · BPMN v2 vs. Odoo Community ERP</p>
-      <h1>From Intended Process to Executed Process: a P2P Conformance Study</h1>
-      <p class="lede">Controlled experiment comparing a normative purchase-to-pay model against observed ERP execution. Round&nbsp;1 (n=120) diagnoses temporal and behavioural deviations; Round&nbsp;2 (n=60) verifies a targeted redesign.</p>
-      <blockquote class="rq">
-        <p><strong>Research question.</strong> To what extent does configured ERP execution conform to the normative P2P model, which rules are violated, at what performance cost, and does a minimal redesign restore conformance without degrading cycle time?</p>
-      </blockquote>
-      <ol class="pipeline pipeline-badges">
-        <li><span class="step-badge">1</span><strong>Model.</strong> Normative BPMN v2 with rules R1–R5</li>
-        <li><span class="step-badge">2</span><strong>Configure.</strong> Odoo approval, 3-way match, posting controls</li>
-        <li><span class="step-badge">3</span><strong>Execute.</strong> Controlled cases S1–S6 (R1) and S3R/S4R/S6R (R2)</li>
-        <li><span class="step-badge">4</span><strong>Mine.</strong> Event logs, discovery, alignment, performance</li>
-        <li><span class="step-badge">5</span><strong>Redesign.</strong> Fix configuration and design causes</li>
-        <li><span class="step-badge">6</span><strong>Verify.</strong> Re-execute and compare R1 vs. R2</li>
-      </ol>
-      <p class="hero-meta">R1: 120 cases · 740 events · conformance 0.50 (lab) &nbsp;|&nbsp; R2: 60 cases · 400 events · conformance 1.00 (lab only; field transfer untested — H8 open) &nbsp;|&nbsp; Artefacts: event logs, BPMN v2, pm4py notebooks</p>
+  <header class="masthead">
+    <div class="shell">
+      <p class="eyebrow">P2P / Evidence desk</p>
+      <h1>Which purchasing exceptions can the records actually support?</h1>
+      <p class="lede">A reproducible control investigation: generated lab cases, separate field proxies, and an ERP pilot boundary. The lab policy is fictional and has no practitioner endorsement.</p>
+      <nav aria-label="Sections"><a href="#lab">Lab</a><a href="#cases">Cases</a><a href="#field">Field</a><a href="#erp">ERP</a><a href="#sources">Sources</a></nav>
     </div>
   </header>
-
-  <nav class="site-nav sticky-nav" aria-label="Showcase sections">
-    <a href="#overview">Overview</a>
-    <a href="#discovery">Discovery</a>
-    <a href="#conformance">Conformance</a>
-    <a href="#performance">Performance</a>
-    <a href="#robustness">Robustness</a>
-    <a href="#real-data">Real data</a>
-    <a href="#bpmn">BPMN</a>
-    <a href="#runs">Runs</a>
-    <a href="#hypotheses">Hypotheses</a>
-    <a href="#reproduce">Reproduce</a>
-  </nav>
-
-  <main>
-    <section id="overview" aria-labelledby="overview-heading">
-      <h2 id="overview-heading">1 · Overview and key indicators</h2>
-      <p>Normative purchase requisition to payment compared against controlled Odoo execution. Select a round; all charts and indicators below follow the selection. Tabular samples and exported figures remain fixed for audit.</p>
-      <div class="controls">
-        <label for="roundToggle">Round</label>
-        <select id="roundToggle" name="round">
-          <option value="r1">r1</option>
-          <option value="r2">r2</option>
-        </select>
-      </div>
-      <div id="kpis" role="status" aria-live="polite">
-        <div>
-          <h3>Cases</h3>
-          <strong>—</strong>
-          <small>Loading round data from data.json</small>
-        </div>
-      </div>
-      <dl class="findings">
-        <dt>Normative path</dt>
-        <dd>Requisition → Approval → Purchase order → Goods receipt → Vendor bill (3-way match) → Payment, with R1–R5 guarding sequence, approval, matching, posting order, and payment release.</dd>
-        <dt>Round 1 finding</dt>
-        <dd>60 of 120 cases deviate (variants V2 swap, V3 rework); violations concentrate in R2–R4. Mean cycle 7.67 days.</dd>
-        <dt>Round 2 result</dt>
-        <dd>After redesign, 60 of 60 cases conform (V1 + authorised V3R rework with re-approval); violations R1–R5 = 0. Mean cycle 7.33 days. Lab only; field transfer is untested (H8 open).</dd>
-      </dl>
-    </section>
-
-    <section id="discovery" aria-labelledby="discovery-heading">
-      <h2 id="discovery-heading">2 · Discovery: variants in the log</h2>
-      <p>Process discovery on each round. R1 yields three variants; R2 collapses to the normative variant plus one explicitly authorised rework loop.</p>
-      <figure>
-        <canvas id="variantChart" role="img" aria-label="Variant distribution chart"></canvas>
-        <figcaption>Fig. 1 — Variant distribution for the selected round (interactive, from data.json).</figcaption>
-      </figure>
-      <figure>
-        <img src="figures/variant_bars.png" alt="Bar chart of case counts per variant in Round 1 and Round 2">
-        <figcaption>Fig. 2 — Exported variant counts, R1 vs. R2. V2 swap disappears; V3 is replaced by authorised V3R.</figcaption>
-      </figure>
-    </section>
-
-    <section id="conformance" aria-labelledby="conformance-heading">
-      <h2 id="conformance-heading">3 · Conformance: rules, cases, alignments</h2>
-      <p>Rule checking (R1–R5) and token-based alignment. Use the filter to audit individual cases; fitness and deviations are reported per case in the alignment sample.</p>
-      <figure>
-        <canvas id="violChart" role="img" aria-label="Violations by rule chart"></canvas>
-        <figcaption>Fig. 3 — Violations by rule R1–R5 for the selected round (interactive).</figcaption>
-      </figure>
-      <div class="controls">
-        <label for="filterInput">Filter cases</label>
-        <input id="filterInput" name="filter" type="search" placeholder="Filter by case, scenario, variant…" autocomplete="off">
-      </div>
-      <div class="table-wrap">
-        <table id="logTable">
-          <caption>Table 1 — Case sample with scenario, observed variant, rule violations, and cycle time (days).</caption>
-          <thead>
-            <tr>
-              <th scope="col">case_id</th>
-              <th scope="col">scenario</th>
-              <th scope="col">variant</th>
-              <th scope="col">violations</th>
-              <th scope="col">cycle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5">Loading log sample from data.json…</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-wrap">
-        <table id="alignTable">
-          <caption>Table 2 — Alignment sample: fitness per case with move-on-model / move-on-log deviations.</caption>
-          <thead>
-            <tr>
-              <th scope="col">case</th>
-              <th scope="col">fitness</th>
-              <th scope="col">deviations</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>C021</td>
-              <td>1.00</td>
-              <td>none — synchronous moves only</td>
-            </tr>
-            <tr>
-              <td>C061</td>
-              <td>0.83</td>
-              <td>R2: goods receipt before purchase order (move-on-log)</td>
-            </tr>
-            <tr>
-              <td>C081</td>
-              <td>0.79</td>
-              <td>R3: bill posted without 3-way match; R4: payment before posting</td>
-            </tr>
-            <tr>
-              <td>C101</td>
-              <td>0.86</td>
-              <td>R4: rework loop without re-approval (move-on-model: approval)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="performance" aria-labelledby="performance-heading">
-      <h2 id="performance-heading">4 · Performance: cycle time and waiting</h2>
-      <p>Mean cycle time by scenario with exported distributional and waiting-time views. Deviating scenarios (notably S2) carry the delay; the redesign holds cycle time flat.</p>
-      <figure>
-        <canvas id="perfChart" role="img" aria-label="Performance by scenario chart"></canvas>
-        <figcaption>Fig. 4 — Mean cycle time by scenario for the selected round (interactive).</figcaption>
-      </figure>
-      <figure>
-        <img src="figures/cycle_boxplot.png" alt="Boxplots of cycle time distributions by scenario">
-        <figcaption>Fig. 5 — Cycle-time distributions by scenario. S2 variance is driven by out-of-order execution and rework.</figcaption>
-      </figure>
-      <figure>
-        <img src="figures/waiting_heatmap.png" alt="Heatmap of mean waiting time between consecutive P2P activities">
-        <figcaption>Fig. 6 — Mean waiting time between activities. Approval and 3-way match queues dominate.</figcaption>
-      </figure>
-    </section>
-
-    <section id="robustness" aria-labelledby="robustness-heading">
-      <h2 id="robustness-heading">5 · Robustness: sensitivity and uncertainty</h2>
-      <p>Bootstrap and permutation checks on the R1–R2 conformance gain and on the cycle-time difference, guarding against over-claiming from a single split.</p>
-      <figure>
-        <canvas id="robustChart" role="img" aria-label="Robustness bootstrap chart"></canvas>
-        <figcaption>Fig. 7 — Bootstrap distribution of the conformance-rate gain (R2 − R1) with 95% interval (interactive).</figcaption>
-      </figure>
-      <div id="statsBox" role="status" aria-live="polite">
-        <h3>Statistical summary</h3>
-        <p>Conformance gain R2 − R1: +0.50, 95% bootstrap CI [0.38, 0.61]; permutation p-value &lt; 0.001.</p>
-        <p>Cycle-time difference (R2 − R1): −0.33 days; Mann-Whitney U p-value = 0.42 (n.s.); Cliff's delta effect = −0.07 (negligible).</p>
-        <p>Interpretation: the conformance improvement is large and robust; there is no evidence of a performance penalty. Full tables in docs/05.</p>
-      </div>
-    </section>
-
-    <section id="real-data" aria-labelledby="real-data-heading">
-      <h2 id="real-data-heading">6 · From synthetic stand-in to real ERP data</h2>
-      <p>Generators are row-for-row compatible with an Odoo export. Replace the CSV, keep column names, and re-run the same pm4py notebook.</p>
-      <div id="pm4pyBox">
-        <h3>pm4py replication path</h3>
-        <p>Expected columns: <code>case_id, activity, timestamp, scenario</code>. Discovery and conformance use stock pm4py calls; no custom miner.</p>
-        <pre><code>import pm4py
-log = pm4py.read_csv("data/event-log-r1.csv")
-net, im, fm = pm4py.discover_petri_net_inductive(log)
-fitness = pm4py.fitness_token_based_replay(log, net, im, fm)
-prec = pm4py.precision_token_based_replay(log, net, im, fm)</code></pre>
-        <p>Mapping note: Odoo <code>purchase.order, stock.picking, account.move, account.payment</code> map to P2P activities in <code>src/mapping_odoo.py</code>. Synthetic timestamps preserve the same weekday and lead-time structure so figures regenerate unchanged.</p>
-      </div>
-      <figure>
-        <img src="figures/bpic_lab_vs_real.png" alt="Lab vs field violation rates">
-        <figcaption>Fig. 7b — Lab (applicable cohort) vs field (BPIC 2019) violation rates. Lab S3/S4/S6 20/20 = 1.0; field R2 0/11128 = 0.0, R3 1584/11128 = 0.1423, R4 3-way after-GR 1882/15182 = 0.1240, R1 2-way 590/1044 = 0.5651.</figcaption>
-      </figure>
-      <p>What contradicted lab expectations: S3 pattern absent in field after-GR stratum (R2 0/11128) — vendor-early billing does not surface as recorded-early (recording-gate absorption); R3 zero-tolerance refuted as a general norm (field after-GR 1584/11128 = 0.1423) — lab tol-0 is a lab norm only. Lab R2 −100% fix does not imply field relevance where the pattern is absent.</p>
-    </section>
-
-    <section id="bpmn" aria-labelledby="bpmn-heading">
-      <h2 id="bpmn-heading">7 · Normative BPMN model</h2>
-      <p>Normative P2P v2: requisition, approval gateway, order, receipt, 3-way-matched bill, payment. Source of truth for rules R1–R5 and for alignment.</p>
-      <figure>
-        <svg viewBox="0 0 820 160" width="100%" height="auto" role="img" aria-label="Normative BPMN v2 purchase-to-pay model: request, approval, order, receipt, invoice, payment with re-approval and receipt gates">
-          <style>.b{fill:#f8fafc;stroke:#334155;stroke-width:1.5}.g{fill:#fef9c3;stroke:#a16207;stroke-width:1.5}.t{font:12px sans-serif;fill:#0f172a}.s{font:10px sans-serif;fill:#475569}.a{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#ah)}</style>
-          <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#334155"/></marker></defs>
-          <rect class="b" x="10" y="55" width="100" height="50" rx="6"/><text class="t" x="60" y="75" text-anchor="middle">Request</text><text class="s" x="60" y="90" text-anchor="middle">PR create</text>
-          <rect class="b" x="125" y="55" width="100" height="50" rx="6"/><text class="t" x="175" y="75" text-anchor="middle">Approval</text><text class="s" x="175" y="90" text-anchor="middle">2-step</text>
-          <rect class="g" x="240" y="55" width="100" height="50" rx="6"/><text class="t" x="290" y="75" text-anchor="middle">Re-approval?</text><text class="s" x="290" y="90" text-anchor="middle">if PO changed</text>
-          <rect class="b" x="355" y="55" width="100" height="50" rx="6"/><text class="t" x="405" y="75" text-anchor="middle">Order</text><text class="s" x="405" y="90" text-anchor="middle">PO confirm</text>
-          <rect class="b" x="470" y="55" width="100" height="50" rx="6"/><text class="t" x="520" y="75" text-anchor="middle">Receipt</text><text class="s" x="520" y="90" text-anchor="middle">Validate GR</text>
-          <rect class="g" x="585" y="55" width="100" height="50" rx="6"/><text class="t" x="635" y="75" text-anchor="middle">Bill gate</text><text class="s" x="635" y="90" text-anchor="middle">qty ≤ received</text>
-          <rect class="b" x="700" y="55" width="110" height="50" rx="6"/><text class="t" x="755" y="75" text-anchor="middle">Pay</text><text class="s" x="755" y="90" text-anchor="middle">after invoice</text>
-          <line class="a" x1="110" y1="80" x2="123" y2="80"/><line class="a" x1="225" y1="80" x2="238" y2="80"/><line class="a" x1="340" y1="80" x2="353" y2="80"/><line class="a" x1="455" y1="80" x2="468" y2="80"/><line class="a" x1="570" y1="80" x2="583" y2="80"/><line class="a" x1="685" y1="80" x2="698" y2="80"/>
-        </svg>
-        <figcaption>Fig. 8 — Normative BPMN v2 preview (inline; generated from 6-step flow since <code>bpmn-placeholder.png</code> was never generated — see dead <code>src/make_figures.py</code> reference). Machine-readable source: docs/bpmn/v2.bpmn.</figcaption>
-      </figure>
-      <p><a href="../docs/bpmn/v2.bpmn">docs/bpmn/v2.bpmn</a> · <a href="#reproduce">Reproduction steps</a></p>
-    </section>
-
-    <section id="method" aria-labelledby="method-heading">
-      <h2 id="method-heading">8 · Method</h2>
-      <p>Design: normative modelling → Odoo configuration → controlled execution (scenarios S1–S6) → event-log extraction → discovery (inductive miner), conformance (token replay, R1–R5 checks), performance (cycle, waiting) → causal analysis → minimal redesign → re-execution (S3R/S4R/S6R) → R1/R2 comparison with robustness checks.</p>
-      <p>Controls: fixed catalogues, fixed approval thresholds, deterministic clocks per scenario; each deviation is injected by exactly one scenario so causes are attributable. All scripts and seeds are versioned; figures under figures/ are regenerated, never hand-edited.</p>
-    </section>
-
-    <section id="validity" aria-labelledby="validity-heading">
-      <h2 id="validity-heading">9 · Threats to validity</h2>
-      <p><strong>Construct.</strong> Rules R1–R5 operationalise the BPMN text; ambiguous gateways were resolved in docs/01 and reviewed against the .bpmn XML.</p>
-      <p><strong>Internal.</strong> Single-tenant Odoo Community; no concurrent-user contention. Randomisation is by seeded generator, not by live randomisation.</p>
-      <p><strong>External.</strong> Synthetic stand-in data with Odoo-compatible schema; real-export validation is pending and the mapping is documented above. Single P2P domain — generalisation to other processes is not claimed.</p>
-    </section>
-
-    <section id="runs" aria-labelledby="runs-heading">
-      <h2 id="runs-heading">10 · Living system: runs over time</h2>
-      <p>Accumulating record of experiment runs. Violation rate is tracked across runs; the table below lists one row per run.</p>
-      <figure>
-        <canvas id="trendChart" role="img" aria-label="Violation rate over runs chart"></canvas>
-        <figcaption>Fig. 9 — Violation rate over runs (interactive, from runs data).</figcaption>
-      </figure>
-      <div class="table-wrap">
-        <table id="runsTable">
-          <caption>Table 3 — Runs ledger with era, case counts, violation rate, and mean cycle time.</caption>
-          <thead>
-            <tr>
-              <th scope="col">run_id</th>
-              <th scope="col">era</th>
-              <th scope="col">cases</th>
-              <th scope="col">viol_rate</th>
-              <th scope="col">mean_cycle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5">No runs recorded yet — new runs will appear here.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p>New runs append via src/run_manager.py; BPIC sample: data/bpic_sample.csv (see docs/07).</p>
-    </section>
-
-    <section id="hypotheses" aria-labelledby="hypotheses-heading">
-      <h2 id="hypotheses-heading">11 · Hypotheses: lab vs field</h2>
-      <p>Pre-registered hypotheses with predicted signatures and lab vs field rates. Statuses: supported, nuanced, open. H8 (lab 60/60 → 0/60 redesign transfer to field) is open and untested — lab result only, never a field claim.</p>
-      <div class="table-wrap">
-        <table id="hypoTable">
-          <caption>Table 4 — Hypotheses with rule, lab rate, field rate, and status.</caption>
-          <thead>
-            <tr>
-              <th scope="col">hypo</th>
-              <th scope="col">rule</th>
-              <th scope="col">lab</th>
-              <th scope="col">field</th>
-              <th scope="col">status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5">No hypotheses available.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="next-exp" style="margin-top:12px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;">
-        <p style="margin:0;"><strong>Next: ERP experiment (H8 <span class="badge-warn">open</span>)</strong> — field transfer of the S3R/S4R/S6R controls is untested. NEXT experiment preregistered in <a href="../docs/17-erp-experiment-protocol.md">docs/17-erp-experiment-protocol.md</a> (Odoo Community transferability protocol; H8 stays open until ERP intervention is measured).</p>
-      </div>
-    </section>
+  <main class="shell">
+    <div id="state" role="status" aria-live="polite" class="notice">Loading this run’s evidence…</div>
+    <div id="content" hidden>
+      <section class="intro" aria-label="Evidence boundary">
+        <span class="tag">Synthetic demonstration</span><span class="tag field-tag">Observational field summary</span><span class="tag muted-tag">ERP execution unverified</span>
+        <p>The generated cases show how a rule checker responds to deliberately designed traces. Field counts describe different activities and applicability populations. A valid export contract and a pilot plan do not establish live Odoo outcomes.</p>
+      </section>
+      <section id="lab">
+        <div class="section-head"><div><p class="eyebrow">01 / Generated lab</p><h2>Case and rule outcomes</h2></div><label>Round <select id="round"><option value="r1">Round 1</option><option value="r2">Round 2</option></select></label></div>
+        <p id="lab-context"></p>
+        <div class="cards" id="cards"></div>
+        <h3>Rule-level denominator</h3><p>Unknown rule outcomes are excluded from that rule’s evaluated count; a case with one violation may still have another unknown rule.</p>
+        <div class="table-scroll"><table><thead><tr><th>Rule</th><th>Fictional policy check</th><th>Violating</th><th>Evaluated</th><th>Unknown</th><th>Violation rate</th></tr></thead><tbody id="rules"></tbody></table></div>
+        <h3>Designed scenarios</h3><p>Durations span the first through last observed event, in calendar days. These samples cannot estimate operational cycle time.</p>
+        <div class="table-scroll"><table><thead><tr><th>Scenario</th><th>Cases</th><th>Violating / evaluated</th><th>Unknown cases</th><th>Mean duration</th></tr></thead><tbody id="scenarios"></tbody></table></div>
+        <p id="comparison" class="subtle"></p>
+      </section>
+      <section id="cases">
+        <p class="eyebrow">02 / Inspect a trace</p><h2>Observed examples from this run</h2>
+        <p>One deterministic example per scenario, selected from the generated event and conformance files. Quantities shown are source row values; blank means absent.</p>
+        <label>Case <select id="case-select"></select></label><div id="case-detail"></div>
+      </section>
+      <section id="field">
+        <p class="eyebrow">03 / Observational field proxies</p><h2>Different definitions, separate denominators</h2>
+        <p id="field-context"></p>
+        <label>Stratum <select id="stratum"></select></label>
+        <p id="stratum-context" class="subtle"></p>
+        <div class="table-scroll"><table><thead><tr><th>Proxy</th><th>True / applicable</th><th>Rate</th><th>Definition and limitation</th></tr></thead><tbody id="field-rules"></tbody></table></div>
+        <p class="subtle">A structural false in a field proxy does not prove full case compliance. Cases cut off before an activity may remain unobserved. Field rules do not share the lab’s quantity, activity, or case applicability definitions.</p>
+      </section>
+      <section id="erp">
+        <p class="eyebrow">04 / Pilot boundary</p><h2>Recorded events required</h2>
+        <p>The synthetic ERP contract fixture validates source IDs, recorded timestamps, action direction, and item/unit quantities. Live Odoo configuration and transaction execution have not been verified in this delivery. Read the <a href="docs/erp-pilot.md">pilot protocol</a> and <a href="docs/event-contract.md">event contract</a>.</p>
+      </section>
+      <section id="sources">
+        <p class="eyebrow">05 / Reproduce and audit</p><h2>Input artifacts and limits</h2>
+        <p>SHA-256 values identify the exact downloadable bytes copied into this bundle. They do not establish the completeness or license of the upstream raw field log. Raw XES is excluded.</p>
+        <div class="table-scroll"><table><thead><tr><th>Input</th><th>Evidence</th><th>Version</th><th>SHA-256</th></tr></thead><tbody id="provenance"></tbody></table></div>
+        <details><summary>Interpretation limits</summary><ul id="limits"></ul></details>
+      </section>
+    </div>
   </main>
-
-  <footer id="reproduce">
-    <h2>Reproduce</h2>
-    <p>Regenerate logs, re-check conformance, and rebuild figures. Requires Python 3.10+ with pm4py, pandas, matplotlib.</p>
-    <pre><code>python3 src/generate_log.py
-python3 src/check_conformance.py data/event-log-r1.csv
-python3 src/generate_log_r2.py
-python3 src/check_conformance.py data/event-log-r2.csv
-python3 src/make_figures.py --input data/ --out webpage/figures/
-python3 -m http.server --directory webpage 8000</code></pre>
-    <p>Synthetic stand-in data; swap in a real Odoo export row-for-row (see §6). Details: README and docs/01–06.</p>
-  </footer>
+  <footer class="shell">Portfolio demonstration · Rebuild the payload after editing supplied artifacts; see README for commands and evidence boundaries.</footer>
 </body>
 </html>

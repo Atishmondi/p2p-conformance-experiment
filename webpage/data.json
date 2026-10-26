@@ -1,692 +1,2554 @@
 {
-  "meta": {
-    "title": "From Intended Process to Executed Process: Conformance Analysis of P2P in an ERP-Based Controlled Experiment",
-    "rq": "How do deviations between the normative purchase-to-pay process and its execution in an ERP system emerge, and what process-design or ERP-configuration changes can reduce these deviations?",
-    "n_r1": 120,
-    "n_r2": 60
-  },
-  "r1": {
-    "cases": 120,
-    "events": 740,
-    "conformance_rate": 0.5,
-    "variants": [
-      {
-        "label": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-        "count": 80
-      },
-      {
-        "label": "Purchase Req->Purchase Req->Purchase Ord->Vendor Invoi->Goods Receip->Payment",
-        "count": 20
-      },
-      {
-        "label": "Purchase Req->Purchase Req->PO Modificat->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-        "count": 20
-      }
-    ],
-    "violations": {
-      "R1": 0,
-      "R2": 20,
-      "R3": 20,
-      "R4": 20,
-      "R5": 0
-    },
-    "performance": [
-      {
-        "scenario": "S1",
-        "mean_cycle": 7.1838,
-        "median_cycle": 6.8438
-      },
-      {
-        "scenario": "S2",
-        "mean_cycle": 10.0257,
-        "median_cycle": 9.7675
-      },
-      {
-        "scenario": "S3",
-        "mean_cycle": 7.2433,
-        "median_cycle": 7.0
-      },
-      {
-        "scenario": "S4",
-        "mean_cycle": 7.7036,
-        "median_cycle": 7.4909
-      },
-      {
-        "scenario": "S5",
-        "mean_cycle": 9.7123,
-        "median_cycle": 9.6863
-      },
-      {
-        "scenario": "S6",
-        "mean_cycle": 8.0373,
-        "median_cycle": 7.7274
-      }
-    ]
-  },
-  "r2": {
-    "cases": 60,
-    "events": 400,
-    "conformance_rate": 1.0,
-    "variants": [
-      {
-        "label": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-        "count": 40
-      },
-      {
-        "label": "Purchase Req->Purchase Req->PO Modificat->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-        "count": 20
-      }
-    ],
-    "violations": {
-      "R1": 0,
-      "R2": 0,
-      "R3": 0,
-      "R4": 0,
-      "R5": 0
-    },
-    "performance": [
-      {
-        "scenario": "S3R",
-        "mean_cycle": 8.3935,
-        "median_cycle": 7.8462
-      },
-      {
-        "scenario": "S4R",
-        "mean_cycle": 7.7318,
-        "median_cycle": 7.1619
-      },
-      {
-        "scenario": "S6R",
-        "mean_cycle": 9.1887,
-        "median_cycle": 9.2775
-      }
-    ]
-  },
-  "stats": {
-    "p_value": 6.326068264e-28,
-    "chi2": 120.0,
-    "cohens_h": 3.141592654,
-    "welch_t": -6.940207133,
-    "welch_p": 3.336269605e-08,
-    "fisher_p": 2.070073888e-35
-  },
-  "pm4py": {
-    "fitness": 1.0,
-    "scope": "vs discovered inductive net, not normative BPMN",
-    "precision": 0.9795918367346939,
-    "variants_mined": 3,
-    "alignments_sample": [
+  "examples": {
+    "r1": [
       {
         "case_id": "C001",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S1",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-05T09:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-07T21:00:00"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-08T04:20:57"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "10",
+            "timestamp": "2026-01-12T08:00:00"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "10",
+            "qty_received": "",
+            "timestamp": "2026-01-13T01:47:27"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-13T23:53:27"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
       },
       {
         "case_id": "C021",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S2",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-09T13:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-12T08:00:00"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-12T16:55:20"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "5",
+            "timestamp": "2026-01-16T03:52:41"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "5",
+            "qty_received": "",
+            "timestamp": "2026-01-19T08:00:00"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-20T18:55:33"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
       },
       {
         "case_id": "C041",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S3",
+        "status": "violating",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-13T17:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-14T07:46:07"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-14T11:32:00"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "5",
+            "qty_received": "",
+            "timestamp": "2026-01-14T22:01:27"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "5",
+            "timestamp": "2026-01-19T08:00:00"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-21T20:22:03"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": [
+          "R2",
+          "R3"
+        ]
       },
       {
         "case_id": "C061",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S4",
+        "status": "violating",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-19T08:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-20T03:17:28"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-20T08:51:59"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "15",
+            "timestamp": "2026-01-23T20:46:56"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "17",
+            "qty_received": "",
+            "timestamp": "2026-01-26T08:00:00"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-28T23:41:20"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": [
+          "R3"
+        ]
       },
       {
         "case_id": "C081",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S5",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-22T01:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-26T08:00:00"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-26T21:39:52"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "5",
+            "timestamp": "2026-01-28T06:20:03"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "5",
+            "qty_received": "",
+            "timestamp": "2026-01-29T00:16:53"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-30T08:21:30"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
       },
       {
         "case_id": "C101",
-        "fitness": 1.0,
-        "deviations": []
+        "rule_version": "v2",
+        "scenario": "S6",
+        "status": "violating",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-26T05:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-27T01:40:19"
+          },
+          {
+            "activity": "PO Modification",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-27T09:02:21"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-01-27T14:13:06"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "10",
+            "timestamp": "2026-01-29T20:03:23"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "10",
+            "qty_received": "",
+            "timestamp": "2026-01-30T14:29:16"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-02T19:34:27"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": [
+          "R4"
+        ]
+      }
+    ],
+    "r2": [
+      {
+        "case_id": "C101",
+        "rule_version": "v2",
+        "scenario": "S3R",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-02T09:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-04T00:08:47"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-04T09:30:16"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "5",
+            "timestamp": "2026-02-06T13:25:12"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "5",
+            "qty_received": "",
+            "timestamp": "2026-02-09T08:00:00"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-13T05:44:31"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
+      },
+      {
+        "case_id": "C121",
+        "rule_version": "v2",
+        "scenario": "S4R",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-06T13:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-09T08:00:00"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-10T00:58:22"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "5",
+            "timestamp": "2026-02-11T09:34:51"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "5",
+            "qty_received": "",
+            "timestamp": "2026-02-12T06:51:15"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-16T08:00:00"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
+      },
+      {
+        "case_id": "C141",
+        "rule_version": "v2",
+        "scenario": "S6R",
+        "status": "compliant",
+        "trace": [
+          {
+            "activity": "Purchase Request",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-10T17:00:00"
+          },
+          {
+            "activity": "Purchase Request Approval",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-11T12:16:26"
+          },
+          {
+            "activity": "PO Modification",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-11T18:53:05"
+          },
+          {
+            "activity": "Purchase Request Approval (re-approval)",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-12T10:42:31"
+          },
+          {
+            "activity": "Purchase Order",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-12T23:06:52"
+          },
+          {
+            "activity": "Goods Receipt",
+            "qty_invoiced": "",
+            "qty_received": "10",
+            "timestamp": "2026-02-13T17:33:28"
+          },
+          {
+            "activity": "Vendor Invoice",
+            "qty_invoiced": "10",
+            "qty_received": "",
+            "timestamp": "2026-02-16T08:00:00"
+          },
+          {
+            "activity": "Payment",
+            "qty_invoiced": "",
+            "qty_received": "",
+            "timestamp": "2026-02-18T04:49:47"
+          }
+        ],
+        "unknown_rules": [],
+        "violations": []
       }
     ]
   },
-  "robustness": [
-    {
-      "noise_level": 0.0,
-      "recall": 1.0,
-      "fpr": 0.0
+  "field": {
+    "available": true,
+    "contrasts": [
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 11128,
+          "n_true": 0,
+          "rate": 0.0,
+          "wilson_95": [
+            2.7095700697970727e-20,
+            0.00034508745340154076
+          ]
+        },
+        "field_metric": "r2_viol",
+        "field_stratum": "three_way_after",
+        "lab": {
+          "compliant": 0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "violating": 20,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.8388748419471806,
+            1.0
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R2",
+        "lab_scenario": "S3",
+        "reason": "Invoice receipt before goods receipt in after-GR stratum; field applicability differs from lab R2."
+      },
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 11128,
+          "n_true": 1584,
+          "rate": 0.14234363767074049,
+          "wilson_95": [
+            0.13597520593739854,
+            0.14895891485062057
+          ]
+        },
+        "field_metric": "r3_viol",
+        "field_stratum": "three_way_after",
+        "lab": {
+          "compliant": 0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "violating": 20,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.8388748419471806,
+            1.0
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R3",
+        "lab_scenario": "S4",
+        "reason": "Historical monetary-value proxy from Cumulative net worth: maximum invoice worth exceeds first PO worth by more than epsilon; differs from lab cumulative invoice/receipt item quantities R3."
+      },
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 199564,
+          "n_true": 0,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            1.924888695800611e-05
+          ]
+        },
+        "field_metric": "r3_viol",
+        "field_stratum": "three_way_before",
+        "lab": {
+          "compliant": 0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "violating": 20,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.8388748419471806,
+            1.0
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R3",
+        "lab_scenario": "S4",
+        "reason": "Historical monetary-value proxy from Cumulative net worth: maximum invoice worth exceeds first PO worth by more than epsilon; differs from lab cumulative invoice/receipt item quantities R3."
+      },
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 15182,
+          "n_true": 1882,
+          "rate": 0.1239625872744039,
+          "wilson_95": [
+            0.11881559260415814,
+            0.12929982918777314
+          ]
+        },
+        "field_metric": "r4_rework",
+        "field_stratum": "three_way_after",
+        "lab": {
+          "compliant": 0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "violating": 20,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.8388748419471806,
+            1.0
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R4",
+        "lab_scenario": "S6",
+        "reason": "Quantity or price change after PO item; not lab modification/reapproval interval R4."
+      },
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 221010,
+          "n_true": 23315,
+          "rate": 0.10549296411927062,
+          "wilson_95": [
+            0.10421911872413472,
+            0.1067805234295424
+          ]
+        },
+        "field_metric": "r4_rework",
+        "field_stratum": "three_way_before",
+        "lab": {
+          "compliant": 0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "violating": 20,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.8388748419471806,
+            1.0
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R4",
+        "lab_scenario": "S6",
+        "reason": "Quantity or price change after PO item; not lab modification/reapproval interval R4."
+      },
+      {
+        "comparable": false,
+        "field": {
+          "n_applicable": 1044,
+          "n_true": 590,
+          "rate": 0.5651340996168582,
+          "wilson_95": [
+            0.5348783002210447,
+            0.5949123268391433
+          ]
+        },
+        "field_metric": "r1_maverick",
+        "field_stratum": "two_way",
+        "lab": {
+          "compliant": 120,
+          "evaluated_cases": 120,
+          "not_evaluable": 0,
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.031019166418703486
+          ]
+        },
+        "lab_era": "r1",
+        "lab_rule": "R1",
+        "lab_scenario": null,
+        "reason": "Vendor-created invoice before PO item (field proxy, not lab approval R1)."
+      }
+    ],
+    "definitions": {
+      "approval_change_after_po": "Approval-change activity after PO; separate from corrected field rework.",
+      "r1_maverick": "Vendor-created invoice before PO item (field proxy, not lab approval R1).",
+      "r2_viol": "Invoice receipt before goods receipt in after-GR stratum; field applicability differs from lab R2.",
+      "r3_viol": "Historical monetary-value proxy from Cumulative net worth: maximum invoice worth exceeds first PO worth by more than epsilon; differs from lab cumulative invoice/receipt item quantities R3.",
+      "r4_rework": "Quantity or price change after PO item; not lab modification/reapproval interval R4.",
+      "r5_viol": "Invoice clearing before invoice receipt; payment signal differs from lab R5."
     },
-    {
-      "noise_level": 0.02,
-      "recall": 0.9889,
-      "fpr": 0.11666666666666665
-    },
-    {
-      "noise_level": 0.05,
-      "recall": 0.9833333333333333,
-      "fpr": 0.2333333333333333
-    },
-    {
-      "noise_level": 0.1,
-      "recall": 0.9722333333333334,
-      "fpr": 0.5
-    }
-  ],
-  "log_sample": [
-    {
-      "case_id": "C001",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 8.6
-    },
-    {
-      "case_id": "C002",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.8
-    },
-    {
-      "case_id": "C003",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.5
-    },
-    {
-      "case_id": "C004",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.4
-    },
-    {
-      "case_id": "C005",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 8.3
-    },
-    {
-      "case_id": "C006",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 5.9
-    },
-    {
-      "case_id": "C007",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 8.3
-    },
-    {
-      "case_id": "C008",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 5.5
-    },
-    {
-      "case_id": "C009",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 7.4
-    },
-    {
-      "case_id": "C010",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 7.0
-    },
-    {
-      "case_id": "C011",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.4
-    },
-    {
-      "case_id": "C012",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.9
-    },
-    {
-      "case_id": "C013",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 7.1
-    },
-    {
-      "case_id": "C014",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 7.6
-    },
-    {
-      "case_id": "C015",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.2
-    },
-    {
-      "case_id": "C016",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.8
-    },
-    {
-      "case_id": "C017",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.6
-    },
-    {
-      "case_id": "C018",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.1
-    },
-    {
-      "case_id": "C019",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 6.2
-    },
-    {
-      "case_id": "C020",
-      "scenario": "S1",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.0
-    },
-    {
-      "case_id": "C021",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 11.2
-    },
-    {
-      "case_id": "C022",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 12.0
-    },
-    {
-      "case_id": "C023",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 11.5
-    },
-    {
-      "case_id": "C024",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.2
-    },
-    {
-      "case_id": "C025",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.0
-    },
-    {
-      "case_id": "C026",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.3
-    },
-    {
-      "case_id": "C027",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.1
-    },
-    {
-      "case_id": "C028",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.6
-    },
-    {
-      "case_id": "C029",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 14.0
-    },
-    {
-      "case_id": "C030",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.5
-    },
-    {
-      "case_id": "C031",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.0
-    },
-    {
-      "case_id": "C032",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.9
-    },
-    {
-      "case_id": "C033",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.6
-    },
-    {
-      "case_id": "C034",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.6
-    },
-    {
-      "case_id": "C035",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.2
-    },
-    {
-      "case_id": "C036",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 8.7
-    },
-    {
-      "case_id": "C037",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.0
-    },
-    {
-      "case_id": "C038",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 9.0
-    },
-    {
-      "case_id": "C039",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 10.4
-    },
-    {
-      "case_id": "C040",
-      "scenario": "S2",
-      "variant": "Purchase Req->Purchase Req->Purchase Ord->Goods Receip->Vendor Invoi->Payment",
-      "violations": "OK",
-      "cycle": 7.7
-    }
-  ],
-  "runs": [
-    {
-      "run_id": "backfill-01-r1",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r1",
-      "n_per_scenario": 20,
-      "seed": 42,
-      "cases": 120,
-      "events": 740,
-      "viol_rate": 0.5,
-      "mean_cycle": 8.3183
-    },
-    {
-      "run_id": "backfill-02-r1",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r1",
-      "n_per_scenario": 20,
-      "seed": 43,
-      "cases": 120,
-      "events": 740,
-      "viol_rate": 0.5,
-      "mean_cycle": 8.3292
-    },
-    {
-      "run_id": "backfill-03-r1",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r1",
-      "n_per_scenario": 20,
-      "seed": 44,
-      "cases": 120,
-      "events": 740,
-      "viol_rate": 0.5,
-      "mean_cycle": 8.1458
-    },
-    {
-      "run_id": "backfill-04-r1",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r1",
-      "n_per_scenario": 20,
-      "seed": 45,
-      "cases": 120,
-      "events": 740,
-      "viol_rate": 0.5,
-      "mean_cycle": 8.1833
-    },
-    {
-      "run_id": "backfill-05-r2",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r2",
-      "n_per_scenario": 20,
-      "seed": 7,
-      "cases": 60,
-      "events": 400,
-      "viol_rate": 0.0,
-      "mean_cycle": 8.4433
-    },
-    {
-      "run_id": "backfill-06-r2",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r2",
-      "n_per_scenario": 20,
-      "seed": 8,
-      "cases": 60,
-      "events": 400,
-      "viol_rate": 0.0,
-      "mean_cycle": 8.58
-    },
-    {
-      "run_id": "backfill-07-r2",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r2",
-      "n_per_scenario": 20,
-      "seed": 9,
-      "cases": 60,
-      "events": 400,
-      "viol_rate": 0.0,
-      "mean_cycle": 8.22
-    },
-    {
-      "run_id": "backfill-08-r2",
-      "utc_time": "2026-09-23T04:17:27+00:00",
-      "era": "r2",
-      "n_per_scenario": 20,
-      "seed": 10,
-      "cases": 60,
-      "events": 400,
-      "viol_rate": 0.0,
-      "mean_cycle": 8.5367
-    }
-  ],
-  "bpic": {
-    "mode": "REAL",
-    "doi": "10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1",
-    "source_xes": "data/BPI_Challenge_2019.xes",
-    "results": "data/bpic2019_results.json",
-    "cases": "data/bpic2019_case_results.csv",
-    "n_cases": 251734,
-    "n_events_filtered": 1595596,
-    "n_events_dropped_out_of_range": 327,
+    "evidence_class": "observational_field_summary",
+    "limitations": [
+      "Checked-in historical summary; raw XES is not rerun by the demo.",
+      "Field proxies and lab rules have different activities, quantities, and applicability.",
+      "Strata retain their own denominators; no lab/field pooling or inferential comparison."
+    ],
+    "rule_version": "historical-field-proxies-v1",
+    "source": "bpic2019_results.json",
     "strata": {
-      "2-way": 1044,
-      "after-GR": 15182,
-      "before-GR": 221010,
-      "consignment": 14498
-    },
-    "r1_maverick_2way": 0.5651340996168582,
-    "r1_maverick_2way_n_true": 590,
-    "r1_maverick_2way_n_applicable": 1044,
-    "r2_after_gr": 0.0,
-    "r2_applicable": 11128,
-    "r2_n_true": 0,
-    "r3_after_gr": 0.14234363767074049,
-    "r3_after_gr_n_true": 1584,
-    "r3_after_gr_n_applicable": 11128,
-    "r3_before_gr": 0.0,
-    "r3_before_gr_n_true": 0,
-    "r3_before_gr_n_applicable": 199564,
-    "r4_corrected": 0.10473754041964932,
-    "r4_corrected_n_true": 26366,
-    "r4_corrected_n_applicable": 251734,
-    "r4_2way": 0.009578544061302681,
-    "approval_change_after_po_2way": 0.9578544061302682,
-    "approval_only_2way": 0.94827586,
-    "approval_only_overall": 0.013113047899767215,
-    "falsifiers": {
-      "A": "INCONCLUSIVE",
-      "B": "REFUTED",
-      "C": "REFUTED"
-    },
-    "falsifiers_detail": {
-      "A_R2_rate_vs_lab_16_7pct": {
-        "observed_after_gr_r2_rate": 0.0,
-        "verdict": "INCONCLUSIVE"
+      "item_category:2-way match": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 1044,
+            "n_true": 1000,
+            "rate": 0.9578544061302682,
+            "wilson_95": [
+              0.9438952356957161,
+              0.9684565251097227
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 1044,
+            "n_true": 590,
+            "rate": 0.5651340996168582,
+            "wilson_95": [
+              0.5348783002210447,
+              0.5949123268391433
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 1044,
+            "n_true": 10,
+            "rate": 0.009578544061302681,
+            "wilson_95": [
+              0.00521109531924275,
+              0.017541830345224448
+            ]
+          },
+          "r5_viol": {
+            "n_applicable": 1044,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.003666068743851328
+            ]
+          }
+        },
+        "n_cases": 1044
       },
-      "B_R3_zero_tolerance_both_3way": {
-        "observed_after": 0.14234363767074049,
-        "observed_before": 0.0,
-        "verdict": "REFUTED"
+      "item_category:3-way match, invoice after GR": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 15182,
+            "n_true": 38,
+            "rate": 0.002502964036358846,
+            "wilson_95": [
+              0.001824194044879382,
+              0.003433430897222079
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 15182,
+            "n_true": 319,
+            "rate": 0.021011724410486102,
+            "wilson_95": [
+              0.01884855443860611,
+              0.023417227181804563
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 11128,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              2.7095700697970727e-20,
+              0.00034508745340154076
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 11128,
+            "n_true": 1584,
+            "rate": 0.14234363767074049,
+            "wilson_95": [
+              0.13597520593739854,
+              0.14895891485062057
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 15182,
+            "n_true": 1882,
+            "rate": 0.1239625872744039,
+            "wilson_95": [
+              0.11881559260415814,
+              0.12929982918777314
+            ]
+          },
+          "r5_viol": {
+            "n_applicable": 15182,
+            "n_true": 9,
+            "rate": 0.0005928072717692003,
+            "wilson_95": [
+              0.00031191758905456754,
+              0.0011263602225452312
+            ]
+          }
+        },
+        "n_cases": 15182
       },
-      "C_R4_rework_vs_base_2_15pct": {
-        "observed": 0.10473754041964932,
-        "verdict": "REFUTED"
+      "item_category:3-way match, invoice before GR": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 221010,
+            "n_true": 3252,
+            "rate": 0.014714266322790824,
+            "wilson_95": [
+              0.014220647543408196,
+              0.01522475468056625
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 221010,
+            "n_true": 2541,
+            "rate": 0.011497217320483236,
+            "wilson_95": [
+              0.011061176150354743,
+              0.011950239900563897
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 199564,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              1.924888695800611e-05
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 221010,
+            "n_true": 23315,
+            "rate": 0.10549296411927062,
+            "wilson_95": [
+              0.10421911872413472,
+              0.1067805234295424
+            ]
+          },
+          "r5_viol": {
+            "n_applicable": 221010,
+            "n_true": 399,
+            "rate": 0.0018053481742907561,
+            "wilson_95": [
+              0.0016368147028399992,
+              0.001991199965961155
+            ]
+          }
+        },
+        "n_cases": 221010
+      },
+      "item_category:Consignment": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 14498,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.0002648945536746005
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 14498,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.0002648945536746005
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 14498,
+            "n_true": 1159,
+            "rate": 0.07994206097392743,
+            "wilson_95": [
+              0.07563793540255015,
+              0.0844687286658563
+            ]
+          },
+          "r5_viol": {
+            "n_applicable": 14498,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.0002648945536746005
+            ]
+          }
+        },
+        "n_cases": 14498
+      },
+      "overall": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 251734,
+            "n_true": 4290,
+            "rate": 0.017041798088458453,
+            "wilson_95": [
+              0.016543523508775193,
+              0.0175548123197889
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 251734,
+            "n_true": 3450,
+            "rate": 0.013704942518690364,
+            "wilson_95": [
+              0.01325813532810329,
+              0.014166591200149018
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 11128,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              2.7095700697970727e-20,
+              0.00034508745340154076
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 210692,
+            "n_true": 1584,
+            "rate": 0.007518083268467716,
+            "wilson_95": [
+              0.007158115622623043,
+              0.007896009019132703
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 251734,
+            "n_true": 26366,
+            "rate": 0.10473754041964932,
+            "wilson_95": [
+              0.10354736670159868,
+              0.10593977735754043
+            ]
+          },
+          "r5_viol": {
+            "n_applicable": 251734,
+            "n_true": 408,
+            "rate": 0.001620758419601643,
+            "wilson_95": [
+              0.0014710418069600463,
+              0.0017856853265917198
+            ]
+          }
+        },
+        "n_cases": 251734
+      },
+      "three_way_after": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 15182,
+            "n_true": 38,
+            "rate": 0.002502964036358846,
+            "wilson_95": [
+              0.001824194044879382,
+              0.003433430897222079
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 11128,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              2.7095700697970727e-20,
+              0.00034508745340154076
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 11128,
+            "n_true": 1584,
+            "rate": 0.14234363767074049,
+            "wilson_95": [
+              0.13597520593739854,
+              0.14895891485062057
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 15182,
+            "n_true": 1882,
+            "rate": 0.1239625872744039,
+            "wilson_95": [
+              0.11881559260415814,
+              0.12929982918777314
+            ]
+          }
+        },
+        "n_cases": 15182
+      },
+      "three_way_before": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 221010,
+            "n_true": 3252,
+            "rate": 0.014714266322790824,
+            "wilson_95": [
+              0.014220647543408196,
+              0.01522475468056625
+            ]
+          },
+          "r2_viol": {
+            "n_applicable": 0,
+            "n_true": 0,
+            "rate": null,
+            "wilson_95": [
+              null,
+              null
+            ]
+          },
+          "r3_viol": {
+            "n_applicable": 199564,
+            "n_true": 0,
+            "rate": 0.0,
+            "wilson_95": [
+              0.0,
+              1.924888695800611e-05
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 221010,
+            "n_true": 23315,
+            "rate": 0.10549296411927062,
+            "wilson_95": [
+              0.10421911872413472,
+              0.1067805234295424
+            ]
+          }
+        },
+        "n_cases": 221010
+      },
+      "two_way": {
+        "available": true,
+        "metrics": {
+          "approval_change_after_po": {
+            "n_applicable": 1044,
+            "n_true": 1000,
+            "rate": 0.9578544061302682,
+            "wilson_95": [
+              0.9438952356957161,
+              0.9684565251097227
+            ]
+          },
+          "r1_maverick": {
+            "n_applicable": 1044,
+            "n_true": 590,
+            "rate": 0.5651340996168582,
+            "wilson_95": [
+              0.5348783002210447,
+              0.5949123268391433
+            ]
+          },
+          "r4_rework": {
+            "n_applicable": 1044,
+            "n_true": 10,
+            "rate": 0.009578544061302681,
+            "wilson_95": [
+              0.00521109531924275,
+              0.017541830345224448
+            ]
+          }
+        },
+        "n_cases": 1044
       }
     }
   },
-  "hypotheses": [
-    {
-      "hypo_id": "H1",
-      "rule": "R1",
-      "track": "field",
-      "predicted_signature": "P(maverick|2-way-match) >> overall; 2-way rate >0.5",
-      "lab_rate": "NA",
-      "field_rate": 0.5651,
-      "status": "supported"
+  "lab": {
+    "cohorts": {
+      "r1": {
+        "evidence_class": "synthetic_demonstration",
+        "overall": {
+          "cases": 120,
+          "compliant": 60,
+          "conformance_rate": 0.5,
+          "evaluated_cases": 120,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 120,
+              "evaluated_cases": 120,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.031019166418703486
+              ]
+            },
+            "R2": {
+              "compliant": 100,
+              "evaluated_cases": 120,
+              "not_evaluable": 0,
+              "violating": 20,
+              "violation_rate": 0.16666666666666666,
+              "wilson_95": [
+                0.11055996367984616,
+                0.24345281393262286
+              ]
+            },
+            "R3": {
+              "compliant": 80,
+              "evaluated_cases": 120,
+              "not_evaluable": 0,
+              "violating": 40,
+              "violation_rate": 0.3333333333333333,
+              "wilson_95": [
+                0.2553174050125844,
+                0.42168898379365016
+              ]
+            },
+            "R4": {
+              "compliant": 100,
+              "evaluated_cases": 120,
+              "not_evaluable": 0,
+              "violating": 20,
+              "violation_rate": 0.16666666666666666,
+              "wilson_95": [
+                0.11055996367984616,
+                0.24345281393262286
+              ]
+            },
+            "R5": {
+              "compliant": 120,
+              "evaluated_cases": 120,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.031019166418703486
+              ]
+            }
+          },
+          "violating": 60,
+          "violation_rate": 0.5,
+          "wilson_95": [
+            0.4119387054110839,
+            0.5880612945889161
+          ]
+        },
+        "rule_version": "v2",
+        "scenarios": {
+          "S1": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          },
+          "S2": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          },
+          "S3": {
+            "cases": 20,
+            "compliant": 0,
+            "conformance_rate": 0.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 0,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 20,
+                "violation_rate": 1.0,
+                "wilson_95": [
+                  0.8388748419471806,
+                  1.0
+                ]
+              },
+              "R3": {
+                "compliant": 0,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 20,
+                "violation_rate": 1.0,
+                "wilson_95": [
+                  0.8388748419471806,
+                  1.0
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 20,
+            "violation_rate": 1.0,
+            "wilson_95": [
+              0.8388748419471806,
+              1.0
+            ]
+          },
+          "S4": {
+            "cases": 20,
+            "compliant": 0,
+            "conformance_rate": 0.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 0,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 20,
+                "violation_rate": 1.0,
+                "wilson_95": [
+                  0.8388748419471806,
+                  1.0
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 20,
+            "violation_rate": 1.0,
+            "wilson_95": [
+              0.8388748419471806,
+              1.0
+            ]
+          },
+          "S5": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          },
+          "S6": {
+            "cases": 20,
+            "compliant": 0,
+            "conformance_rate": 0.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 0,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 20,
+                "violation_rate": 1.0,
+                "wilson_95": [
+                  0.8388748419471806,
+                  1.0
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 20,
+            "violation_rate": 1.0,
+            "wilson_95": [
+              0.8388748419471806,
+              1.0
+            ]
+          }
+        },
+        "targeted": {
+          "cases": 60,
+          "compliant": 0,
+          "conformance_rate": 0.0,
+          "evaluated_cases": 60,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R2": {
+              "compliant": 40,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 20,
+              "violation_rate": 0.3333333333333333,
+              "wilson_95": [
+                0.2272926152352268,
+                0.4594313354788031
+              ]
+            },
+            "R3": {
+              "compliant": 20,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 40,
+              "violation_rate": 0.6666666666666666,
+              "wilson_95": [
+                0.5405686645211968,
+                0.7727073847647732
+              ]
+            },
+            "R4": {
+              "compliant": 40,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 20,
+              "violation_rate": 0.3333333333333333,
+              "wilson_95": [
+                0.2272926152352268,
+                0.4594313354788031
+              ]
+            },
+            "R5": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            }
+          },
+          "violating": 60,
+          "violation_rate": 1.0,
+          "wilson_95": [
+            0.93982814785791,
+            0.9999999999999998
+          ]
+        },
+        "targeted_scenarios": [
+          "S3",
+          "S4",
+          "S6"
+        ]
+      },
+      "r2": {
+        "evidence_class": "synthetic_demonstration",
+        "overall": {
+          "cases": 60,
+          "compliant": 60,
+          "conformance_rate": 1.0,
+          "evaluated_cases": 60,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R2": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R3": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R4": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R5": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            }
+          },
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.06017185214208986
+          ]
+        },
+        "rule_version": "v2",
+        "scenarios": {
+          "S3R": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          },
+          "S4R": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          },
+          "S6R": {
+            "cases": 20,
+            "compliant": 20,
+            "conformance_rate": 1.0,
+            "evaluated_cases": 20,
+            "not_evaluable": 0,
+            "rules": {
+              "R1": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R2": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R3": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R4": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              },
+              "R5": {
+                "compliant": 20,
+                "evaluated_cases": 20,
+                "not_evaluable": 0,
+                "violating": 0,
+                "violation_rate": 0.0,
+                "wilson_95": [
+                  0.0,
+                  0.16112515805281938
+                ]
+              }
+            },
+            "violating": 0,
+            "violation_rate": 0.0,
+            "wilson_95": [
+              0.0,
+              0.16112515805281938
+            ]
+          }
+        },
+        "targeted": {
+          "cases": 60,
+          "compliant": 60,
+          "conformance_rate": 1.0,
+          "evaluated_cases": 60,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R2": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R3": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R4": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            },
+            "R5": {
+              "compliant": 60,
+              "evaluated_cases": 60,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.06017185214208986
+              ]
+            }
+          },
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.06017185214208986
+          ]
+        },
+        "targeted_scenarios": [
+          "S3R",
+          "S4R",
+          "S6R"
+        ]
+      }
     },
-    {
-      "hypo_id": "H2",
-      "rule": "R2",
-      "track": "field",
-      "predicted_signature": "P(R2 viol|invoice-after-GR) ~= lab S3 rate 1.0 (falsifier-A band 0.1-0.25, anchor 0.167)",
-      "lab_rate": 1.0,
-      "field_rate": 0.0,
-      "status": "nuanced"
+    "evidence_class": "synthetic_demonstration",
+    "limitations": [
+      "Generated cases demonstrate fictional controls; they do not measure operational savings.",
+      "Case rates exclude not_evaluable status; rule rates exclude unknown outcomes for that rule.",
+      "A proven violation establishes violating status even when other rules are unknown.",
+      "Wilson intervals describe these samples; generator design limits statistical generalization.",
+      "Cycle times derive from observed first/last timestamps, not business-calendar durations."
+    ],
+    "scientific": {
+      "available": false,
+      "requested": false
     },
-    {
-      "hypo_id": "H3",
-      "rule": "R3",
-      "track": "field",
-      "predicted_signature": "P(R3 value-delta|after-GR) >0 (lab S4=1.0 proxy); field after-GR rate >>0 with low correction",
-      "lab_rate": 1.0,
-      "field_rate": 0.1423,
-      "status": "supported"
+    "targeted_comparison": {
+      "absolute_rate_difference": 1.0,
+      "comparable": true,
+      "interpretation": "Descriptive difference between generated targeted cohorts; no measured operational or causal effect.",
+      "relative_rate_difference": 1.0
     },
-    {
-      "hypo_id": "H4",
-      "rule": "R3",
-      "track": "field",
-      "predicted_signature": "P(R3 viol|invoice-before-GR)=0 structural (no GR reference at invoice time)",
-      "lab_rate": "NA",
-      "field_rate": 0.0,
-      "status": "supported"
+    "throughput": {
+      "r1": {
+        "S1": {
+          "mean_days": 7.183845486111112,
+          "median_days": 6.843836805555555,
+          "n": 20,
+          "stdev_days": 1.1927038470145435
+        },
+        "S2": {
+          "mean_days": 10.025700231481482,
+          "median_days": 9.767540509259259,
+          "n": 20,
+          "stdev_days": 1.3895627874139778
+        },
+        "S3": {
+          "mean_days": 7.243293402777778,
+          "median_days": 7.0,
+          "n": 20,
+          "stdev_days": 1.5625372282379792
+        },
+        "S4": {
+          "mean_days": 7.703557291666667,
+          "median_days": 7.490914351851853,
+          "n": 20,
+          "stdev_days": 1.098205742668857
+        },
+        "S5": {
+          "mean_days": 9.712255787037037,
+          "median_days": 9.68633101851852,
+          "n": 20,
+          "stdev_days": 1.1610968885710635
+        },
+        "S6": {
+          "mean_days": 8.037274305555556,
+          "median_days": 7.727361111111112,
+          "n": 20,
+          "stdev_days": 1.1976317023435306
+        }
+      },
+      "r2": {
+        "S3R": {
+          "mean_days": 8.39348611111111,
+          "median_days": 7.8461689814814815,
+          "n": 20,
+          "stdev_days": 1.904766048776933
+        },
+        "S4R": {
+          "mean_days": 7.731756365740741,
+          "median_days": 7.161938657407408,
+          "n": 20,
+          "stdev_days": 1.5232736012411503
+        },
+        "S6R": {
+          "mean_days": 9.188677662037037,
+          "median_days": 9.27745949074074,
+          "n": 20,
+          "stdev_days": 1.9284145608215006
+        }
+      }
     },
-    {
-      "hypo_id": "H5",
-      "rule": "R4",
-      "track": "field",
-      "predicted_signature": "P(R4 qty/price rework) elevated vs F2 base 0.0215 (band 0.0015-0.0415); lab S6=1.0 scales down in field",
-      "lab_rate": 1.0,
-      "field_rate": 0.1047,
-      "status": "nuanced"
-    },
-    {
-      "hypo_id": "H6",
-      "rule": "R4",
-      "track": "field",
-      "predicted_signature": "P(approval-change-after-PO|2-way) high (~1.0); routine workflow correctly excluded from corrected R4",
-      "lab_rate": "NA",
-      "field_rate": 0.9579,
-      "status": "supported"
-    },
-    {
-      "hypo_id": "H7",
-      "rule": "R5",
-      "track": "field",
-      "predicted_signature": "P(R5 viol) <0.01 rare",
-      "lab_rate": "NA",
-      "field_rate": 0.0016,
-      "status": "supported"
-    },
-    {
-      "hypo_id": "H8",
-      "rule": "redesign",
-      "track": "lab",
-      "predicted_signature": "Lab redesign S3/S4/S6 -> S3R/S4R/S6R drives violations 1.0->0.0; transfers to field (UNTESTED)",
-      "lab_rate": 0.0,
-      "field_rate": "NA",
-      "status": "open"
+    "vendors": {
+      "r1": {
+        "Vendor_A": {
+          "cases": 40,
+          "compliant": 21,
+          "conformance_rate": 0.525,
+          "evaluated_cases": 40,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            },
+            "R2": {
+              "compliant": 34,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 6,
+              "violation_rate": 0.15,
+              "wilson_95": [
+                0.0706118771732036,
+                0.2907232436648971
+              ]
+            },
+            "R3": {
+              "compliant": 27,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 13,
+              "violation_rate": 0.325,
+              "wilson_95": [
+                0.200845022317827,
+                0.47982253810122333
+              ]
+            },
+            "R4": {
+              "compliant": 34,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 6,
+              "violation_rate": 0.15,
+              "wilson_95": [
+                0.0706118771732036,
+                0.2907232436648971
+              ]
+            },
+            "R5": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            }
+          },
+          "violating": 19,
+          "violation_rate": 0.475,
+          "wilson_95": [
+            0.32935470112678905,
+            0.6250263789330752
+          ]
+        },
+        "Vendor_B": {
+          "cases": 40,
+          "compliant": 19,
+          "conformance_rate": 0.475,
+          "evaluated_cases": 40,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            },
+            "R2": {
+              "compliant": 33,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 7,
+              "violation_rate": 0.175,
+              "wilson_95": [
+                0.0874541374603592,
+                0.31949990331787714
+              ]
+            },
+            "R3": {
+              "compliant": 26,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 14,
+              "violation_rate": 0.35,
+              "wilson_95": [
+                0.2213452887317629,
+                0.5049411916274231
+              ]
+            },
+            "R4": {
+              "compliant": 33,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 7,
+              "violation_rate": 0.175,
+              "wilson_95": [
+                0.0874541374603592,
+                0.31949990331787714
+              ]
+            },
+            "R5": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            }
+          },
+          "violating": 21,
+          "violation_rate": 0.525,
+          "wilson_95": [
+            0.3749736210669247,
+            0.670645298873211
+          ]
+        },
+        "Vendor_C": {
+          "cases": 40,
+          "compliant": 20,
+          "conformance_rate": 0.5,
+          "evaluated_cases": 40,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            },
+            "R2": {
+              "compliant": 33,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 7,
+              "violation_rate": 0.175,
+              "wilson_95": [
+                0.0874541374603592,
+                0.31949990331787714
+              ]
+            },
+            "R3": {
+              "compliant": 27,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 13,
+              "violation_rate": 0.325,
+              "wilson_95": [
+                0.200845022317827,
+                0.47982253810122333
+              ]
+            },
+            "R4": {
+              "compliant": 33,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 7,
+              "violation_rate": 0.175,
+              "wilson_95": [
+                0.0874541374603592,
+                0.31949990331787714
+              ]
+            },
+            "R5": {
+              "compliant": 40,
+              "evaluated_cases": 40,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.08762160119728664
+              ]
+            }
+          },
+          "violating": 20,
+          "violation_rate": 0.5,
+          "wilson_95": [
+            0.35199526933465386,
+            0.6480047306653461
+          ]
+        }
+      },
+      "r2": {
+        "Vendor_A": {
+          "cases": 20,
+          "compliant": 20,
+          "conformance_rate": 1.0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R2": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R3": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R4": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R5": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            }
+          },
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.16112515805281938
+          ]
+        },
+        "Vendor_B": {
+          "cases": 20,
+          "compliant": 20,
+          "conformance_rate": 1.0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R2": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R3": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R4": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R5": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            }
+          },
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.16112515805281938
+          ]
+        },
+        "Vendor_C": {
+          "cases": 20,
+          "compliant": 20,
+          "conformance_rate": 1.0,
+          "evaluated_cases": 20,
+          "not_evaluable": 0,
+          "rules": {
+            "R1": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R2": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R3": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R4": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            },
+            "R5": {
+              "compliant": 20,
+              "evaluated_cases": 20,
+              "not_evaluable": 0,
+              "violating": 0,
+              "violation_rate": 0.0,
+              "wilson_95": [
+                0.0,
+                0.16112515805281938
+              ]
+            }
+          },
+          "violating": 0,
+          "violation_rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.16112515805281938
+          ]
+        }
+      }
     }
+  },
+  "limitations": [
+    "Generated cases demonstrate fictional controls; they do not measure operational savings.",
+    "Case rates exclude not_evaluable status; rule rates exclude unknown outcomes for that rule.",
+    "A proven violation establishes violating status even when other rules are unknown.",
+    "Wilson intervals describe these samples; generator design limits statistical generalization.",
+    "Cycle times derive from observed first/last timestamps, not business-calendar durations.",
+    "Checked-in historical summary; raw XES is not rerun by the demo.",
+    "Field proxies and lab rules have different activities, quantities, and applicability.",
+    "Strata retain their own denominators; no lab/field pooling or inferential comparison."
   ],
-  "erp_next": {
-    "h8_status": "open",
-    "protocol": "docs/17-erp-experiment-protocol.md",
-    "mapping": "data/hypothesis_erp_mapping.csv",
-    "testable": [
-      "H1-adapted",
-      "H2-adapted",
-      "H3",
-      "H5"
-    ],
-    "negative_control": "H6",
-    "monitored": "H7",
-    "excluded": [
-      "H4",
-      "H8-frame"
-    ],
-    "note": "protocol only \u2014 no Odoo executed, no results"
-  }
+  "provenance": {
+    "builder": "build_dashboard.py",
+    "historical_note": "Unversioned conformance CSV is historical v1; v2 is explicit. Field proxy version is separate.",
+    "path_base": "Paths are relative to the selected data directory.",
+    "sources": [
+      {
+        "download": "artifacts/bpic2019_results.json",
+        "evidence_class": "observational_field_summary",
+        "path": "bpic2019_results.json",
+        "rule_version": "historical-field-proxies-v1",
+        "sha256": "f9e8577b029b3fa400c5c0586177b5212566d3877afd9a8da52b6804cdf8e16d"
+      },
+      {
+        "download": "artifacts/conformance-r1.csv",
+        "evidence_class": "synthetic_demonstration",
+        "path": "conformance-r1.csv",
+        "rule_version": "v2",
+        "sha256": "0284e19c7a0dc6a1ddd7887a2e67df365cb586fd240362468f9441160d662d43"
+      },
+      {
+        "download": "artifacts/conformance-r2.csv",
+        "evidence_class": "synthetic_demonstration",
+        "path": "conformance-r2.csv",
+        "rule_version": "v2",
+        "sha256": "4a5253cf5d0a51069f0d8eeb61b5e9ceb9c83f744d421c24f4efe4056317e530"
+      },
+      {
+        "download": "artifacts/event-log-r1.csv",
+        "evidence_class": "synthetic_demonstration",
+        "path": "event-log-r1.csv",
+        "rule_version": "v2",
+        "sha256": "19ddf326e2e7ea8192a44c3000b50e347bef04a08da3f78390d3e5ff1d989ae7"
+      },
+      {
+        "download": "artifacts/event-log-r2.csv",
+        "evidence_class": "synthetic_demonstration",
+        "path": "event-log-r2.csv",
+        "rule_version": "v2",
+        "sha256": "b5d4f9929a9150f9fa9f4847358f5d1c6e9f6a3c689247e4420b985164e19bcf"
+      }
+    ]
+  },
+  "schema_version": "2.0"
 }

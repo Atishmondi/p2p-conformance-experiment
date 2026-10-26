@@ -1,5 +1,8 @@
 # Research Audit — P2P Conformance Experiment (READ-ONLY, NO REWRITE)
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Scope: audit only. No code changed, no claims rewritten in place. Recommendations only (Section G).
 Inspected: `README.md`, `docs/00,01,02,04,05,06,07,09,10,11,13,14,15`, `data/hypotheses.csv`, `src/signatures.py` (all 80 lines), `data/bpic2019_results.json` (top-level), `data/comparison.csv`, `data/evaluation.csv` (lines 1–15 + throughput lines verified), `Makefile`.
 Owns-only: this file (`docs/16-research-audit.md`).

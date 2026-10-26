@@ -1,5 +1,2 @@
-pandas
-numpy
-scipy
-matplotlib
-pm4py>=2.7  # optional but recommended
+# Core demo and verification require Python >=3.9 standard library only.
+# Optional numerical and process-mining dependencies: requirements-optional.txt

@@ -1,5 +1,8 @@
 # Validity Threats and Limitations
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 This study is a controlled laboratory experiment with perfect ground truth by construction. The reported effects therefore measure checker correctness and configuration enforcement under controlled conditions, not diagnostic accuracy under operational uncertainty. Threats are organised following the construct–internal–external–conclusion validity taxonomy.
 
 ## 1. Construct validity: does R1–R5 measure compliance?

@@ -1,5 +1,8 @@
 # Normative P2P Model
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Scope strictly P2P only. No inventory valuation, no multi-company.
 
 ## Normative sequence

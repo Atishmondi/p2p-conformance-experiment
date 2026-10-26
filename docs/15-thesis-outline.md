@@ -1,5 +1,8 @@
 # Thesis Outline — Conformance Checking in P2P: Lab Experiment + BPIC 2019 Field Study
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 > Source skim: `docs/00-abstract.md`, `docs/10-appendix.md` (§A–C), `docs/13-cross-validation.md` (§1–2), `docs/16-research-audit.md` (§E–G), `docs/17-erp-experiment-protocol.md` (§§1–8, headings + H-table + gate order).
 > This outline only. All evidence lives in linked artifacts — no numbers are re-argued here.
 > 10-chapter canonical map (kept to 8 outline chapters, 10 max — no chapters added for appearance): Ch1=intro, Ch2=background, Ch3=problem+hypotheses+method, Ch4=lab, Ch5=field, Ch6=results (cross-validation), Ch7=ERP experiment (protocol-only), Ch8=limitations+conclusion. Defense Q&A + threats: `docs/18-defense-and-validity.md` (10 Q&As, 6 threat families).

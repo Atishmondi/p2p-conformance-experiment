@@ -1,5 +1,8 @@
 # ERP Experiment Protocol — Odoo Community Transferability (H8 Preregistration)
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 > **Superseded for ERP extraction and execution (2026-10-26):** This is a historical, unexecuted H8 preregistration. Its §5.1 snapshot schema, §5.2 date-field suggestions, §8 SQL extraction step, and any stated hard-control expectations are **not an executable or evidential path**. Use [the strict recorded-action pilot](erp-pilot.md), [the v2 event contract](event-contract.md), and `src/validate_erp_export.py` instead. `sql/odoo_extract.sql` now deliberately fails; no live Odoo control outcome has been observed. The original arm predictions below remain hypotheses, not findings.
 
 **Status: PROTOCOL ONLY — no Odoo executed, no results recorded, no claim made.**

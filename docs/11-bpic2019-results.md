@@ -1,5 +1,8 @@
 # BPIC 2019 Full-Run Results: Lab Rules (R1–R5) Applied to Field Data
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Source log: BPI Challenge 2019 purchase-order-handling XES
 (`data/BPI_Challenge_2019.xes`), via 4TU.ResearchData,
 DOI `10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1`.

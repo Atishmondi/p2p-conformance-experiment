@@ -1,5 +1,8 @@
 # Data Stewardship (Disk-Constrained): BPI Challenge 2019 XES
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Context: disk is constrained (~96% used / ~8.7 Gi free per project brief;
 `df -h /` at audit time showed 68% / 5.7 Gi free — treat disk as scarce
 either way). The 728 MB XES must be managed deliberately: exactly ONE copy,

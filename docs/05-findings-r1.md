@@ -1,5 +1,8 @@
 # Findings Round 1 (120 cases, 740 events)
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Tool: `src/check_conformance.py` (rule-based R1-R5 + variants + performance; PM4Py-compatible CSV).
 
 ## 1. Discovery / variants (3)

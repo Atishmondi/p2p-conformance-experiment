@@ -1,5 +1,8 @@
 # Defense and Validity — P2P Conformance Experiment (owns-only: this file)
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Scope: this file (`docs/18-defense-and-validity.md`) owns the defense Q&A set and the
 threats-to-validity claim boundaries. It does not rewrite evidence; all numbers are
 cited from linked artifacts. The outline keeps its own Q&A (`docs/15-thesis-outline.md:117-124`);

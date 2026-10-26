@@ -1,5 +1,8 @@
 # PROJECT HANDOFF — P2P Conformance Experiment
 
+> **Historical handoff, superseded for present execution and evidence claims.** The current front door is [README](README.md); see [claim/evidence](docs/claim-evidence.md), [event contract](docs/event-contract.md), and [ERP pilot](docs/erp-pilot.md). Do not execute older SQL or treat synthetic lab results as live Odoo outcomes or operational savings. This original body is retained as research history.
+
+
 > **Purpose of this file:** complete context package for a new agent/human continuing this project with zero prior conversation. FACT = verified in repo. INTERPRETATION = repo's stated reading. HYPOTHESIS = pre-registered, untested. PLANNED = protocol exists, not executed. OPEN = unresolved. Authorship: compiled by a reviewing agent from direct file inspection on 2026-09-23; every number below was read from the repository, not recalled.
 >
 > **How to use:** read §38 first for orientation, then the research chain (§4), then the area you will work on. Before changing anything, read §27 (invariants) and §32 (working rules).

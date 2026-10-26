@@ -1,0 +1,6 @@
+# Optional scientific and historical exploratory workflows; not used by core demo.
+numpy
+scipy
+pandas
+matplotlib
+pm4py>=2.7

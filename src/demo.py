@@ -11,7 +11,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from build_dashboard import build
+from build_dashboard import build, build_site
 from check_conformance import load, write_results
 from compare_lab_field import compare
 from evaluate import ROOT, evaluate, write_json
@@ -51,7 +51,8 @@ def main(argv=None):
         lab = evaluate(out)
         write_json(lab, out / 'evaluation.json')
         write_json(compare(out, lab=lab), out / 'comparison.json')
-        build(out, out / 'dashboard.json')
+        dashboard = build(out, out / 'dashboard.json')
+        build_site(out, out / 'webpage', dashboard)
     except (OSError, ValueError, subprocess.CalledProcessError) as exc:
         parser.exit(1, 'demo error (partial output retained): %s\n' % exc)
     print('Built %s/dashboard.json' % out)

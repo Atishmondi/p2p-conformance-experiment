@@ -1,5 +1,8 @@
 # Reproducibility Gate — P2P Conformance Experiment
 
+> **Historical research note (superseded for current execution and claims).** This document retains its original analysis for provenance. Use [the current claim/evidence map](claim-evidence.md), [event contract](event-contract.md), and [ERP pilot](erp-pilot.md) for current limits and next steps. Old extraction SQL, causal/transfer wording, and hard-enforcement predictions here are not an executable or verified path; do not run the historical SQL.
+
+
 Scope: this file (`docs/19-reproducibility.md`) is the reproducibility gate.
 It owns no code and rewrites no data. All numbers below were verified by
 READ-ONLY commands only (`ls -l`, `wc -l`, `md5` of small files, `make -n`,
