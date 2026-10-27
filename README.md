@@ -1,42 +1,120 @@
-# Purchase-to-pay evidence desk
+# Purchase-to-Pay Conformance Experiment
 
-This portfolio demonstration asks a practical question: **which procurement control exceptions can the recorded events support, and what would an analyst inspect next?** It combines generated purchase-to-pay cases, a separate historical BPI Challenge 2019 field summary, and an ERP pilot contract. The five lab rules are a **fictional policy for the exercise**, not an endorsed purchasing policy or a production accuracy benchmark.
+**Did a business follow its own purchasing rules?**
 
-## Run in five minutes
+This project reads the recorded steps of a purchase, checks them against five example rules, and shows which cases need a closer look. It includes a Python checker, a browser dashboard, generated test cases, and a separate analysis of historical purchasing data.
 
-Requires Python 3.9+; the core demo uses only the standard library. From a fresh clone or download:
+*Purchase-to-pay (P2P)* means the journey from asking to buy something to paying the supplier. *Conformance checking* means comparing what happened with what the rules say should happen.
+
+## A simple example
+
+Imagine an office buying 10 chairs. Its expected process is:
+
+1. Someone asks for the chairs.
+2. A manager approves the request.
+3. The office places an order.
+4. The chairs arrive.
+5. The supplier sends a bill.
+6. The office pays.
+
+Now suppose only **6 chairs have arrived**, but the supplier bills for **10**. Or the office places its order before approval. The checker uses the recorded events to flag these situations, and the dashboard lets you inspect the sequence behind the result.
+
+If an important record is missing, the result can be **unknown**. Missing evidence should not quietly become a pass.
+
+## What it checks
+
+These five rules define a fictional policy for this experiment; organizations can have different purchasing policies.
+
+| Rule | Question |
+|---|---|
+| R1 · Approval | Was each purchase order preceded by an approval? |
+| R2 · Receipt | Was each invoice preceded by a goods receipt? |
+| R3 · Quantity | At each invoice, had enough items arrived to cover everything billed so far? |
+| R4 · Changes | After an order modification, was there another approval before the next purchase-order event? |
+| R5 · Payment | Did the invoice come before payment? When an invoice link is supplied, was that exact invoice earlier? |
+
+Each rule can be **compliant**, **violating**, or **unknown**. The dashboard shows counts, durations, example event sequences, and downloadable records so you can inspect the evidence behind a result.
+
+## Try it locally
+
+You need **Python 3.9 or newer**. The core demo requires no package installation, database, or Odoo setup.
+
+From the project folder, run:
 
 ```sh
 python3 -S src/demo.py --output-dir output/my-first-demo
 python3 -m http.server 8000 --bind 127.0.0.1 --directory output/my-first-demo/webpage
 ```
 
-Open [http://localhost:8000](http://localhost:8000). Choose a new `--output-dir` for another demo; existing directories are protected. `--n 20` is the default cases per scenario; `--without-field` shows the explicit unavailable state. No raw XES, database, Odoo instance, or installed scientific package is required. The static viewer in `output/my-first-demo/webpage` includes its matching `data.json`, source downloads, and pilot documents. Host it as a directory over HTTP; opening `index.html` as `file:` can block `fetch`.
+Open **[localhost:8000](http://localhost:8000)**. Keep the terminal running; press `Ctrl+C` when finished.
 
-After editing a generated v2 event log, regenerate its matching conformance CSV before rebuilding. For example, after editing either or both logs:
+Compare the two rounds, select a case, and inspect its events and rule results.
+
+Use a **new output folder** for another run. Add `--n 5` for a smaller demo or `--without-field` to omit the historical summary. Use the HTTP server above; double-clicking `index.html` can prevent data from loading.
+
+## Where the data comes from
+
+| Part | What it contains | What it tells us |
+|---|---|---|
+| Generated lab | Repeatable purchasing scenarios, including deliberately broken rules | Whether the checker responds correctly to those examples |
+| Historical field analysis | An included BPI Challenge 2019 summary covering 251,734 cases | How selected patterns appear in historical purchasing records |
+| ERP preparation | A strict event-export validator, synthetic sample, and Odoo pilot protocol | What records a future live pilot needs to provide |
+
+The default lab has **60 violating cases out of 120 in Round 1**, and **0 out of 60 in Round 2**. These outcomes come from deliberately designed scenarios. They do not measure a real company's improvement or prove financial savings.
+
+Field checks use different definitions and eligible groups: its invoice comparison uses **monetary worth**, while the lab uses **item quantities**. Keep their percentages separate.
+
+The raw XES event-log file is unnecessary for the demo and excluded from this repository. Its redistribution license has not been verified.
+
+## How it works
+
+Python generates example event logs, checks each case, and builds the reports. A static HTML/CSS/JavaScript dashboard reads the generated results.
+
+| Location | Purpose |
+|---|---|
+| `src/check_conformance.py` | Current v2 rules and input validation |
+| `src/demo.py` | Builds a complete isolated demo |
+| `src/build_dashboard.py` | Checks result consistency and assembles the viewer |
+| `src/validate_erp_export.py` | Validates recorded ERP events and source relationships |
+| `webpage/` | Dashboard and an included sample bundle |
+| `tests/` | Rule, reporting, export, and portability tests |
+| `docs/` | Research notes, evidence boundaries, and pilot instructions |
+
+Historical v1 results remain reproducible; new results are versioned. Download hashes identify source files, and dashboard builds reject verdicts that disagree with their event logs.
+
+<details>
+<summary><strong>After editing a generated event log</strong></summary>
+
+Regenerate the matching conformance file, then rebuild the dashboard. For a changed Round 1 log:
 
 ```sh
 python3 -S src/check_conformance.py output/my-first-demo/event-log-r1.csv --output-dir output/my-first-demo --tag r1
-python3 -S src/check_conformance.py output/my-first-demo/event-log-r2.csv --output-dir output/my-first-demo --tag r2
 python3 -S src/build_dashboard.py --data-dir output/my-first-demo --out output/my-first-demo/dashboard.json --site-dir output/my-first-demo/webpage
 ```
 
-Run only the checker command for each edited log. The builder checks every supplied case verdict against its declared version before publishing, then derives rates and durations, hashes each input, and refreshes the viewer. It fails on missing or inconsistent required input; manually edited conformance verdicts must also match the trace. Historical v1 rows are checked with the frozen v1 checker and are not silently relabeled v2. The optional field summary is absent rather than silently replaced. `make demo OUTPUT_DIR=output/another-demo` is an equivalent generator path. `./run_demo.sh --output-dir output/another-demo` works from another working directory.
+For Round 2, use `event-log-r2.csv` and `--tag r2`. If both logs changed, run both checker commands before rebuilding. Refresh the browser afterward.
 
-## Read the evidence
+For your own data, follow the [event contract](docs/event-contract.md): required columns, quantities, timestamps, invoice links, and unsupported events.
 
-The default generated run (seeds 42 and 7, `n=20`) has 120 first-round and 60 second-round cases. Its case-level first-round violations are 60/120, and second-round violations are 0/60; generated cohorts show a checker response to designed scenarios, **not** an estimated control effect in a business operation. The dashboard always reads counts from its current source artifacts. An unknown outcome reduces its rule denominator; a case may violate one rule while another remains unknown. Scenario durations are first-to-last observed event spans, not business-calendar service times.
+</details>
 
-The included BPI field JSON is a **historical observational proxy summary** (251,734 cases); the demo does not rerun its raw XES. For example, the summary contains 590/1,044 maverick proxy hits in its two-way stratum, whereas the lab R1 tests approval ordering. The field R3 uses monetary worth, while the lab R3 uses cumulative item quantities. The activities, units, eligibility and censoring differ. Never pool those denominators or treat a field structural false as a fully conformant case. The exact redistribution license of the raw XES is unverified; raw XES is excluded from this delivery. The small summary and source records have SHA-256 hashes in the viewer.
+## Verification and next step
 
-Start an investigation by selecting a scenario and inspecting its trace, rule outcomes and unknowns; check quantity event deltas and ordering in the source CSV; then inspect the field stratum and its applicable count as separate context. Decide what source action record or missing event would resolve an unknown before proposing a control. [Business case](docs/business-case.md), [claim/evidence map](docs/claim-evidence.md), and [completion report](docs/completion-report.md) provide the decision boundaries.
-
-## Verify and extend
+Run the tests with:
 
 ```sh
 ./scripts/verify.sh
 ```
 
-This runs the standard-library test suite under `python3 -S`, including isolated generation, source mutation and web-bundle assertions. The HTTP assertion runs where loopback listeners are permitted. CI invokes the same command. Optional numerical and process mining packages live in `requirements-optional.txt`; they are unnecessary for the demo. The scientific option is diagnostic on generated samples, and PM4Py discovery fitness is not a normative purchasing verdict.
+**66 tests passed on Python 3.9 and 3.12**, including HTTP bundle checks; see the [verification record](docs/verification.md). CI uses the same command. Hosted CI execution and desktop/mobile rendering remain unverified. Optional scientific packages are in `requirements-optional.txt`.
 
-For ERP work, read [the event contract](docs/event-contract.md) and [the isolated pilot protocol](docs/erp-pilot.md). `examples/erp-recorded-events.csv` is a **synthetic contract fixture**, not an Odoo export. The validator rejects dates substituted for recorded timestamps, unsupported reversals, ambiguous mapping, and quantities without one comparable item/unit. No live Odoo execution has been verified. Historical [numbered research notes](docs/04-odoo-execution-protocol.md), [handoff](PROJECT_HANDOFF.md), and the existing promotional video are retained as historical context; their older SQL and transfer/causal language is superseded by the current contract and evidence map. Do not execute the old extraction SQL.
+**Next: an audited live Odoo pilot.** The ERP sample is synthetic; live transactions, operational accuracy, and savings remain unverified.
+
+For a business or technology-consulting discussion, the useful question is: **what happened, which rule does it conflict with, and what evidence should an analyst inspect before recommending a change?**
+
+- [Business case and investigation workflow](docs/business-case.md)
+- [Claims and supporting evidence](docs/claim-evidence.md)
+- [ERP pilot protocol](docs/erp-pilot.md)
+- [Completion report](docs/completion-report.md)
+
+Older research notes and promotional material are historical. For ERP work, use the current pilot protocol; the unsafe old extraction SQL has been retired.
