@@ -114,6 +114,30 @@ class ExportTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 adapter.validate_export(self.write(directory, rows))
 
+    def test_two_invoice_links_survive_export_and_drive_r5(self):
+        cases = [('E6', 7, False), (' E8 ', 7, True), ('E8', 8, None)]
+        for link, day, expected in cases:
+            with self.subTest(link=link, day=day), tempfile.TemporaryDirectory() as directory:
+                rows = good_rows()[:-1]
+                rows.append(row('Vendor Invoice', 8, event_id=' E8 ', qty_invoiced='0'))
+                rows.append(row('Payment', 9, timestamp=f'2026-01-{day:02d}T10:00:00+00:00',
+                                invoice_event_id=link))
+                validated = adapter.validate_export(self.write(directory, rows))
+                normalized = Path(directory) / 'normalized.csv'
+                adapter.write_export(validated, normalized)
+                with normalized.open(newline='') as handle:
+                    exported = list(csv.DictReader(handle))
+                self.assertEqual(next(r for r in exported if r['activity'] == 'Payment')['invoice_event_id'], link.strip())
+                self.assertIs(checker.check_case(checker.load(normalized)['A'])[0]['R5'], expected)
+        with tempfile.TemporaryDirectory() as directory:
+            rows = good_rows()[:-1]
+            rows += [row('Vendor Invoice', 8, qty_invoiced='0'),
+                     row('Payment', 9, timestamp='2026-01-07T10:00:00+00:00', invoice_event_id='E8'),
+                     row('Payment', 10, timestamp='2026-01-10T10:00:00+00:00', invoice_event_id='E6')]
+            normalized = Path(directory) / 'normalized.csv'
+            adapter.write_export(adapter.validate_export(self.write(directory, rows)), normalized)
+            self.assertIs(checker.check_case(checker.load(normalized)['A'])[0]['R5'], True)
+
     def test_invalid_cli_leaves_existing_output_untouched(self):
         with tempfile.TemporaryDirectory() as directory:
             rows = good_rows()

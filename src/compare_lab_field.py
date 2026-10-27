@@ -82,13 +82,19 @@ def compare(data_dir: Path, lab=None):
         raise ValueError('field rule_version must be a nonempty version label')
     result['rule_version'] = version
     result['available'] = True
+    for key in ('three_way_strata', 'by_item_category'):
+        if key in source and not isinstance(source[key], dict):
+            raise ValueError('field %s must be an object' % key)
     # Never copy source_xes or arbitrary metadata: legacy summaries can contain
     # machine-local absolute paths and old cached anchors/verdicts.
     strata = dict(overall=_stratum(source.get('overall'), _count(source.get('n_cases'), 'n_cases')),
                   two_way=_stratum(source.get('r1_two_way_stratum')),
                   three_way_after=_stratum(source.get('three_way_strata', {}).get('after')),
                   three_way_before=_stratum(source.get('three_way_strata', {}).get('before')))
-    for category, values in sorted(source.get('by_item_category', {}).items()):
+    categories = source.get('by_item_category', {})
+    if any(not isinstance(category, str) for category in categories):
+        raise ValueError('field by_item_category keys must be strings')
+    for category, values in sorted(categories.items()):
         strata['item_category:' + category] = _stratum(values)
     result['strata'] = strata
     lab = evaluate(data_dir) if lab is None else lab

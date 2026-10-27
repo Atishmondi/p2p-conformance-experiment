@@ -69,6 +69,7 @@ def case_examples(data_dir: Path) -> dict:
     """One deterministic observed case per scenario, paired with its source trace."""
     result = {}
     for era in ('r1', 'r2'):
+        _, version = load_conformance(data_dir / ('conformance-%s.csv' % era))
         with (data_dir / ('conformance-%s.csv' % era)).open(newline='') as handle:
             rows = list(csv.DictReader(handle))
         chosen = {}
@@ -77,8 +78,9 @@ def case_examples(data_dir: Path) -> dict:
         traces = {row['case_id']: [] for row in chosen.values()}
         with (data_dir / ('event-log-%s.csv' % era)).open(newline='') as handle:
             for event in csv.DictReader(handle):
-                if event['case_id'] in traces:
-                    traces[event['case_id']].append(dict(
+                case_id = event['case_id'].strip() if version == 'v2' else event['case_id']
+                if case_id in traces:
+                    traces[case_id].append(dict(
                         activity=event.get('activity', ''), timestamp=event.get('timestamp', ''),
                         qty_received=event.get('qty_received', '') if event.get('activity') == 'Goods Receipt' else '',
                         qty_invoiced=event.get('qty_invoiced', '') if event.get('activity') == 'Vendor Invoice' else ''))

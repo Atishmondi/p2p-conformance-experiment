@@ -44,6 +44,13 @@ def _quantity(value, field):
     return result
 
 
+def _required_text(row, field):
+    value = row.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError('missing required value: %s' % field)
+    return value.strip()
+
+
 def normalize_events(events):
     """Copy and validate one case without inventing missing quantities or order."""
     normalized, identities, anonymous = [], set(), set()
@@ -51,9 +58,7 @@ def normalize_events(events):
     for original in events:
         row = dict(original)
         for field in ('case_id', 'activity'):
-            if not isinstance(row.get(field), str) or not row[field].strip():
-                raise ValueError('missing required value: %s' % field)
-            row[field] = row[field].strip()
+            row[field] = _required_text(row, field)
         cases.add(row['case_id'])
         if len(cases) > 1:
             raise ValueError('check_case requires events from one case')
@@ -79,6 +84,8 @@ def normalize_events(events):
             if len(values) > 1:
                 raise ValueError('conflicting %s within case %s' % (field, row['case_id']))
         identity = str(row.get('event_id') or '').strip()
+        row['event_id'] = identity
+        row['invoice_event_id'] = str(row.get('invoice_event_id') or '').strip()
         if identity:
             if identity in identities:
                 raise ValueError('duplicate event_id: %s' % identity)
@@ -104,6 +111,7 @@ def load(path):
         for line, row in enumerate(reader, 2):
             if None in row or any(row.get(field) is None for field in REQUIRED):
                 raise ValueError('malformed CSV row at line %s' % line)
+            row['case_id'] = _required_text(row, 'case_id')
             identity = (row.get('event_id') or '').strip()
             if identity and identity in identities:
                 raise ValueError('duplicate event_id at line %s: %s' % (line, identity))
@@ -131,6 +139,20 @@ def _precedence(predecessors, targets):
             results.append(None)
         else:
             results.append(True)
+    return _combine(results)
+
+
+def _payment_precedence(invoices, payments):
+    if not payments:
+        return None
+    by_id = {invoice['event_id']: invoice for invoice in invoices if invoice['event_id']}
+    results = []
+    for payment in payments:
+        link = payment['invoice_event_id']
+        if link:
+            results.append(_precedence([by_id[link]], [payment]) if link in by_id else None)
+        else:
+            results.append(_precedence(invoices, [payment]))
     return _combine(results)
 
 
@@ -210,7 +232,7 @@ def check_case(evs):
         'R2': _precedence(receipts, invoices),
         'R3': _quantity_rule(receipts, invoices),
         'R4': _modification_rule(by_activity['PO Modification'], approvals, purchase_orders),
-        'R5': _precedence(invoices, by_activity['Payment']),
+        'R5': _payment_precedence(invoices, by_activity['Payment']),
     }
     cycle = (evs[-1]['_ts'] - evs[0]['_ts']).total_seconds() / 86400 if evs else None
     approval_wait = (approvals[0]['_ts'] - evs[0]['_ts']).total_seconds() / 86400 if approvals else None

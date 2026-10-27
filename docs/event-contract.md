@@ -9,7 +9,11 @@ The original checker is preserved byte-for-byte at
 ## Input
 
 CSV requires nonblank `case_id`, `activity`, `timestamp`. Optional metadata includes
-`scenario`, `resource`, `vendor`, `po_id`, `product_id`, `unit`, and `event_id`.
+`scenario`, `resource`, `vendor`, `po_id`, `product_id`, `unit`, `event_id`, and
+`invoice_event_id`. Leading and trailing whitespace is removed from case IDs
+**before** events are grouped: `x` and ` x ` are one case in v2 outputs and
+reports. Blank-after-trimming IDs fail. Event IDs and invoice links are also
+trimmed before uniqueness checks and matching.
 Missing optional metadata is allowed. Conflicting nonblank product IDs or units
 within one case are rejected. Event IDs must be unique across the input; without
 an ID, exact duplicate events within a case are rejected.
@@ -40,7 +44,7 @@ The accepted approval names are `Purchase Request Approval` and
 | R2 | Every `Vendor Invoice` has an earlier `Goods Receipt`. |
 | R3 | At each invoice timestamp, cumulative invoicing does not exceed received quantity available then. |
 | R4 | Every `PO Modification` has a subsequent approval strictly before the next PO. No modifications is evaluated compliance. |
-| R5 | Every `Payment` has an earlier `Vendor Invoice`. |
+| R5 | Each unlinked `Payment` has an earlier `Vendor Invoice`; a linked payment is compared only with its referenced same-case invoice event. |
 
 `True` is a proven violation, `False` evaluated compliance, and `None` insufficient
 evidence. Missing predecessor/target events are unknown; a known predecessor
@@ -48,6 +52,15 @@ observed only later proves an ordering violation. A tied predecessor is unknown
 when no strictly earlier predecessor exists. R4 without a subsequent PO or any
 approval evidence is unknown; known approvals outside the required interval can
 prove a violation. Boundary ties cannot establish a reapproval interval.
+An optional nonblank `invoice_event_id` on a Payment selects exactly the
+same-case `Vendor Invoice` with that `event_id`: invoice earlier than payment
+is compliant, invoice later is a violation, and a timestamp tie or unmatched
+reference is unknown at the checker boundary. A different earlier invoice
+does not make a linked payment compliant. Multiple payment results use the
+same proven-violation-over-unknown aggregation as other temporal rules.
+Unlinked lab rows retain the any-earlier-invoice rule. The strict ERP export
+adapter requires a resolvable same-case invoice link for every Payment and
+preserves it in normalized CSV; ordering violations proceed to the checker.
 
 R3 accumulates event deltas through each invoice timestamp. A later receipt never
 repairs an earlier excess. Unknown relevant quantities prevent compliance; known

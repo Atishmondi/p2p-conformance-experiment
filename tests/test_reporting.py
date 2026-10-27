@@ -161,6 +161,37 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(compare(self.root)['strata']['three_way_after']['metrics']['r2_viol']['rate'], 0.6)
         self.assertNotIn('/private', json.dumps(result))
 
+    def test_optional_field_containers_reject_malformed_values(self):
+        compare = importlib.import_module('compare_lab_field').compare
+        path = self.root / 'bpic2019_results.json'
+        for key in ('three_way_strata', 'by_item_category'):
+            for value in (None, [], 'bad', 3):
+                with self.subTest(key=key, value=value):
+                    path.write_text(json.dumps({key: value}))
+                    with self.assertRaisesRegex(ValueError, key):
+                        compare(self.root)
+        path.write_text('{}')
+        result = compare(self.root)
+        self.assertFalse(result['strata']['three_way_after']['available'])
+        self.assertFalse(result['strata']['three_way_before']['available'])
+
+    def test_dashboard_example_uses_normalized_v2_case_id(self):
+        checker = importlib.import_module('check_conformance')
+        builder = importlib.import_module('build_dashboard')
+        path = self.root / 'event-log-r1.csv'
+        with path.open(newline='') as handle:
+            rows = list(csv.DictReader(handle))
+            fields = list(rows[0])
+        rows[0]['case_id'] = ' a '
+        with path.open('w', newline='') as handle:
+            writer = csv.DictWriter(handle, fields)
+            writer.writeheader()
+            writer.writerows(rows)
+        checker.write_results(checker.load(path), self.root, 'r1')
+        payload = builder.build(self.root, self.root / 'dashboard.json')
+        example = next(row for row in payload['examples']['r1'] if row['case_id'] == 'a')
+        self.assertEqual(len(example['trace']), 6)
+
     def test_field_r3_definition_describes_monetary_worth_basis(self):
         definition = importlib.import_module('compare_lab_field').DEFINITIONS['r3_viol']
         self.assertIn('Cumulative net worth', definition)

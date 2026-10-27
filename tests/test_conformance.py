@@ -93,6 +93,23 @@ class RuleTests(unittest.TestCase):
         self.assertIs(self.rules(event(PAY, 1), event(INV, 2), event(PAY, 3))['R5'], True)
         self.assertIs(self.rules(event(INV, 1), event(REC, 2), event(INV, 3))['R2'], True)
 
+    def test_linked_payment_uses_only_its_invoice_and_combines_outcomes(self):
+        earlier = event(INV, 1, event_id=' first ')
+        later = event(INV, 4, event_id=' second ')
+        def payment(day, link):
+            return event(PAY, day, invoice_event_id=link)
+        self.assertIs(self.rules(earlier, later, payment(3, ' second '))['R5'], True)
+        self.assertIs(self.rules(earlier, later, payment(3, ' first '))['R5'], False)
+        self.assertIsNone(self.rules(earlier, later, payment(4, 'second'))['R5'])
+        self.assertIsNone(self.rules(earlier, later, payment(3, 'missing'))['R5'])
+        self.assertIs(self.rules(earlier, later, payment(3, 'second'), payment(4, 'second'))['R5'], True)
+        self.assertIsNone(self.rules(earlier, later, payment(3, 'first'), payment(4, 'second'))['R5'])
+        self.assertIs(self.rules(earlier, later, payment(3, ''))['R5'], False)
+
+    def test_linked_invoice_must_be_in_the_same_case(self):
+        self.assertIsNone(self.rules(event(INV, 1, event_id='i1'),
+                                     event(PAY, 2, invoice_event_id='other'))['R5'])
+
     def test_reapproval_is_between_each_modification_and_next_po(self):
         rows = (event(AP, 1), event(PO, 2), event(MOD, 3),
                 event('Purchase Request Approval (re-approval)', 4), event(PO, 5))
@@ -159,6 +176,26 @@ class InputTests(unittest.TestCase):
                      [event(REC, 1, event_id='E1'), event(INV, 2, event_id='E1')]):
             with self.subTest(rows=rows), self.assertRaises(ValueError):
                 self.load(rows)
+
+    def test_whitespace_equivalent_ids_group_before_case_checks(self):
+        rows = [event(AP, 2, case_id=' x ', event_id='a'),
+                event(PO, 1, case_id='x', event_id='p')]
+        cases = self.load(rows)
+        self.assertEqual(set(cases), {'x'})
+        self.assertEqual(len(cases['x']), 2)
+        self.assertEqual({row['case_id'] for row in cases['x']}, {'x'})
+        self.assertIs(checker.check_case(cases['x'])[0]['R1'], True)
+        with tempfile.TemporaryDirectory() as directory:
+            outputs = checker.write_results(cases, directory, 'trimmed')
+            with outputs['conformance'].open(newline='') as handle:
+                results = list(csv.DictReader(handle))
+            self.assertEqual([(r['case_id'], r['status']) for r in results], [('x', 'violating')])
+        with self.assertRaisesRegex(ValueError, 'duplicate event_id'):
+            self.load([rows[0], dict(rows[1], event_id=' a ')])
+        with self.assertRaisesRegex(ValueError, 'conflicting product_id'):
+            self.load([dict(rows[0], product_id='A'), dict(rows[1], product_id='B')])
+        with self.assertRaisesRegex(ValueError, 'missing required value: case_id'):
+            self.load([dict(rows[0], case_id=' \t ')])
 
     def test_conflicting_product_or_unit_rejected(self):
         for field in ('product_id', 'unit'):
