@@ -21,3 +21,9 @@ A fresh `git archive` at the same commit, excluding raw XES, built the default d
 ## Final fix verification
 
 At implementation commit `b15bfcf`, the controller independently ran `./scripts/verify.sh` on Python 3.9.6 and `.venv/bin/python -S -m unittest discover -s tests` on Python 3.12.14: **66 tests passed on each, with no skips**. This includes the new normalized-case, exact invoice-link and malformed optional-container regressions, and the HTTP bundle integration. `node --check webpage/app.js` and whitespace checks passed. Canonical data and the frozen v1 source remained unchanged. The final fix report preserves observed RED/GREEN results; the scoped review records its independent assessment.
+
+## Delivery integrity
+
+The durable checkout was fast-forwarded to the reviewed branch. A source ZIP at `1ba000d` was extracted into a fresh directory and built the default demo under Python 3.12 `-S`: 120/60 cases, with all five source and public-download hashes verified. ZIP CRC checks passed; raw XES, virtual environments and Git internals were excluded. Final delivery metadata changes after that check affect only documentation and removal of a duplicate temporary review record; the executable source remains `b15bfcf`.
+
+The completed local branch is `codex/p2p-completion`. The delivery checkout is `/Users/atishmondi/Documents/Default Project/p2p-delivery/p2p-conformance-experiment`; the source ZIP is alongside it as `p2p-completion-delivery.zip`. No push or publication was performed. The original checkout at `/Users/atishmondi/Documents/p2p odoo/p2p-conformance-experiment/p2p-conformance- project/p2p-conformance-experiment` remains at `5e48381`, with its original webpage modification and untracked handoff preserved.

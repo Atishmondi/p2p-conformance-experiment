@@ -1,0 +1,11 @@
+# Final combined fix wave
+Base800b29a. Read final-review.md in this directory for exact findings.
+
+Address all three findings with independent regression tests observed RED then GREEN:
+1. Normalize required nonblank case_id once before grouping load rows. Whitespace-equivalent IDs must resolve one case, preserve global event ID uniqueness and mixed-grain checks. Confirm downstream report build uses compatible normalized keys rather than a second raw grouping bug.
+2. R5: when a Payment supplies invoice_event_id, compare only the matching same-case Vendor Invoice event_id. Earlier=False, later=True, tie=None, missing referenced invoice=None at checker boundary (ERP adapter already rejects unresolved/cross-case links). Existing unlinked lab rows keep current any-earlier-invoice semantics. Combine multiple payment outcomes using existing true-over-unknown rule. Normalize link/ID strings consistently, retain exact relationship in ERP output. Exercise multi-invoice case through adapter -> normalized CSV -> checker; include compliant, violating, tied, unresolved, multiple-payment, unchanged baseline tests as needed. Do not simply reject ordering violations at adapter: well-formed adverse evidence must reach conformance.
+3. Reject malformed optional field containers (null, list, strings, etc) with clear ValueError or explicit unavailable behavior; absent legitimate optional sections remain supported. Cover three_way_strata and by_item_category before .get/.items.
+
+Update docs/event-contract.md (R5 optional link and normalized case ID semantics) and ERP docs only where changed behavior requires. Keep historical v1 unchanged. Refresh checked-in webpage/docs copies of any revised bundled docs; do not recalculate checked-in sample from historical v1 data. Canonical data, frozen v1, original checkout untouched. No dependencies, browser, Docker, network, push or subagents. Do not edit controller docs/reviews/verification/completion/plan.
+
+Run focused test(s) RED, implement, GREEN, full ./scripts/verify.sh once. Commit code/tests/required docs, report exact commit/tests/remaining concerns to final-fix-report.md here. Controller will independently verify both Python versions and handle final documentation/delivery. One combined wave only; subsequent scoped review will adjudicate.

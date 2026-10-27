@@ -21,3 +21,5 @@ The highest-value next evidence is a small audited Odoo pilot using the [recorde
 ## Delivery
 
 Work is kept on the local `codex/p2p-completion` branch. The original moved checkout remains untouched; the delivery is a separate checkout plus source archive. Follow [README](../README.md) to generate and serve a fresh demo. Use a new output directory for each run. The whole-branch review found three issues; all were fixed and independently accepted in the [final scoped review](reviews/final-rereview.md). The delivery checks are recorded in [verification](verification.md).
+
+The completed checkout is `p2p-delivery/p2p-conformance-experiment` inside the Default Project folder. The adjacent `p2p-completion-delivery.zip` contains the portable source. The final independent review accepted all fixes; 66 tests pass on both supported verification environments. Every scope decision and its tradeoff is preserved in [Rulings made during completion](reviews/decisions.md).
