@@ -4,7 +4,7 @@ This project is a reproducible purchase-to-pay portfolio demonstration. Its valu
 
 ## Delivered
 
-- Versioned v2 rules use event-time cumulative quantities, explicit unknown outcomes, validated inputs and isolated runs; v1 remains reproducible.
+- Versioned v2 rules use event-time cumulative quantities, explicit unknown outcomes, normalized case identities, exact invoice links when supplied, and isolated runs; v1 remains reproducible.
 - Reports derive counts from supplied artifacts. Dashboard builds reject stale verdicts that contradict event traces, and distinguish original source hashes from sanitized downloadable copies.
 - A standard-library demo builds a static viewer with case traces, field strata, rule explanations and local source downloads. No raw XES or optional numerical packages are required.
 - A strict ERP export contract checks action codes, recorded timestamps, item/unit grain and source relationships. Unsafe extraction SQL fails explicitly; the example export is labeled synthetic.
@@ -12,12 +12,12 @@ This project is a reproducible purchase-to-pay portfolio demonstration. Its valu
 
 ## Evidence and boundaries
 
-The latest implementation passed 59 tests with one HTTP check skipped on both Python 3.9 and 3.12, with no optional packages used for the core suite. The raw field reanalysis reproduced all 251,734 case rows byte-for-byte. See [verification](verification.md), [task review records](reviews/README.md), and [council decisions](council-review.md).
+The final implementation passed all 66 tests on both Python 3.9 and 3.12, with no skips or optional packages used for the core suite. The raw field reanalysis reproduced all 251,734 case rows byte-for-byte. See [verification](verification.md), [task review records](reviews/README.md), and [council decisions](council-review.md).
 
-Live Odoo execution remains unverified: Docker had no running daemon, and starting the existing Colima runtime was denied by local permissions. Desktop/mobile rendering and HTTP serving also remain unverified: local socket binding was denied and the browser rejected local-file URLs. No screenshots, hosted CI results, production validation or control-effect claims are made. Static bundle data, links and hashes were checked independently.
+Live Odoo execution remains unverified: Docker had no running daemon, and starting the existing Colima runtime was denied by local permissions. Desktop/mobile rendering remains unverified: the browser rejected local-file URLs. Initial loopback binding was denied, but the existing HTTP integration test passed in the resumed environment. No screenshots, hosted CI results, production validation or control-effect claims are made. Static bundle data, links and hashes were checked independently.
 
 The highest-value next evidence is a small audited Odoo pilot using the [recorded-event protocol](erp-pilot.md), followed by independently labeled cases and an assessment of investigation effort. Fixture tests do not substitute for that work. No new promotional video, raw XES redistribution, push or deployment is included.
 
 ## Delivery
 
-Work is kept on the local `codex/p2p-completion` branch. The original moved checkout remains untouched; the delivery is a separate checkout plus source archive. Follow [README](../README.md) to generate and serve a fresh demo. Use a new output directory for each run. Whole-branch review and final delivery integrity are recorded by the delivery reviewer before handoff.
+Work is kept on the local `codex/p2p-completion` branch. The original moved checkout remains untouched; the delivery is a separate checkout plus source archive. Follow [README](../README.md) to generate and serve a fresh demo. Use a new output directory for each run. The whole-branch review found three issues; all were fixed and independently accepted in the [final scoped review](reviews/final-rereview.md). The delivery checks are recorded in [verification](verification.md).

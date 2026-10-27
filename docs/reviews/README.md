@@ -10,3 +10,7 @@ Task reports include independent fixture tests and observed RED/GREEN evidence. 
 | Dashboard and portability | [report](task-4-report.md) | [review](task-4-review.md) | [accepted](task-4-rereview-2.md) |
 
 The [implementation ledger](implementation-ledger.md) records decisions and scope rulings. Some reports retain execution-time temporary paths as a historical record; the evidence needed for recipients is preserved in [verification](../verification.md). The [completion report](../completion-report.md) states current boundaries.
+
+## Final whole-branch gate
+
+[Whole-branch review](final-review.md) found two important issues and one minor issue. The [combined fix report](final-fix-report.md) records their regression tests and implementation; the [scoped rereview](final-rereview.md) accepted all three with no new breakage. [Decisions and tradeoffs](decisions.md) preserve every controller ruling. Runtime and evidence limitations remain as stated in the completion report.

@@ -59,7 +59,7 @@
 
 ## Final gates
 - [x] Council: five independent perspectives, randomized anonymous peer reviews, synthesis and disposition.
-- [ ] Independent task reviews and fixes; final whole-branch review, one combined fix wave if needed.
+- [x] Independent task reviews and fixes; final whole-branch review, one combined fix wave if needed.
 - [ ] Fresh full verification, artifact hashes, clean diff, delivery checkout/patch with precise original location and application guidance. No push or merge into original.
 
 ## Council refinement
