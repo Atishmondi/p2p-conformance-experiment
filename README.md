@@ -8,9 +8,9 @@ This project reads the recorded steps of a purchase, checks them against five ex
 
 ## See it in action
 
-[![Purchase-to-pay demo: 15 units received and 17 billed](docs/media/p2p-demo.jpg)](docs/media/p2p-demo.mp4)
+https://github.com/user-attachments/assets/b75fb330-ec0c-4678-ba92-e59868d23b46
 
-**[Open the 36-second demo](docs/media/p2p-demo.mp4)** — follow a generated purchase through the five rule checks, inspect its evidence, and see how the project handles insufficient records. The video also covers reproducibility, ERP export validation, and the 66-test verification record. A live ERP pilot is the next step.
+**36-second demo** — follow a generated purchase through the five rule checks, inspect its evidence, and see how the project handles insufficient records. The video also covers reproducibility, ERP export validation, and the 66-test verification record. A live ERP pilot is the next step.
 
 ## A simple example
 
