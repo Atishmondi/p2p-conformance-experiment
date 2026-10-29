@@ -6,6 +6,12 @@ This project reads the recorded steps of a purchase, checks them against five ex
 
 *Purchase-to-pay (P2P)* means the journey from asking to buy something to paying the supplier. *Conformance checking* means comparing what happened with what the rules say should happen.
 
+## See it in action
+
+[![Purchase-to-pay demo: 15 units received and 17 billed](docs/media/p2p-demo.jpg)](docs/media/p2p-demo.mp4)
+
+**[Open the 36-second demo](docs/media/p2p-demo.mp4)** — follow a generated purchase through the five rule checks, inspect its evidence, and see how the project handles insufficient records. The video also covers reproducibility, ERP export validation, and the 66-test verification record. A live ERP pilot is the next step.
+
 ## A simple example
 
 Imagine an office buying 10 chairs. Its expected process is:

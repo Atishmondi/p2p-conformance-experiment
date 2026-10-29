@@ -29,3 +29,6 @@ __pycache__/
 
 # Isolated generated experiments (historical data/ stays versioned)
 /output/experiments/
+
+# Local video drafts and render caches; final demo lives in docs/media/
+/brag-output*/
